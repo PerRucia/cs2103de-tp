@@ -197,8 +197,12 @@ public class TestUserAuth {
         testDir.delete(); // Clean up
     }
 
+    /**
+     * Test multiple consecutive authentications.
+     * Authenticate the same user multiple times in a row.
+     */
     @Test
-    public void consecutiveAuthentications() {
+    public void testConsecutiveAuthentications() {
         userAuth.registerUser("userForMultipleAuths", "Password123");
 
         // Authenticate multiple times
