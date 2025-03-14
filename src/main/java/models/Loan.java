@@ -21,7 +21,7 @@ public class Loan implements Serializable {
         this.loanDate = loanDate;
         this.dueDate = dueDate;
         this.isReturned = false; // Default to not returned
-        book.setStatus(Book.BookStatus.CHECKED_OUT); // Mark book as borrowed
+        book.setStatus(BookStatus.CHECKED_OUT); // Mark book as borrowed
     }
 
     // Getters and setters
@@ -72,11 +72,22 @@ public class Loan implements Serializable {
     public void returnBook() {
         if (!isReturned) {
             isReturned = true;
-            book.setStatus(Book.BookStatus.AVAILABLE); // Mark book as available
+            book.setStatus(BookStatus.AVAILABLE); // Mark book as available
             System.out.println("Book '" + book.getTitle() + "' returned by " + borrower.getName());
         } else {
             System.out.println("Book '" + book.getTitle() + "' was already returned.");
         }
+    }
+
+    public int checkOverdueDays(LocalDate date) {
+        if (!isReturned && date.isAfter(dueDate)) {
+            book.setStatus(BookStatus.OVERDUE); // Mark book as overdue
+            System.out.println("Book '" + book.getTitle() + "' is overdue.");
+        }
+        if (date.isAfter(dueDate)) {
+            return (int) (date.toEpochDay() - dueDate.toEpochDay());
+        }
+        return 0; // Not overdue
     }
 
     @Override

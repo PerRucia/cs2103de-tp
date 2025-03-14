@@ -21,11 +21,17 @@ public class Librarian extends User {
 
     public void addBook(Book book) {
         System.out.println("Librarian " + name + " added book: " + book.getTitle());
-        book.setStatus(Book.BookStatus.AVAILABLE);
+        book.setStatus(BookStatus.AVAILABLE);
     }
 
     public void removeBook(Book book) {
+        if (book.getStatus() == BookStatus.CHECKED_OUT || book.getStatus() == BookStatus.OVERDUE) {
+            System.out.println("Cannot remove book " + book.getTitle() +
+                    " because it is currently checked out.");
+            return;
+        }
         System.out.println("Librarian " + name + " removed book: " + book.getTitle());
+        book.setStatus(BookStatus.UNAVAILABLE);
     }
 
     public void manageUsers() {

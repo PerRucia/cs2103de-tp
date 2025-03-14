@@ -11,10 +11,6 @@ public class Book implements Serializable {
     private String author;
     private BookStatus status;
 
-    public enum BookStatus {
-        AVAILABLE, CHECKED_OUT
-    }
-
     public Book(String isbn, String title, String author) {
         this.isbn = isbn;
         this.title = title;
