@@ -3,7 +3,6 @@ package models;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import models.BookStatus;
 
 public class TestBook {
     private Book book;
@@ -59,6 +58,10 @@ public class TestBook {
         Assertions.assertTrue(bookString.contains("OVERDUE"));
     }
 
+    /**
+     * Test the getters and setters of the Book class.
+     * This test checks if the getters and setters work correctly.
+     */
     @Test
     void testSetMethods() {
         book.setIsbn("0987654321");

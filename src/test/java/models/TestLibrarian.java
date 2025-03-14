@@ -37,6 +37,7 @@ public class TestLibrarian {
         librarian.addBook(book);
         Assertions.assertEquals(BookStatus.AVAILABLE, book.getStatus());
     }
+
     /**
      * Test the removeBook method of the Librarian class.
      * This test checks if the removeBook method sets the book status to UNAVAILABLE.
