@@ -4,5 +4,5 @@ public enum BookStatus {
     AVAILABLE,
     CHECKED_OUT,
     OVERDUE,
-    UNAVAILABLE
+    OUT_OF_CIRCULATION
 }

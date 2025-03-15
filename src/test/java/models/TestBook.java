@@ -41,8 +41,8 @@ public class TestBook {
         Assertions.assertEquals(BookStatus.OVERDUE, book.getStatus());
 
         // Unavailable
-        book.setStatus(BookStatus.UNAVAILABLE);
-        Assertions.assertEquals(BookStatus.UNAVAILABLE, book.getStatus());
+        book.setStatus(BookStatus.OUT_OF_CIRCULATION);
+        Assertions.assertEquals(BookStatus.OUT_OF_CIRCULATION, book.getStatus());
     }
 
     /**

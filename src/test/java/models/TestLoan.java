@@ -8,12 +8,22 @@ import java.time.LocalDate;
 public class TestLoan {
     private User borrower;
     private Book book;
+    private BookList bookList;
+    private LocalDate loanDate;
+    private LocalDate dueDate;
+    private Loan loan;
 
     @BeforeEach
     void initFields() {
         borrower = new User("U1", "Alice", "alice@example.com",
                 "Secret123");
         book = new Book("1234567890", "Effective Java", "Joshua Bloch");
+        bookList = new BookList();
+        bookList.addBook(book);
+
+        loanDate = LocalDate.now();
+        dueDate = loanDate.plusDays(14);
+        loan = new Loan("L1", borrower, book, loanDate, dueDate, bookList);
     }
 
     /**
@@ -22,11 +32,6 @@ public class TestLoan {
      */
     @Test
     void testLoanConstructor() {
-        LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(14);
-
-        Loan loan = new Loan("L1", borrower, book, loanDate, dueDate);
-
         Assertions.assertEquals("L1", loan.getLoanId());
         Assertions.assertEquals(borrower, loan.getBorrower());
         Assertions.assertEquals(book, loan.getBook());
@@ -37,32 +42,18 @@ public class TestLoan {
     }
 
     /**
-     * Test the setters of the Loan class.
-     * This test checks if the setters work correctly.
+     * Test the renewLoan method of the Loan class.
+     * This test checks if the due date is updated correctly when renewed.
      */
     @Test
-    void testLoanSetters() {
-        LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(14);
+    void testRenewLoan() {
+        // Test renewing the loan with a specific number of days
+        loan.renewLoan(7);
+        Assertions.assertEquals(dueDate.plusDays(7), loan.getDueDate());
 
-        Loan loan = new Loan("L1", borrower, book, loanDate, dueDate);
-
-        loan.setLoanId("L2");
-        loan.setBorrower(new User("U2", "Bob", "bob@example.com",
-                "Secret321"));
-        loan.setBook(new Book("0987654321", "Java Concurrency in Practice",
-                "Brian Goetz"));
-        loan.setLoanDate(loanDate.plusDays(1));
-        loan.setDueDate(dueDate.plusDays(1));
-
-        Assertions.assertEquals("L2", loan.getLoanId());
-        Assertions.assertEquals("U2", loan.getBorrower().getUserId());
-        Assertions.assertEquals("Bob", loan.getBorrower().getName());
-        Assertions.assertEquals("0987654321", loan.getBook().getIsbn());
-        Assertions.assertEquals("Java Concurrency in Practice", loan.getBook().getTitle());
-        Assertions.assertEquals("Brian Goetz", loan.getBook().getAuthor());
-        Assertions.assertEquals(loanDate.plusDays(1), loan.getLoanDate());
-
+        // Test renewing the loan with the default number of days
+        loan.renewLoan(0);
+        Assertions.assertEquals(dueDate.plusDays(21), loan.getDueDate());
     }
 
     /**
@@ -71,14 +62,11 @@ public class TestLoan {
      */
     @Test
     void testReturnBook() {
-        LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(14);
-
-        Loan loan = new Loan("L1", borrower, book, loanDate, dueDate);
-        loan.returnBook();
+        loan.returnBook(bookList);
 
         Assertions.assertTrue(loan.isReturned());
         Assertions.assertEquals(BookStatus.AVAILABLE, book.getStatus());
+        Assertions.assertEquals(LocalDate.now(), loan.getReturnDate());
     }
 
     /**
@@ -87,15 +75,11 @@ public class TestLoan {
      */
     @Test
     void testRepeatedReturns() {
-        LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(14);
-
-        Loan loan = new Loan("L1", borrower, book, loanDate, dueDate);
-        loan.returnBook();
+        loan.returnBook(bookList);
         boolean initialReturnState = loan.isReturned();
         BookStatus initialBookStatus = book.getStatus();
 
-        loan.returnBook();
+        loan.returnBook(bookList);
         Assertions.assertEquals(initialReturnState, loan.isReturned());
         Assertions.assertEquals(initialBookStatus, book.getStatus());
     }
@@ -106,14 +90,10 @@ public class TestLoan {
      */
     @Test
     void testOverdueCheck() {
-        LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(14);
-        Loan loan = new Loan("L1", borrower, book, loanDate, dueDate);
-
-        Assertions.assertEquals(0, loan.checkOverdueDays(loanDate));
+        Assertions.assertEquals(0, loan.checkOverdue(loanDate, bookList));
 
         LocalDate overdueDate = loanDate.plusDays(20);
-        Assertions.assertTrue(loan.checkOverdueDays(overdueDate) > 0);
+        Assertions.assertTrue(loan.checkOverdue(overdueDate, bookList) > 0);
         Assertions.assertEquals(BookStatus.OVERDUE, book.getStatus());
     }
 
@@ -123,10 +103,6 @@ public class TestLoan {
      */
     @Test
     void testToString() {
-        LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(14);
-
-        Loan loan = new Loan("L1", borrower, book, loanDate, dueDate);
         String loanString = loan.toString();
 
         Assertions.assertTrue(loanString.contains("L1"));

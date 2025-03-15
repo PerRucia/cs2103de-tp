@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Test;
 
 public class TestLibrarian {
     private Librarian librarian;
+    private BookList bookList;
 
     @BeforeEach
-    void initLibrarian() {
-        librarian = new Librarian("U1", "Alice",
-                "alice@example.com", "Secret123", "E001");
+    void initFields() {
+        bookList = new BookList();
+        librarian = new Librarian("U1", "Alice", "alice@example.com",
+                "Secret123", "E001", bookList);
     }
 
     /**
@@ -33,9 +35,19 @@ public class TestLibrarian {
     @Test
     void testAddBook() {
         Book book = new Book("1234567890", "Effective Java", "Joshua Bloch");
-        book.setStatus(BookStatus.UNAVAILABLE);
+        book.setStatus(BookStatus.OUT_OF_CIRCULATION);
+
+        // Try adding a valid book
         librarian.addBook(book);
         Assertions.assertEquals(BookStatus.AVAILABLE, book.getStatus());
+
+        // Try adding a null book
+        librarian.addBook(null);
+
+        // Try adding a book with null ISBN
+        Book invalidBook = new Book(null, "Java Concurrency in Practice",
+                "Brian Goetz");
+        librarian.addBook(invalidBook);
     }
 
     /**
@@ -49,7 +61,7 @@ public class TestLibrarian {
         Book book = new Book("1234567890", "Effective Java", "Joshua Bloch");
         Assertions.assertEquals(BookStatus.AVAILABLE, book.getStatus());
         librarian.removeBook(book);
-        Assertions.assertEquals(BookStatus.UNAVAILABLE, book.getStatus());
+        Assertions.assertEquals(BookStatus.OUT_OF_CIRCULATION, book.getStatus());
 
         // Try removing a checked-out book
         book.setStatus(BookStatus.CHECKED_OUT);
@@ -60,6 +72,9 @@ public class TestLibrarian {
         book.setStatus(BookStatus.OVERDUE);
         librarian.removeBook(book);
         Assertions.assertEquals(BookStatus.OVERDUE, book.getStatus());
+
+        // Try removing a null book
+        librarian.removeBook(null);
     }
 
     /**

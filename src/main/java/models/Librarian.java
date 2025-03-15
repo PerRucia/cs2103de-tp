@@ -5,10 +5,13 @@ package models;
  */
 public class Librarian extends User {
     private String employeeId;
+    private BookList bookList;
 
-    public Librarian(String userId, String name, String email, String password, String employeeId) {
+    public Librarian(String userId, String name, String email, String password, String employeeId,
+                     BookList bookList) {
         super(userId, name, email, password);
         this.employeeId = employeeId;
+        this.bookList = bookList;
     }
 
     public String getEmployeeId() {
@@ -20,18 +23,22 @@ public class Librarian extends User {
     }
 
     public void addBook(Book book) {
-        System.out.println("Librarian " + name + " added book: " + book.getTitle());
-        book.setStatus(BookStatus.AVAILABLE);
+        try {
+            bookList.addBook(book);
+            System.out.println("Librarian " + name + " added book: " + book.getTitle());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Cannot add book: " + e.getMessage());
+        }
+
     }
 
     public void removeBook(Book book) {
-        if (book.getStatus() == BookStatus.CHECKED_OUT || book.getStatus() == BookStatus.OVERDUE) {
-            System.out.println("Cannot remove book " + book.getTitle() +
-                    " because it is currently checked out.");
-            return;
+        try {
+            bookList.removeBook(book);
+            System.out.println("Librarian " + name + " removed book: " + book.getTitle());
+        } catch (IllegalStateException e) {
+            System.out.println("Cannot remove book: " + e.getMessage());
         }
-        System.out.println("Librarian " + name + " removed book: " + book.getTitle());
-        book.setStatus(BookStatus.UNAVAILABLE);
     }
 
     public void manageUsers() {

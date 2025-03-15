@@ -7,87 +7,84 @@ import java.time.LocalDate;
  * Represents a loan for a book borrowed by a user.
  */
 public class Loan implements Serializable {
-    private String loanId;
-    private User borrower;
-    private Book book;
-    private LocalDate loanDate;
+    private static final int DEFAULT_RENEWAL_DAYS = 14; // Default number of days for renewal
+    private final String loanId;
+    private final User borrower;
+    private final Book book;
+    private final LocalDate loanDate;
     private LocalDate dueDate;
+    private LocalDate returnDate;
     private boolean isReturned;
 
-    public Loan(String loanId, User borrower, Book book, LocalDate loanDate, LocalDate dueDate) {
+    public Loan(String loanId, User borrower, Book book, LocalDate loanDate, LocalDate dueDate,
+                BookList bookList) {
         this.loanId = loanId;
         this.borrower = borrower;
         this.book = book;
         this.loanDate = loanDate;
         this.dueDate = dueDate;
+        this.returnDate = null;
         this.isReturned = false; // Default to not returned
-        book.setStatus(BookStatus.CHECKED_OUT); // Mark book as borrowed
+        bookList.loanBook(book); // Mark the book as loaned
     }
 
-    // Getters and setters
+    // loanID, borrower, book, loanDate should not be overwritten
     public String getLoanId() {
         return loanId;
-    }
-
-    public void setLoanId(String loanId) {
-        this.loanId = loanId;
     }
 
     public User getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(User borrower) {
-        this.borrower = borrower;
-    }
-
     public Book getBook() {
         return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     public LocalDate getLoanDate() {
         return loanDate;
     }
 
-    public void setLoanDate(LocalDate loanDate) {
-        this.loanDate = loanDate;
-    }
-
     public LocalDate getDueDate() {
         return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
     }
 
     public boolean isReturned() {
         return isReturned;
     }
 
-    public void returnBook() {
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    private void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void renewLoan(int days) {
+        int additionalDays = days == 0 ? DEFAULT_RENEWAL_DAYS : days;
+        setDueDate(dueDate.plusDays(additionalDays));
+        System.out.println("Loan renewed. New due date: " + dueDate);
+    }
+
+    public void returnBook(BookList bookList) {
         if (!isReturned) {
             isReturned = true;
-            book.setStatus(BookStatus.AVAILABLE); // Mark book as available
+            bookList.returnBook(book);
+            returnDate = LocalDate.now();
             System.out.println("Book '" + book.getTitle() + "' returned by " + borrower.getName());
         } else {
-            System.out.println("Book '" + book.getTitle() + "' was already returned.");
+            System.out.println("Book '" + book.getTitle() + "' already returned.");
         }
     }
 
-    public int checkOverdueDays(LocalDate date) {
-        if (!isReturned && date.isAfter(dueDate)) {
-            book.setStatus(BookStatus.OVERDUE); // Mark book as overdue
-            System.out.println("Book '" + book.getTitle() + "' is overdue.");
-        }
-        if (date.isAfter(dueDate)) {
+    public int checkOverdue(LocalDate date, BookList bookList) {
+        if (date.isAfter(dueDate) && !isReturned) {
+            System.out.println("Loan " + loanId + " is overdue.");
+            bookList.overdueBook(book);
             return (int) (date.toEpochDay() - dueDate.toEpochDay());
         }
-        return 0; // Not overdue
+        return 0;
     }
 
     @Override
