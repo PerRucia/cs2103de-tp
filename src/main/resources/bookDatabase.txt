@@ -1,0 +1,5 @@
+978-0134685991,Effective Java,Joshua Bloch,AVAILABLE
+978-0596009205,Head First Java,"Kathy Sierra, Bert Bates",CHECKED_OUT
+978-1617294945,Java: The Complete Reference,Herbert Schildt,OVERDUE
+978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
+978-0201633610,Design Patterns: Elements of Reusable Object-Oriented Software,"Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",OUT_OF_CIRCULATION
