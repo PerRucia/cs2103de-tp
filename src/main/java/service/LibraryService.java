@@ -8,10 +8,12 @@ public class LibraryService {
     private final BookList bookList;
 
     public LibraryService() {
-        this.bookList = GeneralStorage.loadBookList(DATABASE_FILE);
-        if (this.bookList == null) {
-            this.bookList = new BookList();
+        BookList bookList1;
+        bookList1 = GeneralStorage.loadBookList(DATABASE_FILE);
+        if (bookList1 == null) {
+            bookList1 = new BookList();
         }
+        this.bookList = bookList1;
     }
 
     public void saveData() {
