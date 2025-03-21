@@ -72,7 +72,7 @@ public class Loan implements Serializable {
             isReturned = true;
             bookList.returnBook(book);
             returnDate = LocalDate.now();
-            System.out.println("Book '" + book.getTitle() + "' returned by " + borrower.getName());
+            System.out.println("Book '" + book.getTitle() + "' returned by " + (borrower.isAdmin() ? "admin" : "user"));
         } else {
             System.out.println("Book '" + book.getTitle() + "' already returned.");
         }
@@ -91,7 +91,7 @@ public class Loan implements Serializable {
     public String toString() {
         return "Loan{" +
                 "loanId='" + loanId + '\'' +
-                ", borrower=" + borrower.getName() +
+                ", borrower=" + (borrower.isAdmin() ? "admin" : "user") +
                 ", book=" + book.getTitle() +
                 ", loanDate=" + loanDate +
                 ", dueDate=" + dueDate +
