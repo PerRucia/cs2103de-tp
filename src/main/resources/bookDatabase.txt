@@ -1,0 +1,4 @@
+978-0134685991,Effective Java,Joshua Bloch,AVAILABLE
+978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
+test,cs2103de-textbook,nus_soc,CHECKED_OUT
+978-1617294945,Java: The Complete Reference,Herbert Schildt,AVAILABLE
