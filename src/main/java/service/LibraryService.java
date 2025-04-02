@@ -10,6 +10,8 @@ public class LibraryService {
     private static final String DATABASE_FILE = "src/main/resources/bookDatabase.txt";
     private final BookList bookList;
     private final LoanList loanList;
+    private UserPreferences userPreferences;
+    private static final String USER_PREFS_FILE = "user_preferences.dat";
 
     public LibraryService() {
         BookList bookList1;
@@ -19,6 +21,9 @@ public class LibraryService {
         }
         this.bookList = bookList1;
         this.loanList = new LoanList();
+        
+        // 加载用户偏好
+        this.userPreferences = GeneralStorage.loadUserPreferences(USER_PREFS_FILE);
     }
 
     public void saveData() {
@@ -31,10 +36,20 @@ public class LibraryService {
     }
 
     public void addBook(String isbn, String title, String author) {
-        Book book = new Book(isbn, title, author);
         try {
+            if (isbn == null || isbn.trim().isEmpty()) {
+                throw new IllegalArgumentException("ISBN cannot be empty.");
+            }
+            if (title == null || title.trim().isEmpty()) {
+                throw new IllegalArgumentException("Title cannot be empty.");
+            }
+            if (author == null || author.trim().isEmpty()) {
+                throw new IllegalArgumentException("Author cannot be empty.");
+            }
+            
+            Book book = new Book(isbn, title, author);
             bookList.addBook(book);
-            System.out.println("Book added successfully.");
+            System.out.println("Book added successfully: " + book.getTitle());
         } catch (IllegalArgumentException e) {
             System.out.println("Error adding book: " + e.getMessage());
         }
@@ -55,18 +70,35 @@ public class LibraryService {
     }
 
     public void loanBook(String isbn) {
-        Book book = bookList.getBook(isbn);
-        if (book != null) {
-            try {
-                bookList.loanBook(book);
-                User borrower = new User(false);
-                loanList.createLoan(borrower, book);
-                System.out.println("Book loaned successfully.");
-            } catch (IllegalStateException e) {
-                System.out.println("Error: " + e.getMessage());
+        try {
+            if (isbn == null || isbn.trim().isEmpty()) {
+                throw new IllegalArgumentException("ISBN cannot be empty.");
             }
-        } else {
-            System.out.println("Book not found.");
+            
+            Book book = bookList.getBook(isbn);
+            if (book == null) {
+                System.out.println("Book not found with ISBN: " + isbn);
+                return;
+            }
+            
+            if (book.getStatus() != BookStatus.AVAILABLE) {
+                throw new IllegalStateException("Book is not available for loan. Current status: " + book.getStatus());
+            }
+            
+            // 创建默认用户（在实际应用中应该使用当前登录用户）
+            User borrower = new User(false);
+            
+            // 创建借阅记录
+            loanList.createLoan(borrower, book);
+            
+            // 更新图书状态
+            bookList.loanBook(book);
+            
+            System.out.println("Book loaned successfully: " + book.getTitle());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -287,5 +319,70 @@ public class LibraryService {
                 System.out.println(book);
             }
         }
+    }
+
+    // 添加获取和设置用户偏好的方法
+    public UserPreferences getUserPreferences() {
+        return userPreferences;
+    }
+
+    /**
+     * 保存用户偏好设置
+     */
+    public void saveUserPreferences() {
+        GeneralStorage.saveUserPreferences(USER_PREFS_FILE, userPreferences);
+        System.out.println("User preferences saved successfully.");
+    }
+
+    /**
+     * 更新图书排序偏好
+     * @param criteria 排序条件
+     * @param ascending 是否升序
+     */
+    public void updateBookSortPreferences(SortCriteria criteria, boolean ascending) {
+        userPreferences.setDefaultBookSortCriteria(criteria);
+        userPreferences.setDefaultSortAscending(ascending);
+        saveUserPreferences();
+    }
+
+    /**
+     * 更新借阅记录排序偏好
+     * @param criteria 排序条件
+     * @param ascending 是否升序
+     */
+    public void updateLoanSortPreferences(LoanSortCriteria criteria, boolean ascending) {
+        userPreferences.setDefaultLoanSortCriteria(criteria);
+        userPreferences.setDefaultSortAscending(ascending);
+        saveUserPreferences();
+    }
+
+    /**
+     * 更新搜索偏好
+     * @param criteria 搜索条件
+     */
+    public void updateSearchPreferences(SearchCriteria criteria) {
+        userPreferences.setDefaultSearchCriteria(criteria);
+        saveUserPreferences();
+    }
+
+    /**
+     * 使用默认偏好显示所有图书
+     */
+    public void viewAllBooksSortedWithPreferences() {
+        viewAllBooksSorted(
+            userPreferences.getDefaultBookSortCriteria(),
+            userPreferences.isDefaultSortAscending()
+        );
+    }
+
+    /**
+     * 使用默认偏好显示所有借阅记录
+     */
+    public void viewLoansSortedWithPreferences() {
+        viewLoansSorted(
+            userPreferences.getDefaultLoanSortCriteria(),
+            userPreferences.isDefaultSortAscending(),
+            !userPreferences.isShowReturnedLoans()
+        );
     }
 } 
