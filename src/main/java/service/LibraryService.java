@@ -222,4 +222,70 @@ public class LibraryService {
     public void viewAllBooksSorted(SortCriteria criteria) {
         viewAllBooksSorted(criteria, true);
     }
+
+    /**
+     * 搜索图书并显示结果
+     * @param query 查询字符串
+     * @param criteria 搜索条件
+     */
+    public void searchBooks(String query, SearchCriteria criteria) {
+        List<Book> results = bookList.searchBooks(query, criteria);
+        
+        System.out.println("\nSearch Results for '" + query + "' in " + criteria.getDisplayName() + ":");
+        
+        if (results.isEmpty()) {
+            System.out.println("No books found matching your search criteria.");
+        } else {
+            System.out.println("Found " + results.size() + " book(s):");
+            for (Book book : results) {
+                System.out.println(book);
+            }
+        }
+    }
+
+    /**
+     * 搜索图书并对结果进行排序
+     * @param query 查询字符串
+     * @param searchCriteria 搜索条件
+     * @param sortCriteria 排序条件
+     * @param ascending 是否升序排列
+     */
+    public void searchAndSortBooks(String query, SearchCriteria searchCriteria, 
+                                  SortCriteria sortCriteria, boolean ascending) {
+        List<Book> results = bookList.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
+        
+        System.out.println("\nSearch Results for '" + query + "' in " + searchCriteria.getDisplayName() + 
+                           " (Sorted by " + sortCriteria.getDisplayName() + 
+                           ", " + (ascending ? "Ascending" : "Descending") + "):");
+        
+        if (results.isEmpty()) {
+            System.out.println("No books found matching your search criteria.");
+        } else {
+            System.out.println("Found " + results.size() + " book(s):");
+            for (Book book : results) {
+                System.out.println(book);
+            }
+        }
+    }
+
+    /**
+     * 按相关性搜索图书
+     * @param query 查询字符串
+     * @param criteria 搜索条件
+     */
+    public void searchBooksByRelevance(String query, SearchCriteria criteria) {
+        List<Book> results = bookList.searchBooksByRelevance(query, criteria);
+        
+        System.out.println("\nSearch Results for '" + query + "' in " + criteria.getDisplayName() + 
+                           " (Sorted by Relevance):");
+        
+        if (results.isEmpty()) {
+            System.out.println("No books found matching your search criteria.");
+        } else {
+            System.out.println("Found " + results.size() + " book(s):");
+            for (Book book : results) {
+                System.out.println(book);
+            }
+        }
+    }
 } 

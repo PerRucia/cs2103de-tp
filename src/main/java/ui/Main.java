@@ -5,6 +5,7 @@ import service.LibraryService;
 import utils.InputUtil;
 import models.SortCriteria;
 import models.LoanSortCriteria;
+import models.SearchCriteria;
 
 public class Main {
     private static LibraryService libraryService;
@@ -82,6 +83,9 @@ public class Main {
             case VIEW_SORTED_LOANS:
                 handleViewSortedLoans();
                 break;
+            case SEARCH_BOOKS:
+                handleSearchBooks();
+                break;
             case EXIT:
                 return false;
         }
@@ -146,6 +150,61 @@ public class Main {
             libraryService.viewCurrentLoansSorted(criteria, ascending);
         } else {
             libraryService.viewLoansSorted(criteria, ascending);
+        }
+    }
+
+    private static void handleSearchBooks() {
+        System.out.println("\nSearch books by:");
+        System.out.println("1. Title");
+        System.out.println("2. Author");
+        System.out.println("3. ISBN");
+        System.out.println("4. All Fields");
+        
+        int searchChoice = InputUtil.readInt("Choose search criteria: ");
+        SearchCriteria searchCriteria = SearchCriteria.fromChoice(searchChoice);
+        
+        String query = InputUtil.readString("Enter search query: ");
+        
+        System.out.println("\nSort results by:");
+        System.out.println("1. Relevance");
+        System.out.println("2. Title");
+        System.out.println("3. Author");
+        System.out.println("4. ISBN");
+        System.out.println("5. Status");
+        
+        int sortChoice = InputUtil.readInt("Choose sorting criteria: ");
+        
+        if (sortChoice == 1) {
+            // 按相关性排序
+            libraryService.searchBooksByRelevance(query, searchCriteria);
+        } else {
+            // 按其他条件排序
+            SortCriteria sortCriteria;
+            switch (sortChoice) {
+                case 2:
+                    sortCriteria = SortCriteria.TITLE;
+                    break;
+                case 3:
+                    sortCriteria = SortCriteria.AUTHOR;
+                    break;
+                case 4:
+                    sortCriteria = SortCriteria.ISBN;
+                    break;
+                case 5:
+                    sortCriteria = SortCriteria.STATUS;
+                    break;
+                default:
+                    sortCriteria = SortCriteria.TITLE;
+            }
+            
+            System.out.println("\nSort direction:");
+            System.out.println("1. Ascending");
+            System.out.println("2. Descending");
+            
+            int directionChoice = InputUtil.readInt("Choose direction: ");
+            boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
+            
+            libraryService.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
         }
     }
 }

@@ -9,7 +9,8 @@ public enum MenuOption {
     VIEW_LOANS(6, "View all loans", true),
     EXIT(7, "Exit", false),
     VIEW_SORTED_BOOKS(8, "View sorted books", false),
-    VIEW_SORTED_LOANS(9, "View sorted loans", true);
+    VIEW_SORTED_LOANS(9, "View sorted loans", true),
+    SEARCH_BOOKS(10, "Search books", false);
 
     private final int choice;
     private final String description;
