@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.AddBookController" 
+      spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Text text="Add a New Book" styleClass="section-title"/>
+    
+    <GridPane hgap="10" vgap="10">
+        <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="isbnField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        
+        <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        
+        <Label text="Author:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="authorField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    </GridPane>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Add Book" onAction="#handleAddBook" styleClass="primary-button"/>
+        <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
+    </HBox>
+    
+    <Label fx:id="messageLabel" styleClass="error-label"/>
+</VBox> 

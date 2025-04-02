@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.ViewLoansController" 
+      spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Text text="Current Loans" styleClass="section-title"/>
+    
+    <TableView fx:id="loansTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="isbnColumn" text="ISBN"/>
+            <TableColumn fx:id="titleColumn" text="Title"/>
+            <TableColumn fx:id="userIdColumn" text="User ID"/>
+            <TableColumn fx:id="loanDateColumn" text="Loan Date"/>
+        </columns>
+    </TableView>
+    
+    <Label fx:id="messageLabel" styleClass="error-label"/>
+</VBox> 

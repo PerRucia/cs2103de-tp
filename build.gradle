@@ -2,10 +2,16 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
     mavenCentral()
+}
+
+javafx {
+    version = '17.0.7'
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
@@ -43,7 +49,7 @@ test {
 }
 
 application {
-    mainClass.set("ui.Main")
+    mainClass.set("ui.LibraryApp")
 }
 
 shadowJar {

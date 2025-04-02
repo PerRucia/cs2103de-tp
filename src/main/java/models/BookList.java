@@ -332,4 +332,11 @@ public class BookList {
         // 不匹配得零分
         return 0;
     }
+
+    /**
+     * Clears all books from the list.
+     */
+    public void clear() {
+        books.clear();
+    }
 }
