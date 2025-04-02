@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import models.UserPreferences;
 
 
 public class GeneralStorage {
@@ -56,6 +57,35 @@ public class GeneralStorage {
             }
         } catch (IOException e) {
             System.err.println("Error writing to the book database: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 保存用户偏好设置
+     * @param filePath 文件路径
+     * @param preferences 用户偏好对象
+     */
+    public static void saveUserPreferences(String filePath, UserPreferences preferences) {
+        try (java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(
+                new java.io.FileOutputStream(filePath))) {
+            oos.writeObject(preferences);
+        } catch (IOException e) {
+            System.err.println("Error saving user preferences: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 加载用户偏好设置
+     * @param filePath 文件路径
+     * @return 用户偏好对象，如果加载失败则返回默认偏好
+     */
+    public static UserPreferences loadUserPreferences(String filePath) {
+        try (java.io.ObjectInputStream ois = new java.io.ObjectInputStream(
+                new java.io.FileInputStream(filePath))) {
+            return (UserPreferences) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Creating new user preferences file.");
+            return new UserPreferences(); // 返回默认偏好
         }
     }
 }

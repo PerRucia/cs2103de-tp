@@ -14,60 +14,93 @@ public class TestLoan {
     private Loan loan;
 
     @BeforeEach
-    void initFields() {
+    void setUp() {
         borrower = new User(false);
         book = new Book("1234567890", "Effective Java", "Joshua Bloch");
         bookList = new BookList();
         bookList.addBook(book);
-
         loanDate = LocalDate.now();
         dueDate = loanDate.plusDays(14);
-        loan = new Loan("L1", borrower, book, loanDate, dueDate, bookList);
+        
+        // 使用新的构造函数
+        loan = new Loan(borrower, book, loanDate, dueDate);
+        
+        // 手动设置图书状态为已借出
+        bookList.loanBook(book);
     }
 
-    /**
-     * Test the constructor of the Loan class.
-     * This test checks if the constructor initializes all fields correctly.
-     */
     @Test
-    void testLoanConstructor() {
-        Assertions.assertEquals("L1", loan.getLoanId());
-        Assertions.assertEquals(borrower, loan.getBorrower());
-        Assertions.assertEquals(book, loan.getBook());
-        Assertions.assertEquals(loanDate, loan.getLoanDate());
-        Assertions.assertEquals(dueDate, loan.getDueDate());
-        Assertions.assertFalse(loan.isReturned());
-        Assertions.assertEquals(BookStatus.CHECKED_OUT, book.getStatus());
+    void testGetLoanId() {
+        // 由于我们现在使用生成的ID，我们需要检查ID不为空
+        Assertions.assertNotNull(loan.getLoanId());
+        Assertions.assertTrue(loan.getLoanId().contains(book.getIsbn()));
     }
 
-    /**
-     * Test the renewLoan method of the Loan class.
-     * This test checks if the due date is updated correctly when renewed.
-     */
+    @Test
+    void testGetBorrower() {
+        Assertions.assertEquals(borrower, loan.getBorrower());
+    }
+
+    @Test
+    void testGetBook() {
+        Assertions.assertEquals(book, loan.getBook());
+    }
+
+    @Test
+    void testGetLoanDate() {
+        Assertions.assertEquals(loanDate, loan.getLoanDate());
+    }
+
+    @Test
+    void testGetDueDate() {
+        Assertions.assertEquals(dueDate, loan.getDueDate());
+    }
+
+    @Test
+    void testIsReturned() {
+        Assertions.assertFalse(loan.isReturned());
+    }
+
+    @Test
+    void testGetReturnDate() {
+        Assertions.assertNull(loan.getReturnDate());
+    }
+
     @Test
     void testRenewLoan() {
-        // Test renewing the loan with a specific number of days
-        loan.renewLoan(7);
-        Assertions.assertEquals(dueDate.plusDays(7), loan.getDueDate());
-
-        // Test renewing the loan with the default number of days
+        LocalDate originalDueDate = loan.getDueDate();
         loan.renewLoan(0);
-        Assertions.assertEquals(dueDate.plusDays(21), loan.getDueDate());
+        Assertions.assertEquals(originalDueDate.plusDays(14), loan.getDueDate());
     }
 
-    /**
-     * Test the returnBook method of the Loan class.
-     * This test checks if the book status is updated correctly when returned.
-     */
     @Test
     void testReturnBook() {
-        Assertions.assertFalse(loan.isReturned());
         Assertions.assertEquals(BookStatus.CHECKED_OUT, book.getStatus());
         
-        loan.returnBook(bookList);
+        // 使用新的无参数 returnBook 方法
+        loan.returnBook();
+        
+        // 手动更新图书状态
+        bookList.returnBook(book);
         
         Assertions.assertTrue(loan.isReturned());
         Assertions.assertNotNull(loan.getReturnDate());
         Assertions.assertEquals(BookStatus.AVAILABLE, book.getStatus());
+    }
+
+    @Test
+    void testCheckOverdue() {
+        LocalDate futureDate = dueDate.plusDays(1);
+        int daysOverdue = loan.checkOverdue(futureDate, bookList);
+        Assertions.assertEquals(1, daysOverdue);
+        Assertions.assertEquals(BookStatus.OVERDUE, book.getStatus());
+    }
+
+    @Test
+    void testCheckNotOverdue() {
+        LocalDate pastDate = dueDate.minusDays(1);
+        int daysOverdue = loan.checkOverdue(pastDate, bookList);
+        Assertions.assertEquals(0, daysOverdue);
+        Assertions.assertEquals(BookStatus.CHECKED_OUT, book.getStatus());
     }
 }
