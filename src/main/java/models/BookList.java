@@ -22,14 +22,14 @@ public class BookList {
     /**
      * Adds a book to the list if it is not already present.
      * @param book The book to be added.
-     * @throws IllegalArgumentException if the book or ISBN is null.
+     * @throws IllegalArgumentException if the book or ISBN is null or empty.
      */
     public void addBook(Book book) throws IllegalArgumentException {
-        if (book != null && book.getIsbn() != null) {
+        if (book != null && book.getIsbn() != null && !book.getIsbn().isEmpty()) {
             books.put(book.getIsbn(), book);
             book.setStatus(BookStatus.AVAILABLE);
         } else {
-            throw new IllegalArgumentException("Book or ISBN cannot be null.");
+            throw new IllegalArgumentException("Book or ISBN cannot be null or empty.");
         }
     }
 
