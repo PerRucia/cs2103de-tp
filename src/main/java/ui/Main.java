@@ -3,6 +3,7 @@ package ui;
 import models.User;
 import service.LibraryService;
 import utils.InputUtil;
+import models.SortCriteria;
 
 public class Main {
     private static LibraryService libraryService;
@@ -74,6 +75,9 @@ public class Main {
             case VIEW_LOANS:
                 libraryService.viewLoans();
                 break;
+            case VIEW_SORTED_BOOKS:
+                handleViewSortedBooks();
+                break;
             case EXIT:
                 return false;
         }
@@ -85,5 +89,25 @@ public class Main {
         String title = InputUtil.readString("Enter Title: ");
         String author = InputUtil.readString("Enter Author: ");
         libraryService.addBook(isbn, title, author);
+    }
+
+    private static void handleViewSortedBooks() {
+        System.out.println("\nSort books by:");
+        System.out.println("1. Title");
+        System.out.println("2. Author");
+        System.out.println("3. ISBN");
+        System.out.println("4. Status");
+        
+        int sortChoice = InputUtil.readInt("Choose sorting criteria: ");
+        SortCriteria criteria = SortCriteria.fromChoice(sortChoice);
+        
+        System.out.println("\nSort direction:");
+        System.out.println("1. Ascending");
+        System.out.println("2. Descending");
+        
+        int directionChoice = InputUtil.readInt("Choose direction: ");
+        boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
+        
+        libraryService.viewAllBooksSorted(criteria, ascending);
     }
 }

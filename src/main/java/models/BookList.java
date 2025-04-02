@@ -1,6 +1,9 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BookList {
@@ -98,5 +101,50 @@ public class BookList {
      */
     public Map<String, Book> getAllBooks() {
         return new HashMap<>(books);
+    }
+
+    /**
+     * 获取按指定条件排序的图书列表
+     * @param criteria 排序条件
+     * @param ascending 是否升序排列
+     * @return 排序后的图书列表
+     */
+    public List<Book> getSortedBooks(SortCriteria criteria, boolean ascending) {
+        List<Book> bookList = new ArrayList<>(books.values());
+        
+        Comparator<Book> comparator;
+        
+        switch (criteria) {
+            case TITLE:
+                comparator = Comparator.comparing(Book::getTitle);
+                break;
+            case AUTHOR:
+                comparator = Comparator.comparing(Book::getAuthor);
+                break;
+            case ISBN:
+                comparator = Comparator.comparing(Book::getIsbn);
+                break;
+            case STATUS:
+                comparator = Comparator.comparing(book -> book.getStatus().toString());
+                break;
+            default:
+                comparator = Comparator.comparing(Book::getTitle);
+        }
+        
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+        
+        bookList.sort(comparator);
+        return bookList;
+    }
+
+    /**
+     * 获取按指定条件升序排序的图书列表
+     * @param criteria 排序条件
+     * @return 排序后的图书列表
+     */
+    public List<Book> getSortedBooks(SortCriteria criteria) {
+        return getSortedBooks(criteria, true);
     }
 }

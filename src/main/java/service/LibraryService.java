@@ -2,6 +2,7 @@ package service;
 
 import models.*;
 import storage.GeneralStorage;
+import java.util.List;
 
 public class LibraryService {
     private static final String DATABASE_FILE = "src/main/resources/bookDatabase.txt";
@@ -82,5 +83,33 @@ public class LibraryService {
         bookList.getAllBooks().values().stream()
                 .filter(book -> book.getStatus() == BookStatus.CHECKED_OUT)
                 .forEach(System.out::println);
+    }
+
+    /**
+     * 显示按指定条件排序的所有图书
+     * @param criteria 排序条件
+     * @param ascending 是否升序排列
+     */
+    public void viewAllBooksSorted(SortCriteria criteria, boolean ascending) {
+        List<Book> sortedBooks = bookList.getSortedBooks(criteria, ascending);
+        
+        System.out.println("\nLibrary Books (Sorted by " + criteria.getDisplayName() + 
+                           ", " + (ascending ? "Ascending" : "Descending") + "):");
+        
+        if (sortedBooks.isEmpty()) {
+            System.out.println("No books in the library.");
+        } else {
+            for (Book book : sortedBooks) {
+                System.out.println(book);
+            }
+        }
+    }
+
+    /**
+     * 显示按指定条件升序排序的所有图书
+     * @param criteria 排序条件
+     */
+    public void viewAllBooksSorted(SortCriteria criteria) {
+        viewAllBooksSorted(criteria, true);
     }
 } 
