@@ -16,16 +16,28 @@ public class Loan implements Serializable {
     private LocalDate returnDate;
     private boolean isReturned;
 
-    public Loan(String loanId, User borrower, Book book, LocalDate loanDate, LocalDate dueDate,
-                BookList bookList) {
-        this.loanId = loanId;
+    /**
+     * 创建一个新的借阅记录
+     * @param borrower 借阅者
+     * @param book 借阅的图书
+     * @param loanDate 借阅日期
+     * @param dueDate 应还日期
+     */
+    public Loan(User borrower, Book book, LocalDate loanDate, LocalDate dueDate) {
+        this.loanId = generateLoanId(borrower, book, loanDate);
         this.borrower = borrower;
         this.book = book;
         this.loanDate = loanDate;
         this.dueDate = dueDate;
         this.returnDate = null;
-        this.isReturned = false; // Default to not returned
-        bookList.loanBook(book); // Mark the book as loaned
+        this.isReturned = false;
+    }
+
+    /**
+     * 生成借阅ID
+     */
+    private String generateLoanId(User borrower, Book book, LocalDate loanDate) {
+        return book.getIsbn() + "-" + loanDate.toString();
     }
 
     // loanID, borrower, book, loanDate should not be overwritten
@@ -67,10 +79,12 @@ public class Loan implements Serializable {
         System.out.println("Loan renewed. New due date: " + dueDate);
     }
 
-    public void returnBook(BookList bookList) {
+    /**
+     * 归还图书（不需要 BookList 参数）
+     */
+    public void returnBook() {
         if (!isReturned) {
             isReturned = true;
-            bookList.returnBook(book);
             returnDate = LocalDate.now();
             System.out.println("Book '" + book.getTitle() + "' returned by " + (borrower.isAdmin() ? "admin" : "user"));
         } else {
@@ -89,13 +103,17 @@ public class Loan implements Serializable {
 
     @Override
     public String toString() {
-        return "Loan{" +
-                "loanId='" + loanId + '\'' +
-                ", borrower=" + (borrower.isAdmin() ? "admin" : "user") +
-                ", book=" + book.getTitle() +
-                ", loanDate=" + loanDate +
-                ", dueDate=" + dueDate +
-                ", isReturned=" + isReturned +
-                '}';
+        LocalDate today = LocalDate.now();
+        boolean isOverdue = returnDate == null && dueDate.isBefore(today);
+        String status = returnDate != null ? "Returned" : (isOverdue ? "Overdue" : "On Loan");
+        
+        return String.format("Loan: %s - '%s' by %s - Borrowed: %s, Due: %s%s - Status: %s",
+                book.getIsbn(),
+                book.getTitle(),
+                book.getAuthor(),
+                loanDate,
+                dueDate,
+                returnDate != null ? ", Returned: " + returnDate : "",
+                status);
     }
 }
