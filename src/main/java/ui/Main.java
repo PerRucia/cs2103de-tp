@@ -4,6 +4,7 @@ import models.User;
 import service.LibraryService;
 import utils.InputUtil;
 import models.SortCriteria;
+import models.LoanSortCriteria;
 
 public class Main {
     private static LibraryService libraryService;
@@ -78,6 +79,9 @@ public class Main {
             case VIEW_SORTED_BOOKS:
                 handleViewSortedBooks();
                 break;
+            case VIEW_SORTED_LOANS:
+                handleViewSortedLoans();
+                break;
             case EXIT:
                 return false;
         }
@@ -109,5 +113,39 @@ public class Main {
         boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
         
         libraryService.viewAllBooksSorted(criteria, ascending);
+    }
+
+    private static void handleViewSortedLoans() {
+        System.out.println("\nSort loans by:");
+        System.out.println("1. Loan Date");
+        System.out.println("2. Due Date");
+        System.out.println("3. Return Date");
+        System.out.println("4. Book Title");
+        System.out.println("5. Book Author");
+        System.out.println("6. Book ISBN");
+        System.out.println("7. Status");
+        
+        int sortChoice = InputUtil.readInt("Choose sorting criteria: ");
+        LoanSortCriteria criteria = LoanSortCriteria.fromChoice(sortChoice);
+        
+        System.out.println("\nSort direction:");
+        System.out.println("1. Ascending");
+        System.out.println("2. Descending");
+        
+        int directionChoice = InputUtil.readInt("Choose direction: ");
+        boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
+        
+        System.out.println("\nView options:");
+        System.out.println("1. All loans");
+        System.out.println("2. Current loans only");
+        
+        int viewChoice = InputUtil.readInt("Choose view option: ");
+        boolean currentOnly = viewChoice == 2;
+        
+        if (currentOnly) {
+            libraryService.viewCurrentLoansSorted(criteria, ascending);
+        } else {
+            libraryService.viewLoansSorted(criteria, ascending);
+        }
     }
 }
