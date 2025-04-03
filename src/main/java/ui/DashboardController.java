@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import service.LibraryService;
 import models.User;
+import java.io.IOException;
 
 public class DashboardController {
     @FXML private StackPane contentPane;

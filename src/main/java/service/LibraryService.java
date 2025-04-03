@@ -42,7 +42,7 @@ public class LibraryService {
 
     public void viewAllBooks() {
         System.out.println("\nBooks in Library:");
-        bookList.getAllBooks().values().forEach(System.out::println);
+        bookList.getBooks().values().forEach(System.out::println);
     }
 
     public void addBook(String isbn, String title, String author) {
@@ -238,11 +238,6 @@ public class LibraryService {
         viewLoansSorted(criteria, true, true);
     }
 
-    /**
-     * Display all books sorted by specified criteria
-     * @param criteria Sort criteria
-     * @param ascending Whether to sort in ascending order
-     */
     public void viewAllBooksSorted(SortCriteria criteria, boolean ascending) {
         List<Book> sortedBooks = bookList.getSortedBooks(criteria, ascending);
         
@@ -250,7 +245,7 @@ public class LibraryService {
                            ", " + (ascending ? "Ascending" : "Descending") + "):");
         
         if (sortedBooks.isEmpty()) {
-            System.out.println("No books in the library.");
+            System.out.println("No books found.");
         } else {
             for (Book book : sortedBooks) {
                 System.out.println(book);
@@ -258,70 +253,23 @@ public class LibraryService {
         }
     }
 
-    /**
-     * 搜索图书并显示结果
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     */
-    public void searchBooks(String query, SearchCriteria criteria) {
-        List<Book> results = bookList.searchBooks(query, criteria);
-        
-        System.out.println("\nSearch Results for '" + query + "' in " + criteria.getDisplayName() + ":");
-        
-        if (results.isEmpty()) {
-            System.out.println("No books found matching your search criteria.");
-        } else {
-            System.out.println("Found " + results.size() + " book(s):");
-            for (Book book : results) {
-                System.out.println(book);
-            }
-        }
+    public void viewAllBooksSorted(SortCriteria criteria) {
+        viewAllBooksSorted(criteria, true);
     }
 
-    /**
-     * 搜索图书并对结果进行排序
-     * @param query 查询字符串
-     * @param searchCriteria 搜索条件
-     * @param sortCriteria 排序条件
-     * @param ascending 是否升序排列
-     */
-    public void searchAndSortBooks(String query, SearchCriteria searchCriteria, 
-                                  SortCriteria sortCriteria, boolean ascending) {
-        List<Book> results = bookList.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
-        
-        System.out.println("\nSearch Results for '" + query + "' in " + searchCriteria.getDisplayName() + 
-                           " (Sorted by " + sortCriteria.getDisplayName() + 
-                           ", " + (ascending ? "Ascending" : "Descending") + "):");
-        
-        if (results.isEmpty()) {
-            System.out.println("No books found matching your search criteria.");
-        } else {
-            System.out.println("Found " + results.size() + " book(s):");
-            for (Book book : results) {
-                System.out.println(book);
-            }
-        }
+    public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, SortCriteria sortCriteria, boolean ascending) {
+        return bookList.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
     }
 
-    /**
-     * 按相关性搜索图书
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     */
-    public void searchBooksByRelevance(String query, SearchCriteria criteria) {
-        List<Book> results = bookList.searchBooksByRelevance(query, criteria);
-        
-        System.out.println("\nSearch Results for '" + query + "' in " + criteria.getDisplayName() + 
-                           " (Sorted by Relevance):");
-        
-        if (results.isEmpty()) {
-            System.out.println("No books found matching your search criteria.");
-        } else {
-            System.out.println("Found " + results.size() + " book(s):");
-            for (Book book : results) {
-                System.out.println(book);
-            }
-        }
+    public List<Book> getAllBooks() {
+        return new ArrayList<>(bookList.getBooks().values());
+    }
+
+    public void sortBooks(SortCriteria sortCriteria, boolean ascending) {
+        bookList.getSortedBooks(sortCriteria, ascending).forEach(book -> {
+            bookList.clear();
+            bookList.addBook(book);
+        });
     }
 
     // 添加获取和设置用户偏好的方法
@@ -387,39 +335,5 @@ public class LibraryService {
             userPreferences.isDefaultSortAscending(),
             !userPreferences.isShowReturnedLoans()
         );
-    }
-
-    public List<Book> getAllBooks() {
-        return new ArrayList<>(bookList.getAllBooks().values());
-    }
-
-    public void sortBooks(SortCriteria criteria, boolean ascending) {
-        List<Book> books = getAllBooks();
-        Comparator<Book> comparator;
-
-        switch (criteria) {
-            case TITLE:
-                comparator = Comparator.comparing(Book::getTitle);
-                break;
-            case AUTHOR:
-                comparator = Comparator.comparing(Book::getAuthor);
-                break;
-            case ISBN:
-                comparator = Comparator.comparing(Book::getIsbn);
-                break;
-            case STATUS:
-                comparator = Comparator.comparing(Book::getStatus);
-                break;
-            default:
-                comparator = Comparator.comparing(Book::getTitle);
-        }
-
-        if (!ascending) {
-            comparator = comparator.reversed();
-        }
-
-        books.sort(comparator);
-        bookList.clear();
-        books.forEach(bookList::addBook);
     }
 } 

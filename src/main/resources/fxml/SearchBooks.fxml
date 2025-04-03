@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.SearchBooksController" 
+      spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Text text="Search Books" styleClass="section-title"/>
+    
+    <GridPane hgap="10" vgap="10">
+        <Label text="Search:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="searchField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        
+        <Label text="Search by:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="searchCriteriaComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        
+        <Label text="Sort by:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <ComboBox fx:id="sortCriteriaComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        
+        <Label text="Sort direction:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <RadioButton fx:id="ascendingRadio" text="Ascending" selected="true">
+                <toggleGroup>
+                    <ToggleGroup fx:id="sortDirection"/>
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="descendingRadio" text="Descending" toggleGroup="$sortDirection"/>
+        </HBox>
+    </GridPane>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Search" onAction="#handleSearch" styleClass="primary-button"/>
+        <Button text="Clear" onAction="#handleClear" styleClass="secondary-button"/>
+    </HBox>
+    
+    <TableView fx:id="resultsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="isbnColumn" text="ISBN" prefWidth="100"/>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="200"/>
+            <TableColumn fx:id="authorColumn" text="Author" prefWidth="150"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150"/>
+        </columns>
+    </TableView>
+    
+    <Label fx:id="messageLabel" styleClass="error-label"/>
+</VBox> 

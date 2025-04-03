@@ -12,22 +12,28 @@ import models.SortCriteria;
 import models.LoanSortCriteria;
 import models.SearchCriteria;
 import models.UserPreferences;
+import java.util.List;
+import models.Book;
 
 public class Main extends Application {
     private static LibraryService libraryService;
     private static User currentUser;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-        Parent root = loader.load();
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-        
-        primaryStage.setTitle("Library Management System");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            
+            primaryStage.setTitle("Library Management System");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -206,7 +212,7 @@ public class Main extends Application {
         
         if (sortChoice == 1) {
             // 按相关性排序
-            libraryService.searchBooksByRelevance(query, searchCriteria);
+            handleSearch(query, searchCriteria);
         } else {
             // 按其他条件排序
             SortCriteria sortCriteria;
@@ -235,6 +241,18 @@ public class Main extends Application {
             boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
             
             libraryService.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
+        }
+    }
+
+    private static void handleSearch(String query, SearchCriteria searchCriteria) {
+        List<Book> results = libraryService.searchAndSortBooks(query, searchCriteria, SortCriteria.TITLE, true);
+        if (results.isEmpty()) {
+            System.out.println("No books found matching your search criteria.");
+        } else {
+            System.out.println("Found " + results.size() + " book(s):");
+            for (Book book : results) {
+                System.out.println(book);
+            }
         }
     }
 
