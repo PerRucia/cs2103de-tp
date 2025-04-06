@@ -5,6 +5,7 @@ import storage.GeneralStorage;
 import java.util.List;
 import java.util.Comparator;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class LibraryService {
     private static final String DATABASE_FILE = "src/main/resources/bookDatabase.txt";
@@ -12,6 +13,7 @@ public class LibraryService {
     private final LoanList loanList;
     private UserPreferences userPreferences;
     private static final String USER_PREFS_FILE = "user_preferences.dat";
+    private User currentUser;
 
     public LibraryService() {
         BookList bookList1;
@@ -22,8 +24,16 @@ public class LibraryService {
         this.bookList = bookList1;
         this.loanList = new LoanList();
         
-        // 加载用户偏好
+        // Load user preferences
         this.userPreferences = GeneralStorage.loadUserPreferences(USER_PREFS_FILE);
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public void saveData() {
@@ -32,7 +42,7 @@ public class LibraryService {
 
     public void viewAllBooks() {
         System.out.println("\nBooks in Library:");
-        bookList.getAllBooks().values().forEach(System.out::println);
+        bookList.getBooks().values().forEach(System.out::println);
     }
 
     public void addBook(String isbn, String title, String author) {
@@ -56,20 +66,6 @@ public class LibraryService {
     }
 
     public void removeBook(String isbn) {
-        Book book = bookList.getBook(isbn);
-        if (book != null) {
-            try {
-                bookList.removeBook(book);
-                System.out.println("Book removed successfully.");
-            } catch (IllegalStateException e) {
-                System.out.println("Error removing book: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Book not found.");
-        }
-    }
-
-    public void loanBook(String isbn) {
         try {
             if (isbn == null || isbn.trim().isEmpty()) {
                 throw new IllegalArgumentException("ISBN cannot be empty.");
@@ -77,28 +73,51 @@ public class LibraryService {
             
             Book book = bookList.getBook(isbn);
             if (book == null) {
-                System.out.println("Book not found with ISBN: " + isbn);
-                return;
+                throw new IllegalArgumentException("Book not found.");
+            }
+            
+            if (book.getStatus() != BookStatus.AVAILABLE) {
+                throw new IllegalStateException("Cannot remove book because it is currently " + 
+                    book.getStatus().toString().toLowerCase() + ".");
+            }
+            
+            bookList.removeBook(book);
+            System.out.println("Book removed successfully.");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            throw e; // Re-throw to let UI handle the error
+        }
+    }
+
+    public void loanBook(String isbn) {
+        try {
+            if (currentUser == null) {
+                throw new IllegalStateException("No user is currently logged in.");
+            }
+
+            if (isbn == null || isbn.trim().isEmpty()) {
+                throw new IllegalArgumentException("ISBN cannot be empty.");
+            }
+            
+            Book book = bookList.getBook(isbn);
+            if (book == null) {
+                throw new IllegalArgumentException("Book not found with ISBN: " + isbn);
             }
             
             if (book.getStatus() != BookStatus.AVAILABLE) {
                 throw new IllegalStateException("Book is not available for loan. Current status: " + book.getStatus());
             }
             
-            // 创建默认用户（在实际应用中应该使用当前登录用户）
-            User borrower = new User(false);
+            // Create loan record using the current user
+            loanList.createLoan(currentUser, book);
             
-            // 创建借阅记录
-            loanList.createLoan(borrower, book);
-            
-            // 更新图书状态
+            // Update book status
             bookList.loanBook(book);
             
             System.out.println("Book loaned successfully: " + book.getTitle());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        } catch (IllegalStateException e) {
-            System.out.println("Error: " + e.getMessage());
+            throw e; // Re-throw to let UI handle the error
         }
     }
 
@@ -123,16 +142,8 @@ public class LibraryService {
         }
     }
 
-    public void viewLoans() {
-        List<Loan> currentLoans = loanList.getCurrentLoans();
-        System.out.println("\nCurrently Loaned Books:");
-        if (currentLoans.isEmpty()) {
-            System.out.println("No books currently on loan.");
-        } else {
-            for (Loan loan : currentLoans) {
-                System.out.println(loan);
-            }
-        }
+    public List<Loan> viewLoans() {
+        return loanList.getCurrentLoans();
     }
 
     public void viewLoansSorted(LoanSortCriteria criteria, boolean ascending, boolean currentOnly) {
@@ -227,11 +238,6 @@ public class LibraryService {
         viewLoansSorted(criteria, true, true);
     }
 
-    /**
-     * 显示按指定条件排序的所有图书
-     * @param criteria 排序条件
-     * @param ascending 是否升序排列
-     */
     public void viewAllBooksSorted(SortCriteria criteria, boolean ascending) {
         List<Book> sortedBooks = bookList.getSortedBooks(criteria, ascending);
         
@@ -239,7 +245,7 @@ public class LibraryService {
                            ", " + (ascending ? "Ascending" : "Descending") + "):");
         
         if (sortedBooks.isEmpty()) {
-            System.out.println("No books in the library.");
+            System.out.println("No books found.");
         } else {
             for (Book book : sortedBooks) {
                 System.out.println(book);
@@ -247,78 +253,23 @@ public class LibraryService {
         }
     }
 
-    /**
-     * 显示按指定条件升序排序的所有图书
-     * @param criteria 排序条件
-     */
     public void viewAllBooksSorted(SortCriteria criteria) {
         viewAllBooksSorted(criteria, true);
     }
 
-    /**
-     * 搜索图书并显示结果
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     */
-    public void searchBooks(String query, SearchCriteria criteria) {
-        List<Book> results = bookList.searchBooks(query, criteria);
-        
-        System.out.println("\nSearch Results for '" + query + "' in " + criteria.getDisplayName() + ":");
-        
-        if (results.isEmpty()) {
-            System.out.println("No books found matching your search criteria.");
-        } else {
-            System.out.println("Found " + results.size() + " book(s):");
-            for (Book book : results) {
-                System.out.println(book);
-            }
-        }
+    public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, SortCriteria sortCriteria, boolean ascending) {
+        return bookList.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
     }
 
-    /**
-     * 搜索图书并对结果进行排序
-     * @param query 查询字符串
-     * @param searchCriteria 搜索条件
-     * @param sortCriteria 排序条件
-     * @param ascending 是否升序排列
-     */
-    public void searchAndSortBooks(String query, SearchCriteria searchCriteria, 
-                                  SortCriteria sortCriteria, boolean ascending) {
-        List<Book> results = bookList.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
-        
-        System.out.println("\nSearch Results for '" + query + "' in " + searchCriteria.getDisplayName() + 
-                           " (Sorted by " + sortCriteria.getDisplayName() + 
-                           ", " + (ascending ? "Ascending" : "Descending") + "):");
-        
-        if (results.isEmpty()) {
-            System.out.println("No books found matching your search criteria.");
-        } else {
-            System.out.println("Found " + results.size() + " book(s):");
-            for (Book book : results) {
-                System.out.println(book);
-            }
-        }
+    public List<Book> getAllBooks() {
+        return new ArrayList<>(bookList.getBooks().values());
     }
 
-    /**
-     * 按相关性搜索图书
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     */
-    public void searchBooksByRelevance(String query, SearchCriteria criteria) {
-        List<Book> results = bookList.searchBooksByRelevance(query, criteria);
-        
-        System.out.println("\nSearch Results for '" + query + "' in " + criteria.getDisplayName() + 
-                           " (Sorted by Relevance):");
-        
-        if (results.isEmpty()) {
-            System.out.println("No books found matching your search criteria.");
-        } else {
-            System.out.println("Found " + results.size() + " book(s):");
-            for (Book book : results) {
-                System.out.println(book);
-            }
-        }
+    public void sortBooks(SortCriteria sortCriteria, boolean ascending) {
+        bookList.getSortedBooks(sortCriteria, ascending).forEach(book -> {
+            bookList.clear();
+            bookList.addBook(book);
+        });
     }
 
     // 添加获取和设置用户偏好的方法

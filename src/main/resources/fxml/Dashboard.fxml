@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="ui.DashboardController">
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT">
+            <Text text="Library Management System" styleClass="header-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
+        </HBox>
+    </top>
+    
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Button text="View All Books" onAction="#handleViewAllBooks" styleClass="menu-button" maxWidth="Infinity"/>
+            <Button text="Search Books" onAction="#handleSearchBooks" styleClass="menu-button" maxWidth="Infinity"/>
+            <Button text="Loan Book" onAction="#handleLoanBook" styleClass="menu-button" maxWidth="Infinity"/>
+            <Button text="Return Book" onAction="#handleReturnBook" styleClass="menu-button" maxWidth="Infinity"/>
+            <Button text="Add Book" onAction="#handleAddBook" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
+            <Button text="Remove Book" onAction="#handleRemoveBook" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
+            <Button text="View Loans" onAction="#handleViewLoans" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
+            <Button text="User Preferences" onAction="#handleUserPreferences" styleClass="menu-button" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+    
+    <center>
+        <StackPane fx:id="contentPane" styleClass="content-pane">
+            <Text text="Welcome to the Library Management System" styleClass="welcome-text"/>
+        </StackPane>
+    </center>
+</BorderPane> 

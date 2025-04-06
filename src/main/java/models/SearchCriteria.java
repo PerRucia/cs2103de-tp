@@ -4,10 +4,11 @@ package models;
  * 定义图书搜索的条件
  */
 public enum SearchCriteria {
+    ALL("All"),
+    ISBN("ISBN"),
     TITLE("Title"),
     AUTHOR("Author"),
-    ISBN("ISBN"),
-    ALL_FIELDS("All Fields");
+    STATUS("Status");
     
     private final String displayName;
     
@@ -15,14 +16,15 @@ public enum SearchCriteria {
         this.displayName = displayName;
     }
     
-    public String getDisplayName() {
+    @Override
+    public String toString() {
         return displayName;
     }
     
     /**
      * 从整数选择获取搜索条件
      * @param choice 用户选择的整数
-     * @return 对应的搜索条件，如果选择无效则返回ALL_FIELDS
+     * @return 对应的搜索条件，如果选择无效则返回ALL
      */
     public static SearchCriteria fromChoice(int choice) {
         switch (choice) {
@@ -33,9 +35,11 @@ public enum SearchCriteria {
             case 3:
                 return ISBN;
             case 4:
-                return ALL_FIELDS;
+                return ALL;
+            case 5:
+                return STATUS;
             default:
-                return ALL_FIELDS; // 默认搜索所有字段
+                return ALL; // 默认搜索所有字段
         }
     }
 } 

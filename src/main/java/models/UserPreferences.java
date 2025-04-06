@@ -11,7 +11,7 @@ public class UserPreferences implements Serializable {
     // Default sort preferences
     private SortCriteria defaultBookSortCriteria = SortCriteria.TITLE;
     private LoanSortCriteria defaultLoanSortCriteria = LoanSortCriteria.LOAN_DATE;
-    private SearchCriteria defaultSearchCriteria = SearchCriteria.ALL_FIELDS;
+    private SearchCriteria defaultSearchCriteria = SearchCriteria.ALL;
     private boolean defaultSortAscending = true;
     
     // Display preferences

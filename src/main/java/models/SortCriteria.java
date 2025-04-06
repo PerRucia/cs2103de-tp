@@ -4,9 +4,9 @@ package models;
  * 定义图书排序的条件
  */
 public enum SortCriteria {
+    ISBN("ISBN"),
     TITLE("Title"),
     AUTHOR("Author"),
-    ISBN("ISBN"),
     STATUS("Status");
     
     private final String displayName;
@@ -16,6 +16,11 @@ public enum SortCriteria {
     }
     
     public String getDisplayName() {
+        return displayName;
+    }
+    
+    @Override
+    public String toString() {
         return displayName;
     }
     
