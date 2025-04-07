@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.ViewBooksController" spacing="10">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Text text="All Books" styleClass="section-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Back to Dashboard" onAction="#handleBack" styleClass="secondary-button"/>
+    </HBox>
+    
+    <TableView fx:id="booksTable" styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="isbnColumn" text="ISBN" prefWidth="150"/>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="300"/>
+            <TableColumn fx:id="authorColumn" text="Author" prefWidth="200"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+        </columns>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Sort" onAction="#handleSort" styleClass="secondary-button"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+    </HBox>
+</VBox> 

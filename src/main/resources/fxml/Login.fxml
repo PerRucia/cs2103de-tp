@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.LoginController">
+    <padding>
+        <Insets top="50" right="50" bottom="50" left="50"/>
+    </padding>
+    
+    <Text text="Library Management System" styleClass="title-text"/>
+    
+    <VBox spacing="10" styleClass="login-form">
+        <Label text="Login" styleClass="form-title"/>
+        
+        <VBox spacing="5">
+            <Label text="Username"/>
+            <TextField fx:id="usernameField" promptText="Enter username"/>
+        </VBox>
+        
+        <VBox spacing="5">
+            <Label text="Password"/>
+            <PasswordField fx:id="passwordField" promptText="Enter password"/>
+        </VBox>
+        
+        <CheckBox fx:id="adminCheckBox" text="Login as Administrator"/>
+        
+        <Button fx:id="loginButton" text="Login" onAction="#handleLogin" styleClass="primary-button"/>
+        
+        <Label fx:id="errorLabel" styleClass="error-label" visible="false"/>
+    </VBox>
+</VBox> 

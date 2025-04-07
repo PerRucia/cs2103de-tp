@@ -101,7 +101,7 @@ public class BookList {
      * Gets all books in the list.
      * @return A map of all books with their ISBN as the key.
      */
-    public Map<String, Book> getAllBooks() {
+    public Map<String, Book> getBooks() {
         return new HashMap<>(books);
     }
 
@@ -114,24 +114,12 @@ public class BookList {
     public List<Book> getSortedBooks(SortCriteria criteria, boolean ascending) {
         List<Book> bookList = new ArrayList<>(books.values());
         
-        Comparator<Book> comparator;
-        
-        switch (criteria) {
-            case TITLE:
-                comparator = Comparator.comparing(Book::getTitle);
-                break;
-            case AUTHOR:
-                comparator = Comparator.comparing(Book::getAuthor);
-                break;
-            case ISBN:
-                comparator = Comparator.comparing(Book::getIsbn);
-                break;
-            case STATUS:
-                comparator = Comparator.comparing(book -> book.getStatus().toString());
-                break;
-            default:
-                comparator = Comparator.comparing(Book::getTitle);
-        }
+        Comparator<Book> comparator = switch (criteria) {
+            case TITLE -> Comparator.comparing(Book::getTitle);
+            case AUTHOR -> Comparator.comparing(Book::getAuthor);
+            case ISBN -> Comparator.comparing(Book::getIsbn);
+            case STATUS -> Comparator.comparing(book -> book.getStatus().toString());
+        };
         
         if (!ascending) {
             comparator = comparator.reversed();
@@ -176,20 +164,16 @@ public class BookList {
      * @return 如果图书匹配搜索条件则返回true
      */
     private boolean matchesSearchCriteria(Book book, String query, SearchCriteria criteria) {
-        switch (criteria) {
-            case TITLE:
-                return book.getTitle().toLowerCase().contains(query);
-            case AUTHOR:
-                return book.getAuthor().toLowerCase().contains(query);
-            case ISBN:
-                return book.getIsbn().toLowerCase().contains(query);
-            case ALL_FIELDS:
-                return book.getTitle().toLowerCase().contains(query) ||
+        return switch (criteria) {
+            case TITLE -> book.getTitle().toLowerCase().contains(query);
+            case AUTHOR -> book.getAuthor().toLowerCase().contains(query);
+            case ISBN -> book.getIsbn().toLowerCase().contains(query);
+            case STATUS -> book.getStatus().toString().toLowerCase().contains(query);
+            case ALL -> book.getTitle().toLowerCase().contains(query) ||
                        book.getAuthor().toLowerCase().contains(query) ||
-                       book.getIsbn().toLowerCase().contains(query);
-            default:
-                return false;
-        }
+                       book.getIsbn().toLowerCase().contains(query) ||
+                       book.getStatus().toString().toLowerCase().contains(query);
+        };
     }
 
     /**
@@ -208,24 +192,12 @@ public class BookList {
             return searchResults;
         }
         
-        Comparator<Book> comparator;
-        
-        switch (sortCriteria) {
-            case TITLE:
-                comparator = Comparator.comparing(Book::getTitle);
-                break;
-            case AUTHOR:
-                comparator = Comparator.comparing(Book::getAuthor);
-                break;
-            case ISBN:
-                comparator = Comparator.comparing(Book::getIsbn);
-                break;
-            case STATUS:
-                comparator = Comparator.comparing(book -> book.getStatus().toString());
-                break;
-            default:
-                comparator = Comparator.comparing(Book::getTitle);
-        }
+        Comparator<Book> comparator = switch (sortCriteria) {
+            case TITLE -> Comparator.comparing(Book::getTitle);
+            case AUTHOR -> Comparator.comparing(Book::getAuthor);
+            case ISBN -> Comparator.comparing(Book::getIsbn);
+            case STATUS -> Comparator.comparing(book -> book.getStatus().toString());
+        };
         
         if (!ascending) {
             comparator = comparator.reversed();
@@ -295,7 +267,7 @@ public class BookList {
             case ISBN:
                 score += calculateFieldScore(book.getIsbn(), query);
                 break;
-            case ALL_FIELDS:
+            case ALL:
                 score += calculateFieldScore(book.getTitle(), query) * 3; // 标题匹配权重更高
                 score += calculateFieldScore(book.getAuthor(), query) * 2; // 作者匹配权重次之
                 score += calculateFieldScore(book.getIsbn(), query);
@@ -331,5 +303,12 @@ public class BookList {
         
         // 不匹配得零分
         return 0;
+    }
+
+    /**
+     * Clears all books from the list.
+     */
+    public void clear() {
+        books.clear();
     }
 }

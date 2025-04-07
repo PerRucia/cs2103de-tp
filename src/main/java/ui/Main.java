@@ -1,5 +1,10 @@
 package ui;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import models.User;
 import service.LibraryService;
 import utils.InputUtil;
@@ -7,17 +12,35 @@ import models.SortCriteria;
 import models.LoanSortCriteria;
 import models.SearchCriteria;
 import models.UserPreferences;
+import java.util.List;
+import models.Book;
 
-public class Main {
+public class Main extends Application {
     private static LibraryService libraryService;
     private static User currentUser;
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Parent root = loader.load();
+            
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+            
+            primaryStage.setTitle("Library Management System");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         libraryService = new LibraryService();
         
         try {
-            login();
-            runMainLoop();
+            launch(args);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
@@ -27,10 +50,19 @@ public class Main {
         }
     }
 
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
     private static void login() {
         System.out.println("\nWelcome to Library Management System");
         boolean isAdmin = InputUtil.readYesNo("Login as administrator? (y/n): ");
-        currentUser = new User(isAdmin);
+        String userId = "default"; // In a real application, this would be entered by the user
+        currentUser = new User(userId, isAdmin);
         System.out.println("Logged in as " + (isAdmin ? "Administrator" : "User"));
     }
 
@@ -180,7 +212,7 @@ public class Main {
         
         if (sortChoice == 1) {
             // 按相关性排序
-            libraryService.searchBooksByRelevance(query, searchCriteria);
+            handleSearch(query, searchCriteria);
         } else {
             // 按其他条件排序
             SortCriteria sortCriteria;
@@ -209,6 +241,18 @@ public class Main {
             boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
             
             libraryService.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
+        }
+    }
+
+    private static void handleSearch(String query, SearchCriteria searchCriteria) {
+        List<Book> results = libraryService.searchAndSortBooks(query, searchCriteria, SortCriteria.TITLE, true);
+        if (results.isEmpty()) {
+            System.out.println("No books found matching your search criteria.");
+        } else {
+            System.out.println("Found " + results.size() + " book(s):");
+            for (Book book : results) {
+                System.out.println(book);
+            }
         }
     }
 
