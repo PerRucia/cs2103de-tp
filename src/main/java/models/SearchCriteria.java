@@ -4,7 +4,7 @@ package models;
  * 定义图书搜索的条件
  */
 public enum SearchCriteria {
-    ALL("All"),
+    ALL("All Fields"),
     ISBN("ISBN"),
     TITLE("Title"),
     AUTHOR("Author"),

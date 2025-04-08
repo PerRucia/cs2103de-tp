@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import models.Book;
 import service.LibraryService;
 import models.SortCriteria;
+import models.UserPreferences;
 
 import java.util.List;
 
@@ -34,13 +35,27 @@ public class ViewBooksController {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         
-        // Load initial data
-        refreshBooks();
+        // Load initial data with user preferences
+        refreshBooksWithPreferences();
     }
 
     private void refreshBooks() {
         List<Book> books = libraryService.getAllBooks();
         booksList = FXCollections.observableArrayList(books);
+        booksTable.setItems(booksList);
+    }
+    
+    private void refreshBooksWithPreferences() {
+        // Get user preferences
+        UserPreferences userPrefs = libraryService.getUserPreferences();
+        
+        // Apply sort preferences
+        SortCriteria sortCriteria = userPrefs.getDefaultBookSortCriteria();
+        boolean ascending = userPrefs.isDefaultSortAscending();
+        
+        // Get sorted books according to preferences
+        List<Book> sortedBooks = libraryService.sortBooks(sortCriteria, ascending);
+        booksList = FXCollections.observableArrayList(sortedBooks);
         booksTable.setItems(booksList);
     }
 
@@ -51,15 +66,18 @@ public class ViewBooksController {
         dialog.setTitle("Sort Books");
         dialog.setHeaderText("Choose sorting criteria and direction");
 
+        // Get user preferences
+        UserPreferences userPrefs = libraryService.getUserPreferences();
+
         // Create sort criteria choice box
         ChoiceBox<SortCriteria> criteriaChoice = new ChoiceBox<>();
         criteriaChoice.getItems().addAll(SortCriteria.values());
-        criteriaChoice.setValue(SortCriteria.TITLE);
+        criteriaChoice.setValue(userPrefs.getDefaultBookSortCriteria());
 
         // Create sort direction choice box
         ChoiceBox<String> directionChoice = new ChoiceBox<>();
         directionChoice.getItems().addAll("Ascending", "Descending");
-        directionChoice.setValue("Ascending");
+        directionChoice.setValue(userPrefs.isDefaultSortAscending() ? "Ascending" : "Descending");
 
         // Add controls to dialog
         dialog.getDialogPane().setContent(new VBox(10,
@@ -77,8 +95,9 @@ public class ViewBooksController {
             if (response == ButtonType.OK) {
                 SortCriteria criteria = criteriaChoice.getValue();
                 boolean ascending = directionChoice.getValue().equals("Ascending");
-                libraryService.sortBooks(criteria, ascending);
-                refreshBooks();
+                List<Book> sortedBooks = libraryService.sortBooks(criteria, ascending);
+                booksList = FXCollections.observableArrayList(sortedBooks);
+                booksTable.setItems(booksList);
             }
         });
     }

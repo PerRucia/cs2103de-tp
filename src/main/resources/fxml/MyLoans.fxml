@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.MyLoansController" 
+      spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Text text="My Loans" styleClass="section-title"/>
+    
+    <TableView fx:id="loansTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="isbnColumn" text="ISBN" prefWidth="100"/>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="200"/>
+            <TableColumn fx:id="authorColumn" text="Author" prefWidth="150"/>
+            <TableColumn fx:id="loanDateColumn" text="Loan Date" prefWidth="120"/>
+            <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="120"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="100"/>
+        </columns>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Sort" onAction="#handleSort" styleClass="secondary-button"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+        <Button text="Back" onAction="#handleBack" styleClass="secondary-button"/>
+    </HBox>
+    
+    <Label fx:id="messageLabel" styleClass="error-label"/>
+</VBox> 
