@@ -14,6 +14,7 @@ import models.SortCriteria;
 import models.UserPreferences;
 
 import java.util.List;
+import java.util.Comparator;
 
 public class ViewBooksController {
     @FXML private TableView<Book> booksTable;
@@ -35,8 +36,25 @@ public class ViewBooksController {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         
+        // 设置列头排序功能
+        setupColumnSorting();
+        
         // Load initial data with user preferences
         refreshBooksWithPreferences();
+    }
+
+    /**
+     * 设置表格列的排序功能
+     */
+    private void setupColumnSorting() {
+        // 禁用所有列的排序功能
+        isbnColumn.setSortable(false);
+        titleColumn.setSortable(false);
+        authorColumn.setSortable(false);
+        statusColumn.setSortable(false);
+        
+        // 清除任何排序标记
+        booksTable.getSortOrder().clear();
     }
 
     private void refreshBooks() {

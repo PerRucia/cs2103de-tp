@@ -106,10 +106,10 @@ public class BookList {
     }
 
     /**
-     * 获取按指定条件排序的图书列表
-     * @param criteria 排序条件
-     * @param ascending 是否升序排列
-     * @return 排序后的图书列表
+     * Get a list of books sorted by specified criteria
+     * @param criteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
+     * @return The sorted list of books
      */
     public List<Book> getSortedBooks(SortCriteria criteria, boolean ascending) {
         List<Book> bookList = new ArrayList<>(books.values());
@@ -130,19 +130,19 @@ public class BookList {
     }
 
     /**
-     * 获取按指定条件升序排序的图书列表
-     * @param criteria 排序条件
-     * @return 排序后的图书列表
+     * Get a list of books sorted in ascending order according to the specified criteria
+     * @param criteria sorting criteria
+     * @return sorted book list
      */
     public List<Book> getSortedBooks(SortCriteria criteria) {
         return getSortedBooks(criteria, true);
     }
 
     /**
-     * 根据搜索条件和查询字符串搜索图书
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     * @return 匹配的图书列表
+     * Search books based on search conditions and query string
+     * @param query query string
+     * @param criteria search conditions
+     * @return matching book list
      */
     public List<Book> searchBooks(String query, SearchCriteria criteria) {
         if (query == null || query.trim().isEmpty()) {
@@ -157,11 +157,11 @@ public class BookList {
     }
 
     /**
-     * 检查图书是否匹配搜索条件
-     * @param book 要检查的图书
-     * @param query 规范化后的查询字符串（小写且去除首尾空格）
-     * @param criteria 搜索条件
-     * @return 如果图书匹配搜索条件则返回true
+     * Check if the book matches the search criteria
+     * @param book The book to be checked
+     * @param query Normalized query string (lowercase and without leading and trailing spaces)
+     * @param criteria Search criteria
+     * @return Returns true if the book matches the search criteria
      */
     private boolean matchesSearchCriteria(Book book, String query, SearchCriteria criteria) {
         return switch (criteria) {
@@ -177,12 +177,12 @@ public class BookList {
     }
 
     /**
-     * 搜索图书并对结果进行排序
-     * @param query 查询字符串
-     * @param searchCriteria 搜索条件
-     * @param sortCriteria 排序条件
-     * @param ascending 是否升序排列
-     * @return 排序后的搜索结果
+     * Search books and sort the results
+     * @param query query string
+     * @param searchCriteria search criteria
+     * @param sortCriteria sort criteria
+     * @param ascending whether to sort in ascending order
+     * @return sorted search results
      */
     public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, 
                                         SortCriteria sortCriteria, boolean ascending) {
@@ -208,11 +208,11 @@ public class BookList {
     }
 
     /**
-     * 搜索图书并对结果进行排序（默认升序）
-     * @param query 查询字符串
-     * @param searchCriteria 搜索条件
-     * @param sortCriteria 排序条件
-     * @return 排序后的搜索结果
+     * Search books and sort the results (default ascending order)
+     * @param query query string
+     * @param searchCriteria search criteria
+     * @param sortCriteria sort criteria
+     * @return sorted search results
      */
     public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, 
                                         SortCriteria sortCriteria) {
@@ -220,10 +220,10 @@ public class BookList {
     }
 
     /**
-     * 搜索图书（默认按相关性排序）
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     * @return 按相关性排序的搜索结果
+     * Search books (sorted by relevance by default)
+     * @param query query string
+     * @param criteria search criteria
+     * @return search results sorted by relevance
      */
     public List<Book> searchBooksByRelevance(String query, SearchCriteria criteria) {
         if (query == null || query.trim().isEmpty()) {
@@ -232,27 +232,27 @@ public class BookList {
         
         String normalizedQuery = query.toLowerCase().trim();
         
-        // 创建一个带有相关性分数的图书列表
+        // Create a list of books with relevance scores
         List<Map.Entry<Book, Integer>> scoredBooks = books.values().stream()
                 .map(book -> new AbstractMap.SimpleEntry<>(book, calculateRelevanceScore(book, normalizedQuery, criteria)))
                 .filter(entry -> entry.getValue() > 0) // 只保留匹配的图书
                 .collect(Collectors.toList());
         
-        // 按相关性分数降序排序
+        // Sort by relevance score in descending order
         scoredBooks.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
         
-        // 提取排序后的图书
+        // Extract sorted books
         return scoredBooks.stream()
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
 
     /**
-     * 计算图书与查询的相关性分数
-     * @param book 要计算的图书
-     * @param query 规范化后的查询字符串
-     * @param criteria 搜索条件
-     * @return 相关性分数（越高越相关）
+     * Calculate the relevance score of the book to the query
+     * @param book The book to be calculated
+     * @param query The normalized query string
+     * @param criteria Search criteria
+     * @return Relevance score (the higher the more relevant)
      */
     private int calculateRelevanceScore(Book book, String query, SearchCriteria criteria) {
         int score = 0;
@@ -278,30 +278,30 @@ public class BookList {
     }
 
     /**
-     * 计算字段与查询的匹配分数
-     * @param field 字段值
-     * @param query 查询字符串
-     * @return 匹配分数
+     * Calculate the match score between the field and the query
+     * @param field field value
+     * @param query query string
+     * @return match score
      */
     private int calculateFieldScore(String field, String query) {
         String normalizedField = field.toLowerCase();
         
-        // 完全匹配得高分
+        // Exact matches get high scores
         if (normalizedField.equals(query)) {
             return 10;
         }
         
-        // 开头匹配得中等分数
+        // The beginning match gets a medium score
         if (normalizedField.startsWith(query)) {
             return 5;
         }
         
-        // 包含匹配得低分
+        // Contains matching low score
         if (normalizedField.contains(query)) {
             return 3;
         }
         
-        // 不匹配得零分
+        // No match will result in zero points
         return 0;
     }
 
