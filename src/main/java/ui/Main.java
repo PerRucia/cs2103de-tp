@@ -37,6 +37,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        // Suppress JavaFX TSM messages on macOS
+        System.setProperty("javafx.macosx.enableDynamicCoreAnimation", "false");
+        System.setProperty("apple.awt.UIElement", "true");
+        
         libraryService = new LibraryService();
         
         try {

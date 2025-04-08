@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.UserPreferencesController" 
+      spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Text text="User Preferences" styleClass="section-title"/>
+    
+    <VBox spacing="15">
+        <!-- Book Sort Settings -->
+        <VBox spacing="10" styleClass="preference-section">
+            <Label text="Default Book Sort Settings" styleClass="subsection-title"/>
+            <ComboBox fx:id="bookSortCriteriaComboBox" promptText="Sort Criteria"/>
+        </VBox>
+        
+        <!-- Loan Sort Settings -->
+        <VBox spacing="10" styleClass="preference-section">
+            <Label text="Default Loan Sort Settings" styleClass="subsection-title"/>
+            <ComboBox fx:id="loanSortCriteriaComboBox" promptText="Sort Criteria"/>
+        </VBox>
+        
+        <!-- Search Settings -->
+        <VBox spacing="10" styleClass="preference-section">
+            <Label text="Default Search Settings" styleClass="subsection-title"/>
+            <ComboBox fx:id="searchCriteriaComboBox" promptText="Search Criteria"/>
+        </VBox>
+        
+        <!-- Sort Direction -->
+        <VBox spacing="10" styleClass="preference-section">
+            <Label text="Default Sort Direction" styleClass="subsection-title"/>
+            <HBox spacing="20">
+                <RadioButton fx:id="ascendingRadio" text="Ascending" selected="true">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="sortDirection"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="descendingRadio" text="Descending" toggleGroup="$sortDirection"/>
+            </HBox>
+        </VBox>
+        
+        <!-- Display Settings - 保留CheckBox但隐藏整个部分的标题和items per page -->
+        <VBox spacing="10" styleClass="preference-section" visible="false" managed="false">
+            <Label text="Display Settings" styleClass="subsection-title"/>
+            <CheckBox fx:id="showBookStatusCheckBox" text="Show Book Status"/>
+            <CheckBox fx:id="showReturnedLoansCheckBox" text="Show Returned Loans"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Items per page:"/>
+                <TextField fx:id="itemsPerPageField" prefWidth="60"/>
+            </HBox>
+        </VBox>
+    </VBox>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Save" onAction="#handleSave" styleClass="primary-button"/>
+        <Button text="Reset to Default" onAction="#handleReset" styleClass="secondary-button"/>
+    </HBox>
+</VBox> 

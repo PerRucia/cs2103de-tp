@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Comparator;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class LibraryService {
     private static final String DATABASE_FILE = "src/main/resources/bookDatabase.txt";
@@ -146,6 +147,46 @@ public class LibraryService {
         return loanList.getCurrentLoans();
     }
 
+    /**
+     * 获取当前用户的借阅记录
+     * @return 当前用户的借阅记录列表
+     */
+    public List<Loan> getMyLoans() {
+        if (currentUser == null) {
+            throw new IllegalStateException("No user is currently logged in.");
+        }
+        
+        // 过滤借阅记录，只返回当前用户的记录
+        return loanList.getAllLoans().stream()
+            .filter(loan -> loan.getBorrower().getId().equals(currentUser.getId()))
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * 获取当前用户的借阅记录（可选择是否包含已归还的书籍）
+     * @param includeReturned 是否包含已归还的书籍
+     * @return 当前用户的借阅记录列表
+     */
+    public List<Loan> getMyLoans(boolean includeReturned) {
+        List<Loan> myLoans = getMyLoans();
+        
+        if (!includeReturned) {
+            return myLoans.stream()
+                .filter(loan -> loan.getReturnDate() == null)
+                .collect(Collectors.toList());
+        }
+        
+        return myLoans;
+    }
+
+    /**
+     * Get all loan records including returned ones
+     * @return a list of all loans in the system
+     */
+    public List<Loan> getAllLoanRecords() {
+        return loanList.getAllLoans();
+    }
+
     public void viewLoansSorted(LoanSortCriteria criteria, boolean ascending, boolean currentOnly) {
         List<Loan> loans;
         if (currentOnly) {
@@ -265,11 +306,77 @@ public class LibraryService {
         return new ArrayList<>(bookList.getBooks().values());
     }
 
-    public void sortBooks(SortCriteria sortCriteria, boolean ascending) {
-        bookList.getSortedBooks(sortCriteria, ascending).forEach(book -> {
-            bookList.clear();
-            bookList.addBook(book);
-        });
+    public List<Book> sortBooks(SortCriteria sortCriteria, boolean ascending) {
+        return bookList.getSortedBooks(sortCriteria, ascending);
+    }
+
+    /**
+     * 对借阅记录进行排序
+     * @param loans 要排序的借阅记录列表
+     * @param criteria 排序条件
+     * @param ascending 是否升序排列
+     * @return 排序后的借阅记录列表
+     */
+    public List<Loan> sortLoans(List<Loan> loans, LoanSortCriteria criteria, boolean ascending) {
+        List<Loan> loansCopy = new ArrayList<>(loans);
+        
+        Comparator<Loan> comparator;
+        
+        switch (criteria) {
+            case LOAN_DATE:
+                comparator = Comparator.comparing(Loan::getLoanDate);
+                break;
+            case DUE_DATE:
+                comparator = Comparator.comparing(Loan::getDueDate);
+                break;
+            case RETURN_DATE:
+                comparator = (loan1, loan2) -> {
+                    if (loan1.getReturnDate() == null && loan2.getReturnDate() == null) {
+                        return 0;
+                    } else if (loan1.getReturnDate() == null) {
+                        return 1;
+                    } else if (loan2.getReturnDate() == null) {
+                        return -1;
+                    } else {
+                        return loan1.getReturnDate().compareTo(loan2.getReturnDate());
+                    }
+                };
+                break;
+            case BOOK_TITLE:
+                comparator = Comparator.comparing(loan -> loan.getBook().getTitle());
+                break;
+            case BOOK_AUTHOR:
+                comparator = Comparator.comparing(loan -> loan.getBook().getAuthor());
+                break;
+            case BOOK_ISBN:
+                comparator = Comparator.comparing(loan -> loan.getBook().getIsbn());
+                break;
+            case STATUS:
+                comparator = (loan1, loan2) -> {
+                    boolean isOverdue1 = loan1.getReturnDate() == null && 
+                                        loan1.getDueDate().isBefore(LocalDate.now());
+                    boolean isOverdue2 = loan2.getReturnDate() == null && 
+                                        loan2.getDueDate().isBefore(LocalDate.now());
+                    boolean isReturned1 = loan1.getReturnDate() != null;
+                    boolean isReturned2 = loan2.getReturnDate() != null;
+                    
+                    if (isOverdue1 && !isOverdue2) return 1;
+                    if (!isOverdue1 && isOverdue2) return -1;
+                    if (isReturned1 && !isReturned2) return -1;
+                    if (!isReturned1 && isReturned2) return 1;
+                    return 0;
+                };
+                break;
+            default:
+                comparator = Comparator.comparing(Loan::getLoanDate);
+        }
+        
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+        
+        loansCopy.sort(comparator);
+        return loansCopy;
     }
 
     // 添加获取和设置用户偏好的方法
@@ -281,8 +388,9 @@ public class LibraryService {
      * 保存用户偏好设置
      */
     public void saveUserPreferences() {
-        GeneralStorage.saveUserPreferences(USER_PREFS_FILE, userPreferences);
-        System.out.println("User preferences saved successfully.");
+        if (userPreferences != null) {
+            GeneralStorage.saveUserPreferences(USER_PREFS_FILE, userPreferences);
+        }
     }
 
     /**
@@ -335,5 +443,15 @@ public class LibraryService {
             userPreferences.isDefaultSortAscending(),
             !userPreferences.isShowReturnedLoans()
         );
+    }
+
+    /**
+     * Logs out the current user by setting currentUser to null
+     */
+    public void logout() {
+        // Save user preferences if needed
+        saveUserPreferences();
+        // Clear current user
+        this.currentUser = null;
     }
 } 

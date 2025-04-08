@@ -29,13 +29,23 @@ public class SearchBooksController {
     public void initialize() {
         libraryService = LibraryApp.getLibraryService();
         
+        // Get user preferences
+        UserPreferences userPrefs = libraryService.getUserPreferences();
+        
         // Initialize search criteria combo box
         searchCriteriaComboBox.setItems(FXCollections.observableArrayList(SearchCriteria.values()));
-        searchCriteriaComboBox.setValue(SearchCriteria.ALL);
+        searchCriteriaComboBox.setValue(userPrefs.getDefaultSearchCriteria());
         
         // Initialize sort criteria combo box
         sortCriteriaComboBox.setItems(FXCollections.observableArrayList(SortCriteria.values()));
-        sortCriteriaComboBox.setValue(SortCriteria.TITLE);
+        sortCriteriaComboBox.setValue(userPrefs.getDefaultBookSortCriteria());
+        
+        // Set sort direction based on preferences
+        if (userPrefs.isDefaultSortAscending()) {
+            ascendingRadio.setSelected(true);
+        } else {
+            descendingRadio.setSelected(true);
+        }
         
         // Initialize table columns
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -45,17 +55,16 @@ public class SearchBooksController {
         
         // Set up actions column
         actionsColumn.setCellFactory(column -> {
-            TableCell<Book, String> cell = new TableCell<>() {
+            return new TableCell<Book, String>() {
                 private final Button loanButton = new Button("Loan");
                 private final Button removeButton = new Button("Remove");
-                private final HBox buttons = new HBox(5, loanButton, removeButton);
                 
                 {
-                    buttons.setAlignment(javafx.geometry.Pos.CENTER);
+                    // 设置按钮样式
                     loanButton.getStyleClass().add("action-button");
                     removeButton.getStyleClass().add("action-button");
-                    removeButton.getStyleClass().add("admin-only");
                     
+                    // 设置按钮事件处理
                     loanButton.setOnAction(event -> {
                         Book book = getTableView().getItems().get(getIndex());
                         handleLoan(book);
@@ -70,14 +79,43 @@ public class SearchBooksController {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
+                    
                     if (empty) {
                         setGraphic(null);
-                    } else {
-                        setGraphic(buttons);
+                        return;
                     }
+                    
+                    // 获取当前行的书籍
+                    Book book = getTableView().getItems().get(getIndex());
+                    
+                    // 根据书籍状态设置Loan按钮是否可用
+                    boolean isAvailable = book.getStatus() == BookStatus.AVAILABLE;
+                    loanButton.setDisable(!isAvailable);
+                    
+                    // 设置工具提示
+                    if (!isAvailable) {
+                        Tooltip tooltip = new Tooltip("Book is not available for loan. Current status: " + book.getStatus());
+                        Tooltip.install(loanButton, tooltip);
+                    } else {
+                        loanButton.setTooltip(null);
+                    }
+                    
+                    // 创建HBox并添加按钮
+                    HBox buttonsBox = new HBox(5);
+                    buttonsBox.setAlignment(javafx.geometry.Pos.CENTER);
+                    
+                    // 添加Loan按钮（对所有用户显示）
+                    buttonsBox.getChildren().add(loanButton);
+                    
+                    // 如果是管理员，添加Remove按钮
+                    User currentUser = libraryService.getCurrentUser();
+                    if (currentUser != null && currentUser.isAdmin()) {
+                        buttonsBox.getChildren().add(removeButton);
+                    }
+                    
+                    setGraphic(buttonsBox);
                 }
             };
-            return cell;
         });
         
         // Show all books initially
@@ -92,9 +130,8 @@ public class SearchBooksController {
         boolean ascending = ascendingRadio.isSelected();
         
         if (query.isEmpty()) {
-            List<Book> allBooks = libraryService.getAllBooks();
-            libraryService.sortBooks(sortCriteria, ascending);
-            updateResults(allBooks);
+            List<Book> sortedBooks = libraryService.sortBooks(sortCriteria, ascending);
+            updateResults(sortedBooks);
             return;
         }
         
@@ -124,22 +161,56 @@ public class SearchBooksController {
     
     private void handleLoan(Book book) {
         try {
+            // 检查图书状态，只有可用的书籍才能借阅
+            if (book.getStatus() != BookStatus.AVAILABLE) {
+                messageLabel.setText("Error: Book is not available for loan. Current status: " + book.getStatus());
+                return;
+            }
+            
             libraryService.loanBook(book.getIsbn());
             messageLabel.setText("Book loaned successfully!");
-            updateResults(libraryService.getAllBooks());
+            
+            // 更新当前行的状态，无需刷新整个列表
+            book.setStatus(BookStatus.CHECKED_OUT);
+            resultsTable.refresh();
         } catch (Exception e) {
             messageLabel.setText("Error: " + e.getMessage());
         }
     }
     
     private void handleRemove(Book book) {
-        try {
-            libraryService.removeBook(book.getIsbn());
-            messageLabel.setText("Book removed successfully!");
-            updateResults(libraryService.getAllBooks());
-        } catch (Exception e) {
-            messageLabel.setText("Error: " + e.getMessage());
+        // 检查当前用户是否为管理员
+        User currentUser = libraryService.getCurrentUser();
+        if (currentUser == null || !currentUser.isAdmin()) {
+            messageLabel.setText("Error: Only administrators can remove books");
+            return;
         }
+        
+        // 创建确认对话框
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Confirm Deletion");
+        confirmDialog.setHeaderText("Delete Book");
+        confirmDialog.setContentText("Are you sure you want to delete the book \"" + book.getTitle() + "\" (ISBN: " + book.getIsbn() + ")?");
+        
+        // 添加确认和取消按钮
+        ButtonType confirmButton = new ButtonType("Delete");
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirmDialog.getButtonTypes().setAll(confirmButton, cancelButton);
+        
+        // 显示对话框并等待用户响应
+        confirmDialog.showAndWait().ifPresent(response -> {
+            if (response == confirmButton) {
+                try {
+                    libraryService.removeBook(book.getIsbn());
+                    messageLabel.setText("Book removed successfully!");
+                    
+                    // 从结果表中移除该书
+                    resultsTable.getItems().remove(book);
+                } catch (Exception e) {
+                    messageLabel.setText("Error: " + e.getMessage());
+                }
+            }
+        });
     }
     
     private void updateResults(List<Book> books) {
