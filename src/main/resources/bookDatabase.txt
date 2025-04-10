@@ -1,5 +1,16 @@
-978-0134685991,Effective Java,Joshua Bloch,AVAILABLE
+9780134757599,Refactoring: Improving the Design of Existing Code,Martin Fowler,AVAILABLE
 abc,x,y,CHECKED_OUT
-978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
-test,cs2103de-textbook,nus_soc,AVAILABLE
+9780321125217,Domain-Driven Design,Eric Evans,CHECKED_OUT
+9780134494166,Clean Architecture,Robert C. Martin,AVAILABLE
+978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,CHECKED_OUT
+9780201633610,Design Patterns,Erich Gamma,CHECKED_OUT
+9781492056362,Fluent Python,Luciano Ramalho,AVAILABLE
+9780596007126,Head First Design Patterns,Eric Freeman,AVAILABLE
+9780262035613,Deep Learning,Ian Goodfellow,AVAILABLE
+9780132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
+9780321486813,Patterns of Enterprise Application Architecture,Martin Fowler,AVAILABLE
+978-0134685991,Effective Java,Joshua Bloch,AVAILABLE
+9780201835953,The Mythical Man-Month,Frederick P. Brooks Jr.,AVAILABLE
+9780135957059,The Pragmatic Programmer,Andrew Hunt,AVAILABLE
+9781449373320,Designing Data-Intensive Applications,Martin Kleppmann,AVAILABLE
 978-1617294945,Java: The Complete Reference,Herbert Schildt,AVAILABLE

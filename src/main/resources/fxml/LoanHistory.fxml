@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.LoanHistoryController" 
+      spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Text text="Loan History" styleClass="section-title"/>
+    
+    <HBox spacing="15" alignment="CENTER">
+        <Label text="Search:" />
+        <TextField fx:id="searchField" prefWidth="200" promptText="Enter user ID, book title, ISBN..." />
+        <ComboBox fx:id="searchTypeComboBox" prefWidth="150" />
+        <Button text="Search" onAction="#handleSearch" styleClass="primary-button" />
+        <Button text="Reset" onAction="#handleReset" styleClass="secondary-button" />
+    </HBox>
+    
+    <TableView fx:id="loansTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="isbnColumn" text="ISBN" prefWidth="100"/>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="200"/>
+            <TableColumn fx:id="authorColumn" text="Author" prefWidth="150"/>
+            <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="100"/>
+            <TableColumn fx:id="loanDateColumn" text="Loan Date" prefWidth="120"/>
+            <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="120"/>
+            <TableColumn fx:id="returnDateColumn" text="Return Date" prefWidth="120"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+        </columns>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Label text="Total Records: " />
+        <Label fx:id="recordCountLabel" text="0" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Sort" onAction="#handleSort" styleClass="secondary-button"/>
+        <Button text="Export CSV" onAction="#handleExport" styleClass="secondary-button"/>
+        <Button text="Back" onAction="#handleBack" styleClass="secondary-button"/>
+    </HBox>
+    
+    <Label fx:id="messageLabel" styleClass="error-label"/>
+</VBox> 

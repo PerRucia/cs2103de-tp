@@ -6,21 +6,40 @@
 <?import javafx.scene.text.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.ViewLoansController" 
-      spacing="20" alignment="TOP_CENTER">
+      spacing="10" styleClass="main-container">
     <padding>
-        <Insets top="30" right="40" bottom="30" left="40"/>
+        <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Text text="Current Loans" styleClass="section-title"/>
+    <Label text="View Loans" styleClass="page-title"/>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Search:"/>
+        <TextField fx:id="searchField" prefWidth="300" promptText="Enter user ID, book title, or ISBN"/>
+        <ComboBox fx:id="searchTypeComboBox" prefWidth="150"/>
+        <Button text="Search" onAction="#handleSearch"/>
+        <Button text="Reset" onAction="#handleReset"/>
+    </HBox>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Total Records:"/>
+        <Label fx:id="recordCountLabel" text="0"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Sort" onAction="#handleSort"/>
+        <Button text="Refresh" onAction="#handleRefresh"/>
+    </HBox>
+    
+    <Label fx:id="messageLabel" styleClass="message"/>
     
     <TableView fx:id="loansTable" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="isbnColumn" text="ISBN"/>
-            <TableColumn fx:id="titleColumn" text="Title"/>
-            <TableColumn fx:id="userIdColumn" text="User ID"/>
-            <TableColumn fx:id="loanDateColumn" text="Loan Date"/>
+            <TableColumn fx:id="isbnColumn" text="ISBN" prefWidth="100"/>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="200"/>
+            <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="100"/>
+            <TableColumn fx:id="loanDateColumn" text="Loan Date" prefWidth="100"/>
+            <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="100"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+            <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="100"/>
         </columns>
     </TableView>
-    
-    <Label fx:id="messageLabel" styleClass="error-label"/>
 </VBox> 
