@@ -3,7 +3,8 @@ package utils;
 import java.util.Scanner;
 
 public class InputUtil {
-    private static final Scanner scanner = new Scanner(System.in);
+    // Removed 'final' to allow test modifications of the scanner instance.
+    private static Scanner scanner = new Scanner(System.in);
 
     public static String readString(String prompt) {
         System.out.print(prompt);

@@ -46,24 +46,20 @@ public class LibraryService {
         bookList.getBooks().values().forEach(System.out::println);
     }
 
-    public void addBook(String isbn, String title, String author) {
-        try {
-            if (isbn == null || isbn.trim().isEmpty()) {
-                throw new IllegalArgumentException("ISBN cannot be empty.");
-            }
-            if (title == null || title.trim().isEmpty()) {
-                throw new IllegalArgumentException("Title cannot be empty.");
-            }
-            if (author == null || author.trim().isEmpty()) {
-                throw new IllegalArgumentException("Author cannot be empty.");
-            }
-            
-            Book book = new Book(isbn, title, author);
-            bookList.addBook(book);
-            System.out.println("Book added successfully: " + book.getTitle());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error adding book: " + e.getMessage());
+    public void addBook(String isbn, String title, String author) throws IllegalArgumentException {
+        if (isbn == null || isbn.trim().isEmpty()) {
+            throw new IllegalArgumentException("ISBN cannot be empty.");
         }
+        if (title == null || title.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty.");
+        }
+        if (author == null || author.trim().isEmpty()) {
+            throw new IllegalArgumentException("Author cannot be empty.");
+        }
+
+        Book book = new Book(isbn, title, author);
+        bookList.addBook(book);
+        System.out.println("Book added successfully: " + book.getTitle());
     }
 
     public void removeBook(String isbn) {
