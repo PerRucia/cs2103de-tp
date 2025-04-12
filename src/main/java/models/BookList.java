@@ -272,6 +272,8 @@ public class BookList {
                 score += calculateFieldScore(book.getAuthor(), query) * 2; // 作者匹配权重次之
                 score += calculateFieldScore(book.getIsbn(), query);
                 break;
+            default:
+                break;
         }
         
         return score;

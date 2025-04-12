@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,9 +13,7 @@ import models.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public class MyLoansController {
     @FXML private TableView<Loan> loansTable;

@@ -32,6 +32,15 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+    // Mockito core
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+
+    // (Optional) If you're mocking final classes or static methods
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
+
+    // (Optional) Mockito with JUnit 5 integration
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
 }
 
 test {
@@ -55,6 +64,11 @@ application {
 shadowJar {
     archiveBaseName = "LibraryManagementSystem"
     archiveClassifier = null
+}
+
+tasks.withType(Test) {
+    jvmArgs '-XX:+EnableDynamicAgentLoading'
+    // Or use '-Djdk.instrument.traceUsage' if you want to trace usage
 }
 
 run {

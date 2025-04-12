@@ -1,9 +1,9 @@
 9780134757599,Refactoring: Improving the Design of Existing Code,Martin Fowler,AVAILABLE
-abc,x,y,CHECKED_OUT
-9780321125217,Domain-Driven Design,Eric Evans,CHECKED_OUT
+abc,x,y,AVAILABLE
+9780321125217,Domain-Driven Design,Eric Evans,AVAILABLE
 9780134494166,Clean Architecture,Robert C. Martin,AVAILABLE
-978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,CHECKED_OUT
-9780201633610,Design Patterns,Erich Gamma,CHECKED_OUT
+978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
+9780201633610,Design Patterns,Erich Gamma,AVAILABLE
 9781492056362,Fluent Python,Luciano Ramalho,AVAILABLE
 9780596007126,Head First Design Patterns,Eric Freeman,AVAILABLE
 9780262035613,Deep Learning,Ian Goodfellow,AVAILABLE

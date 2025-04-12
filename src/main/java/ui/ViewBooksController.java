@@ -14,7 +14,6 @@ import models.SortCriteria;
 import models.UserPreferences;
 
 import java.util.List;
-import java.util.Comparator;
 
 public class ViewBooksController {
     @FXML private TableView<Book> booksTable;

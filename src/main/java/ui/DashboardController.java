@@ -3,7 +3,7 @@ package ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
+// import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -114,11 +114,11 @@ public class DashboardController {
         }
     }
 
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    // private void showError(String message) {
+    //     Alert alert = new Alert(Alert.AlertType.ERROR);
+    //     alert.setTitle("Error");
+    //     alert.setHeaderText(null);
+    //     alert.setContentText(message);
+    //     alert.showAndWait();
+    // }
 } 
