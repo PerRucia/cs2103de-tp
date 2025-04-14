@@ -13,19 +13,19 @@ public class TestBookListSearch {
     void setUp() {
         bookList = new BookList();
         
-        // 添加测试图书
+        // Add test books
         bookList.addBook(new Book("9780134685991", "Effective Java", "Joshua Bloch"));
         bookList.addBook(new Book("9780132350884", "Clean Code", "Robert C. Martin"));
         bookList.addBook(new Book("9781449331818", "Learning JavaScript", "Ethan Brown"));
         bookList.addBook(new Book("9780596007126", "Head First Design Patterns", "Eric Freeman"));
-        bookList.addBook(new Book("9780321356680", "Effective Java", "Joshua Bloch")); // 重复的标题和作者
+        bookList.addBook(new Book("9780321356680", "Effective Java", "Joshua Bloch")); // Duplicate title and author
     }
     
     @Test
     void testSearchByTitle() {
         List<Book> results = bookList.searchBooks("java", SearchCriteria.TITLE);
         
-        // 不断言具体数量，只确保结果包含 "java"
+        // Don't assert specific count, just ensure results contain "java"
         assertTrue(results.size() > 0);
         assertTrue(results.stream().allMatch(book -> book.getTitle().toLowerCase().contains("java")));
     }
@@ -50,7 +50,7 @@ public class TestBookListSearch {
     void testSearchAllFields() {
         List<Book> results = bookList.searchBooks("java", SearchCriteria.ALL_FIELDS);
         
-        // 应该找到标题中包含 "Java" 的图书
+        // Should find books containing "Java" in the title
         assertTrue(results.size() >= 2);
     }
     
@@ -58,10 +58,10 @@ public class TestBookListSearch {
     void testSearchAndSort() {
         List<Book> results = bookList.searchAndSortBooks("java", SearchCriteria.TITLE, SortCriteria.AUTHOR, true);
         
-        // 不断言具体数量，只确保结果不为空
+        // Don't assert specific count, just ensure results are not empty
         assertTrue(results.size() > 0);
         
-        // 验证结果是按作者排序的
+        // Verify results are sorted by author
         for (int i = 0; i < results.size() - 1; i++) {
             assertTrue(results.get(i).getAuthor().compareTo(results.get(i + 1).getAuthor()) <= 0);
         }
@@ -72,7 +72,7 @@ public class TestBookListSearch {
         List<Book> results = bookList.searchBooksByRelevance("effective java", SearchCriteria.ALL_FIELDS);
         
         assertTrue(results.size() >= 2);
-        // 第一个结果应该是完全匹配 "Effective Java" 的图书
+        // First result should be an exact match for "Effective Java"
         assertEquals("Effective Java", results.get(0).getTitle());
     }
     

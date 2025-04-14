@@ -13,12 +13,12 @@ public class TestBookListSorting {
     void setUp() {
         bookList = new BookList();
         
-        // 添加测试图书，故意打乱顺序
+        // Add test books in deliberately mixed order
         bookList.addBook(new Book("9780134685991", "Effective Java", "Joshua Bloch"));
         bookList.addBook(new Book("9780132350884", "Clean Code", "Robert C. Martin"));
         bookList.addBook(new Book("9781449331818", "Learning JavaScript", "Ethan Brown"));
         
-        // 设置不同状态
+        // Set different statuses
         Book book1 = bookList.getBook("9780134685991");
         book1.setStatus(BookStatus.CHECKED_OUT);
         

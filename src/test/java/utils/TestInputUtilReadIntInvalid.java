@@ -18,32 +18,32 @@ public class TestInputUtilReadIntInvalid {
 
     @BeforeEach
     void setUp() {
-        // 重定向标准输出以便测试
+        // Redirect standard output for testing
         System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     void tearDown() {
-        // 恢复标准输入输出
+        // Restore standard input and output
         System.setOut(originalOut);
         System.setIn(originalIn);
     }
 
     @Test
     void testReadIntInvalidThenValidInput() {
-        // 设置模拟输入：先输入无效内容，再输入有效数字
+        // Set up mock input: first invalid input, then valid number
         String input = "abc\n42\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         
-        // 调用被测试方法
+        // Call the method being tested
         int result = InputUtil.readInt("Enter number: ");
         
-        // 验证提示信息和错误消息
+        // Verify prompt message and error message
         String output = outContent.toString();
         assertTrue(output.contains("Enter number: "));
         assertTrue(output.contains("Please enter a valid number."));
         
-        // 验证返回值
+        // Verify the return value
         assertEquals(42, result);
     }
 } 

@@ -32,17 +32,17 @@ public class TestLibraryService {
 
     @BeforeEach
     void setUp() throws Exception {
-        // 重定向标准输出以便测试
+        // Redirect standard output for testing
         System.setOut(new PrintStream(outContent));
         
-        // 创建临时测试数据库文件
+        // Create temporary test database file
         testDatabaseFile = tempDir.resolve("testBookDatabase.txt");
         Files.createFile(testDatabaseFile);
         
-        // 创建一个测试用的BookList
+        // Create a test BookList
         BookList testBookList = new BookList();
         
-        // 使用反射直接设置bookList字段，而不是尝试修改final字段
+        // Use reflection to directly set the bookList field instead of trying to modify the final field
         libraryService = new LibraryService();
         Field bookListField = LibraryService.class.getDeclaredField("bookList");
         bookListField.setAccessible(true);
@@ -51,23 +51,23 @@ public class TestLibraryService {
 
     @AfterEach
     void tearDown() {
-        // 恢复标准输出
+        // Restore standard output
         System.setOut(originalOut);
     }
 
     @Test
     void testAddBook() {
-        // 测试添加有效图书
+        // Test adding a valid book
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Book added successfully"));
         
-        // 清空输出缓冲区
+        // Clear output buffer
         outContent.reset();
         
-        // 验证图书已添加
+        // Verify book was added
         libraryService.viewAllBooks();
         output = outContent.toString();
         assertTrue(output.contains("1234567890"));
@@ -77,18 +77,18 @@ public class TestLibraryService {
 
     @Test
     void testAddBookWithEmptyIsbn() {
-        // 测试添加ISBN为空的图书
+        // Test adding a book with empty ISBN
         libraryService.addBook("", "Test Book", "Test Author");
         
-        // 获取输出
+        // Get output
         String output = outContent.toString();
         
-        // 不管是否有错误消息，都验证图书是否被添加
+        // Verify if book was added regardless of error message
         outContent.reset();
         libraryService.viewAllBooks();
         String viewOutput = outContent.toString();
         
-        // 验证图书是否被添加（根据实际行为调整断言）
+        // Verify if book was added (adjust assertion based on actual behavior)
         if (output.contains("Error")) {
             assertFalse(viewOutput.contains("Test Book"));
         } else {
@@ -98,18 +98,18 @@ public class TestLibraryService {
 
     @Test
     void testLoanBook() {
-        // 先添加一本书
+        // First add a book
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         outContent.reset();
         
-        // 借阅这本书
+        // Loan this book
         libraryService.loanBook("1234567890");
         
-        // 验证输出 - 使用更宽松的断言
+        // Verify output - using more lenient assertions
         String output = outContent.toString();
         assertTrue(output.contains("loaned successfully") || output.contains("Book loaned"));
         
-        // 验证图书状态
+        // Verify book status
         outContent.reset();
         libraryService.viewLoans();
         output = outContent.toString();
@@ -118,25 +118,25 @@ public class TestLibraryService {
 
     @Test
     void testLoanNonExistentBook() {
-        // 尝试借阅不存在的图书
+        // Try to loan a non-existent book
         libraryService.loanBook("9999999999");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Book not found"));
     }
 
     @Test
     void testLoanAlreadyLoanedBook() {
-        // 先添加并借阅一本书
+        // First add and loan a book
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         libraryService.loanBook("1234567890");
         outContent.reset();
         
-        // 再次尝试借阅同一本书
+        // Try to loan the same book again
         libraryService.loanBook("1234567890");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Error"));
         assertTrue(output.contains("not available"));
@@ -144,19 +144,19 @@ public class TestLibraryService {
 
     @Test
     void testReturnBook() {
-        // 先添加并借阅一本书
+        // First add and loan a book
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         libraryService.loanBook("1234567890");
         outContent.reset();
         
-        // 归还这本书
+        // Return this book
         libraryService.returnBook("1234567890");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Book returned successfully"));
         
-        // 验证图书不再在借出列表中
+        // Verify book is no longer in loan list
         outContent.reset();
         libraryService.viewLoans();
         output = outContent.toString();
@@ -165,24 +165,24 @@ public class TestLibraryService {
 
     @Test
     void testReturnNonExistentBook() {
-        // 尝试归还不存在的图书
+        // Try to return a non-existent book
         libraryService.returnBook("9999999999");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Book not found"));
     }
 
     @Test
     void testReturnNonLoanedBook() {
-        // 先添加一本书但不借阅
+        // First add a book but don't loan it
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         outContent.reset();
         
-        // 尝试归还未借出的图书
+        // Try to return a book that wasn't loaned
         libraryService.returnBook("1234567890");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Error"));
         assertTrue(output.contains("not checked out"));
@@ -190,18 +190,18 @@ public class TestLibraryService {
 
     @Test
     void testRemoveBook() {
-        // 先添加一本书
+        // First add a book
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         outContent.reset();
         
-        // 移除这本书
+        // Remove this book
         libraryService.removeBook("1234567890");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Book removed successfully"));
         
-        // 验证图书已被移除
+        // Verify book was removed
         outContent.reset();
         libraryService.viewAllBooks();
         output = outContent.toString();
@@ -210,25 +210,25 @@ public class TestLibraryService {
 
     @Test
     void testRemoveNonExistentBook() {
-        // 尝试移除不存在的图书
+        // Try to remove a non-existent book
         libraryService.removeBook("9999999999");
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Book not found"));
     }
 
     @Test
     void testViewAllBooks() {
-        // 添加几本书
+        // Add several books
         libraryService.addBook("1111111111", "Book 1", "Author 1");
         libraryService.addBook("2222222222", "Book 2", "Author 2");
         outContent.reset();
         
-        // 查看所有图书
+        // View all books
         libraryService.viewAllBooks();
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Books in Library"));
         assertTrue(output.contains("1111111111"));
@@ -241,16 +241,16 @@ public class TestLibraryService {
 
     @Test
     void testViewLoans() {
-        // 添加几本书并借阅其中一本
+        // Add several books and loan one of them
         libraryService.addBook("1111111111", "Book 1", "Author 1");
         libraryService.addBook("2222222222", "Book 2", "Author 2");
         libraryService.loanBook("1111111111");
         outContent.reset();
         
-        // 查看借出的图书
+        // View loaned books
         libraryService.viewLoans();
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Currently Loaned Books"));
         assertTrue(output.contains("1111111111"));
@@ -259,10 +259,10 @@ public class TestLibraryService {
 
     @Test
     void testSaveData() throws IOException {
-        // 添加一本书
+        // Add a book
         libraryService.addBook("1234567890", "Test Book", "Test Author");
         
-        // 使用反射获取bookList
+        // Use reflection to get bookList
         Field bookListField;
         BookList bookList = null;
         try {
@@ -273,14 +273,14 @@ public class TestLibraryService {
             fail("Failed to access bookList field: " + e.getMessage());
         }
         
-        // 直接使用GeneralStorage保存到我们的测试文件
+        // Directly use GeneralStorage to save to our test file
         assertNotNull(bookList);
         GeneralStorage.saveBookList(testDatabaseFile.toString(), bookList);
         
-        // 验证文件已创建
+        // Verify file was created
         assertTrue(Files.exists(testDatabaseFile));
         
-        // 验证文件内容
+        // Verify file content
         String fileContent = Files.readString(testDatabaseFile);
         assertTrue(fileContent.contains("1234567890"));
         assertTrue(fileContent.contains("Test Book"));
@@ -289,25 +289,25 @@ public class TestLibraryService {
 
     @Test
     void testViewAllBooksSorted() {
-        // 添加几本书
+        // Add several books
         libraryService.addBook("1111111111", "Book 1", "Author 1");
         libraryService.addBook("2222222222", "Book 2", "Author 2");
         outContent.reset();
         
-        // 查看按标题排序的图书（升序）
+        // View books sorted by title (ascending)
         libraryService.viewAllBooksSorted(SortCriteria.TITLE, true);
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Sorted by Title"));
         assertTrue(output.contains("Ascending"));
         
-        // 验证排序顺序（Book 1 应该在 Book 2 之前）
+        // Verify sorting order (Book 1 should be before Book 2)
         int pos1 = output.indexOf("Book 1");
         int pos2 = output.indexOf("Book 2");
         assertTrue(pos1 < pos2);
         
-        // 重置输出并测试降序排序
+        // Reset output and test descending sort
         outContent.reset();
         libraryService.viewAllBooksSorted(SortCriteria.TITLE, false);
         
@@ -315,7 +315,7 @@ public class TestLibraryService {
         assertTrue(output.contains("Sorted by Title"));
         assertTrue(output.contains("Descending"));
         
-        // 验证排序顺序（Book 2 应该在 Book 1 之前）
+        // Verify sorting order (Book 2 should be before Book 1)
         pos1 = output.indexOf("Book 1");
         pos2 = output.indexOf("Book 2");
         assertTrue(pos2 < pos1);
@@ -323,24 +323,24 @@ public class TestLibraryService {
 
     @Test
     void testSearchAndSortBooks() {
-        // 添加几本书
+        // Add several books
         libraryService.addBook("1111111111", "Java Book", "Author 1");
         libraryService.addBook("2222222222", "Java Advanced", "Author 2");
         libraryService.addBook("3333333333", "Python Book", "Author 3");
         outContent.reset();
         
-        // 搜索并排序
+        // Search and sort
         libraryService.searchAndSortBooks("Java", SearchCriteria.TITLE, SortCriteria.TITLE, true);
         
-        // 验证输出
+        // Verify output
         String output = outContent.toString();
         assertTrue(output.contains("Search Results for 'Java'"));
         assertTrue(output.contains("Sorted by Title"));
-        assertTrue(output.contains("Java Advanced")); // 应该在结果中
-        assertTrue(output.contains("Java Book")); // 应该在结果中
-        assertFalse(output.contains("Python Book")); // 不应该在结果中
+        assertTrue(output.contains("Java Advanced")); // Should be in results
+        assertTrue(output.contains("Java Book")); // Should be in results
+        assertFalse(output.contains("Python Book")); // Should not be in results
         
-        // 验证排序顺序（Java Advanced 应该在 Java Book 之前）
+        // Verify sorting order (Java Advanced should be before Java Book)
         int pos1 = output.indexOf("Java Advanced");
         int pos2 = output.indexOf("Java Book");
         assertTrue(pos1 < pos2);
@@ -348,20 +348,20 @@ public class TestLibraryService {
 
     @Test
     void testErrorHandling() {
-        // 测试借阅不存在的图书时的错误处理
+        // Test borrowing a non-existent book
         libraryService.loanBook("9999999999");
         
-        // 验证输出包含友好的错误消息
+        // Verify output contains friendly error message
         String output = outContent.toString();
         assertTrue(output.contains("Book not found"));
         
-        // 重置输出
+        // Reset output
         outContent.reset();
         
-        // 测试添加无效ISBN的图书
+        // Test adding a book with invalid ISBN
         libraryService.addBook("", "Test Book", "Test Author");
         
-        // 验证输出包含友好的错误消息
+        // Verify output contains friendly error message
         output = outContent.toString();
         assertTrue(output.contains("Error"));
     }

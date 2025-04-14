@@ -18,30 +18,30 @@ public class TestInputUtilReadYesNo {
 
     @BeforeEach
     void setUp() {
-        // 重定向标准输出以便测试
+        // Redirect standard output for testing
         System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     void tearDown() {
-        // 恢复标准输入输出
+        // Restore standard input and output
         System.setOut(originalOut);
         System.setIn(originalIn);
     }
 
     @Test
     void testReadYesNoWithY() {
-        // 设置模拟输入
+        // Set up mock input
         String input = "y\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         
-        // 调用被测试方法
+        // Call the method being tested
         boolean result = InputUtil.readYesNo("Continue? (y/n): ");
         
-        // 验证提示信息
+        // Verify the prompt message
         assertEquals("Continue? (y/n): ", outContent.toString());
         
-        // 验证返回值
+        // Verify the return value
         assertTrue(result);
     }
 } 

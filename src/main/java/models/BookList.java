@@ -106,10 +106,10 @@ public class BookList {
     }
 
     /**
-     * 获取按指定条件排序的图书列表
-     * @param criteria 排序条件
-     * @param ascending 是否升序排列
-     * @return 排序后的图书列表
+     * Gets a list of books sorted by the specified criteria
+     * @param criteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
+     * @return Sorted list of books
      */
     public List<Book> getSortedBooks(SortCriteria criteria, boolean ascending) {
         List<Book> bookList = new ArrayList<>(books.values());
@@ -130,19 +130,19 @@ public class BookList {
     }
 
     /**
-     * 获取按指定条件升序排序的图书列表
-     * @param criteria 排序条件
-     * @return 排序后的图书列表
+     * Gets a list of books sorted by the specified criteria in ascending order
+     * @param criteria Sorting criteria
+     * @return Sorted list of books
      */
     public List<Book> getSortedBooks(SortCriteria criteria) {
         return getSortedBooks(criteria, true);
     }
 
     /**
-     * 根据搜索条件和查询字符串搜索图书
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     * @return 匹配的图书列表
+     * Searches for books based on search criteria and query string
+     * @param query Search query string
+     * @param criteria Search criteria
+     * @return List of matching books
      */
     public List<Book> searchBooks(String query, SearchCriteria criteria) {
         if (query == null || query.trim().isEmpty()) {
@@ -157,11 +157,11 @@ public class BookList {
     }
 
     /**
-     * 检查图书是否匹配搜索条件
-     * @param book 要检查的图书
-     * @param query 规范化后的查询字符串（小写且去除首尾空格）
-     * @param criteria 搜索条件
-     * @return 如果图书匹配搜索条件则返回true
+     * Checks if a book matches the search criteria
+     * @param book Book to check
+     * @param query Normalized query string (lowercase and trimmed)
+     * @param criteria Search criteria
+     * @return true if the book matches the search criteria
      */
     private boolean matchesSearchCriteria(Book book, String query, SearchCriteria criteria) {
         return switch (criteria) {
@@ -177,12 +177,12 @@ public class BookList {
     }
 
     /**
-     * 搜索图书并对结果进行排序
-     * @param query 查询字符串
-     * @param searchCriteria 搜索条件
-     * @param sortCriteria 排序条件
-     * @param ascending 是否升序排列
-     * @return 排序后的搜索结果
+     * Searches for books and sorts the results
+     * @param query Search query string
+     * @param searchCriteria Search criteria
+     * @param sortCriteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
+     * @return Sorted search results
      */
     public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, 
                                         SortCriteria sortCriteria, boolean ascending) {
@@ -208,11 +208,11 @@ public class BookList {
     }
 
     /**
-     * 搜索图书并对结果进行排序（默认升序）
-     * @param query 查询字符串
-     * @param searchCriteria 搜索条件
-     * @param sortCriteria 排序条件
-     * @return 排序后的搜索结果
+     * Searches for books and sorts the results in ascending order
+     * @param query Search query string
+     * @param searchCriteria Search criteria
+     * @param sortCriteria Sorting criteria
+     * @return Sorted search results
      */
     public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, 
                                         SortCriteria sortCriteria) {
@@ -220,10 +220,10 @@ public class BookList {
     }
 
     /**
-     * 搜索图书（默认按相关性排序）
-     * @param query 查询字符串
-     * @param criteria 搜索条件
-     * @return 按相关性排序的搜索结果
+     * Searches for books (sorted by relevance by default)
+     * @param query Search query string
+     * @param criteria Search criteria
+     * @return Search results sorted by relevance
      */
     public List<Book> searchBooksByRelevance(String query, SearchCriteria criteria) {
         if (query == null || query.trim().isEmpty()) {
@@ -232,16 +232,16 @@ public class BookList {
         
         String normalizedQuery = query.toLowerCase().trim();
         
-        // 创建一个带有相关性分数的图书列表
+        // Create a list of books with relevance scores
         List<Map.Entry<Book, Integer>> scoredBooks = books.values().stream()
                 .map(book -> new AbstractMap.SimpleEntry<>(book, calculateRelevanceScore(book, normalizedQuery, criteria)))
-                .filter(entry -> entry.getValue() > 0) // 只保留匹配的图书
+                .filter(entry -> entry.getValue() > 0) // Only keep matching books
                 .collect(Collectors.toList());
         
-        // 按相关性分数降序排序
+        // Sort by relevance score in descending order
         scoredBooks.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
         
-        // 提取排序后的图书
+        // Extract sorted books
         return scoredBooks.stream()
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());

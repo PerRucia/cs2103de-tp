@@ -18,30 +18,30 @@ public class TestInputUtilReadInt {
 
     @BeforeEach
     void setUp() {
-        // 重定向标准输出以便测试
+        // Redirect standard output for testing
         System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     void tearDown() {
-        // 恢复标准输入输出
+        // Restore standard input and output
         System.setOut(originalOut);
         System.setIn(originalIn);
     }
 
     @Test
     void testReadIntValidInput() {
-        // 设置模拟输入
+        // Set up mock input
         String input = "42\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         
-        // 调用被测试方法
+        // Call the method being tested
         int result = InputUtil.readInt("Enter number: ");
         
-        // 验证提示信息
+        // Verify the prompt message
         assertEquals("Enter number: ", outContent.toString());
         
-        // 验证返回值
+        // Verify the return value
         assertEquals(42, result);
     }
 } 

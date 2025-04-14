@@ -22,16 +22,16 @@ public class TestLoan {
         loanDate = LocalDate.now();
         dueDate = loanDate.plusDays(14);
         
-        // 使用新的构造函数
+        // Use new constructor
         loan = new Loan(borrower, book, loanDate, dueDate);
         
-        // 手动设置图书状态为已借出
+        // Manually set book status to checked out
         bookList.loanBook(book);
     }
 
     @Test
     void testGetLoanId() {
-        // 由于我们现在使用生成的ID，我们需要检查ID不为空
+        // Since we now use generated IDs, we need to check that the ID is not null
         Assertions.assertNotNull(loan.getLoanId());
         Assertions.assertTrue(loan.getLoanId().contains(book.getIsbn()));
     }
@@ -77,10 +77,10 @@ public class TestLoan {
     void testReturnBook() {
         Assertions.assertEquals(BookStatus.CHECKED_OUT, book.getStatus());
         
-        // 使用新的无参数 returnBook 方法
+        // Use new parameterless returnBook method
         loan.returnBook();
         
-        // 手动更新图书状态
+        // Manually update book status
         bookList.returnBook(book);
         
         Assertions.assertTrue(loan.isReturned());

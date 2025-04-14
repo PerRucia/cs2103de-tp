@@ -18,89 +18,89 @@ public class TestInputUtil {
 
     @BeforeEach
     void setUp() {
-        // 重定向标准输出以便测试
+        // Redirect standard output for testing
         System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     void tearDown() {
-        // 恢复标准输入输出
+        // Restore standard input and output
         System.setOut(originalOut);
         System.setIn(originalIn);
     }
 
     @Test
     void testInputUtil() {
-        // 测试 readString
+        // Test readString
         {
-            // 设置模拟输入
+            // Set up mock input
             String input = "Test Input\n";
             System.setIn(new ByteArrayInputStream(input.getBytes()));
             
-            // 调用被测试方法
+            // Call the method being tested
             String result = InputUtil.readString("Enter text: ");
             
-            // 验证提示信息
+            // Verify the prompt message
             assertEquals("Enter text: ", outContent.toString());
             
-            // 验证返回值
+            // Verify the return value
             assertEquals("Test Input", result);
             
-            // 重置输出缓冲区
+            // Reset output buffer
             outContent.reset();
         }
         
-        // 测试 readInt 有效输入
+        // Test readInt with valid input
         {
-            // 设置模拟输入
+            // Set up mock input
             String input = "42\n";
             System.setIn(new ByteArrayInputStream(input.getBytes()));
             
-            // 调用被测试方法
+            // Call the method being tested
             int result = InputUtil.readInt("Enter number: ");
             
-            // 验证提示信息
+            // Verify the prompt message
             assertEquals("Enter number: ", outContent.toString());
             
-            // 验证返回值
+            // Verify the return value
             assertEquals(42, result);
             
-            // 重置输出缓冲区
+            // Reset output buffer
             outContent.reset();
         }
         
-        // 测试 readYesNo 输入 "y"
+        // Test readYesNo with "y" input
         {
-            // 设置模拟输入
+            // Set up mock input
             String input = "y\n";
             System.setIn(new ByteArrayInputStream(input.getBytes()));
             
-            // 调用被测试方法
+            // Call the method being tested
             boolean result = InputUtil.readYesNo("Continue? (y/n): ");
             
-            // 验证提示信息
+            // Verify the prompt message
             assertEquals("Continue? (y/n): ", outContent.toString());
             
-            // 验证返回值
+            // Verify the return value
             assertTrue(result);
             
-            // 重置输出缓冲区
+            // Reset output buffer
             outContent.reset();
         }
         
-        // 测试 readYesNo 输入 "n"
+        // Test readYesNo with "n" input
         {
-            // 设置模拟输入
+            // Set up mock input
             String input = "n\n";
             System.setIn(new ByteArrayInputStream(input.getBytes()));
             
-            // 调用被测试方法
+            // Call the method being tested
             boolean result = InputUtil.readYesNo("Continue? (y/n): ");
             
-            // 验证提示信息
+            // Verify the prompt message
             assertEquals("Continue? (y/n): ", outContent.toString());
             
-            // 验证返回值
+            // Verify the return value
             assertFalse(result);
         }
     }
