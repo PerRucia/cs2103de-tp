@@ -272,7 +272,7 @@ public class LibraryService {
         });
     }
 
-    // 添加获取和设置用户偏好的方法
+    // Add methods for getting and setting user preferences
     public UserPreferences getUserPreferences() {
         return userPreferences;
     }

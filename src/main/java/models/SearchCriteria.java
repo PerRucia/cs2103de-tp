@@ -39,7 +39,7 @@ public enum SearchCriteria {
             case 5:
                 return STATUS;
             default:
-                return ALL; // 默认搜索所有字段
+                return ALL; // Default search all fields
         }
     }
 } 

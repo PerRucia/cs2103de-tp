@@ -268,8 +268,8 @@ public class BookList {
                 score += calculateFieldScore(book.getIsbn(), query);
                 break;
             case ALL:
-                score += calculateFieldScore(book.getTitle(), query) * 3; // 标题匹配权重更高
-                score += calculateFieldScore(book.getAuthor(), query) * 2; // 作者匹配权重次之
+                score += calculateFieldScore(book.getTitle(), query) * 3; // Higher weight for title matches
+                score += calculateFieldScore(book.getAuthor(), query) * 2; // Medium weight for author matches
                 score += calculateFieldScore(book.getIsbn(), query);
                 break;
         }
@@ -286,22 +286,22 @@ public class BookList {
     private int calculateFieldScore(String field, String query) {
         String normalizedField = field.toLowerCase();
         
-        // 完全匹配得高分
+        // Exact match gets highest score
         if (normalizedField.equals(query)) {
             return 10;
         }
         
-        // 开头匹配得中等分数
+        // Beginning match gets medium score
         if (normalizedField.startsWith(query)) {
             return 5;
         }
         
-        // 包含匹配得低分
+        // Contains match gets low score
         if (normalizedField.contains(query)) {
             return 3;
         }
         
-        // 不匹配得零分
+        // No match gets zero score
         return 0;
     }
 

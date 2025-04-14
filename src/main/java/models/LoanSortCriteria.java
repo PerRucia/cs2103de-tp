@@ -44,7 +44,7 @@ public enum LoanSortCriteria {
             case 7:
                 return STATUS;
             default:
-                return LOAN_DATE; // 默认按借阅日期排序
+                return LOAN_DATE; // Default sorting by loan date
         }
     }
 } 
