@@ -278,7 +278,7 @@ public class LibraryService {
     }
 
     /**
-     * 保存用户偏好设置
+     * Save user preferences
      */
     public void saveUserPreferences() {
         GeneralStorage.saveUserPreferences(USER_PREFS_FILE, userPreferences);
@@ -286,9 +286,9 @@ public class LibraryService {
     }
 
     /**
-     * 更新图书排序偏好
-     * @param criteria 排序条件
-     * @param ascending 是否升序
+     * Update book sorting preferences
+     * @param criteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
      */
     public void updateBookSortPreferences(SortCriteria criteria, boolean ascending) {
         userPreferences.setDefaultBookSortCriteria(criteria);
@@ -297,9 +297,9 @@ public class LibraryService {
     }
 
     /**
-     * 更新借阅记录排序偏好
-     * @param criteria 排序条件
-     * @param ascending 是否升序
+     * Update loan record sorting preferences
+     * @param criteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
      */
     public void updateLoanSortPreferences(LoanSortCriteria criteria, boolean ascending) {
         userPreferences.setDefaultLoanSortCriteria(criteria);
@@ -308,8 +308,8 @@ public class LibraryService {
     }
 
     /**
-     * 更新搜索偏好
-     * @param criteria 搜索条件
+     * Update search preferences
+     * @param criteria Search criteria
      */
     public void updateSearchPreferences(SearchCriteria criteria) {
         userPreferences.setDefaultSearchCriteria(criteria);
@@ -317,7 +317,7 @@ public class LibraryService {
     }
 
     /**
-     * 使用默认偏好显示所有图书
+     * Display all books using default preferences
      */
     public void viewAllBooksSortedWithPreferences() {
         viewAllBooksSorted(
@@ -327,7 +327,7 @@ public class LibraryService {
     }
 
     /**
-     * 使用默认偏好显示所有借阅记录
+     * Display all loan records using default preferences
      */
     public void viewLoansSortedWithPreferences() {
         viewLoansSorted(

@@ -1,7 +1,7 @@
 package models;
 
 /**
- * 定义图书排序的条件
+ * Define sorting criteria for books
  */
 public enum SortCriteria {
     ISBN("ISBN"),
@@ -25,9 +25,9 @@ public enum SortCriteria {
     }
     
     /**
-     * 从整数选择获取排序条件
-     * @param choice 用户选择的整数
-     * @return 对应的排序条件，如果选择无效则返回TITLE
+     * Get sorting criteria from integer choice
+     * @param choice User's integer choice
+     * @return Corresponding sorting criteria, returns TITLE if choice is invalid
      */
     public static SortCriteria fromChoice(int choice) {
         switch (choice) {

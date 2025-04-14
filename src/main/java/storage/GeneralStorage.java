@@ -66,9 +66,9 @@ public class GeneralStorage {
     }
 
     /**
-     * 保存用户偏好设置
-     * @param filename 文件路径
-     * @param preferences 用户偏好对象
+     * Save user preferences
+     * @param filename File path
+     * @param preferences User preferences object
      */
     public static void saveUserPreferences(String filename, UserPreferences preferences) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -79,9 +79,9 @@ public class GeneralStorage {
     }
 
     /**
-     * 加载用户偏好设置
-     * @param filename 文件路径
-     * @return 用户偏好对象，如果加载失败则返回默认偏好
+     * Load user preferences
+     * @param filename File path
+     * @return User preferences object, returns default preferences if loading fails
      */
     public static UserPreferences loadUserPreferences(String filename) {
         File file = new File(filename);

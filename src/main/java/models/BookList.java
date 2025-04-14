@@ -248,11 +248,11 @@ public class BookList {
     }
 
     /**
-     * 计算图书与查询的相关性分数
-     * @param book 要计算的图书
-     * @param query 规范化后的查询字符串
-     * @param criteria 搜索条件
-     * @return 相关性分数（越高越相关）
+     * Calculate relevance score between book and query
+     * @param book Book to calculate score for
+     * @param query Normalized query string
+     * @param criteria Search criteria
+     * @return Relevance score (higher means more relevant)
      */
     private int calculateRelevanceScore(Book book, String query, SearchCriteria criteria) {
         int score = 0;
@@ -278,10 +278,10 @@ public class BookList {
     }
 
     /**
-     * 计算字段与查询的匹配分数
-     * @param field 字段值
-     * @param query 查询字符串
-     * @return 匹配分数
+     * Calculate match score between field and query
+     * @param field Field value
+     * @param query Query string
+     * @return Match score
      */
     private int calculateFieldScore(String field, String query) {
         String normalizedField = field.toLowerCase();

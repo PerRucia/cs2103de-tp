@@ -1,7 +1,7 @@
 package models;
 
 /**
- * 定义图书搜索的条件
+ * Define search criteria for books
  */
 public enum SearchCriteria {
     ALL("All"),
@@ -22,9 +22,9 @@ public enum SearchCriteria {
     }
     
     /**
-     * 从整数选择获取搜索条件
-     * @param choice 用户选择的整数
-     * @return 对应的搜索条件，如果选择无效则返回ALL
+     * Get search criteria from integer choice
+     * @param choice User's integer choice
+     * @return Corresponding search criteria, returns ALL if choice is invalid
      */
     public static SearchCriteria fromChoice(int choice) {
         switch (choice) {
