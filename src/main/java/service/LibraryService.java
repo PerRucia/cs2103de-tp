@@ -266,10 +266,10 @@ public class LibraryService {
     }
 
     public void sortBooks(SortCriteria sortCriteria, boolean ascending) {
-        bookList.getSortedBooks(sortCriteria, ascending).forEach(book -> {
-            bookList.clear();
-            bookList.addBook(book);
-        });
+        List<Book> sortedBooks = bookList.getSortedBooks(sortCriteria, ascending);
+        bookList.clear();
+        sortedBooks.forEach(book -> bookList.addBook(book));
+        saveData(); // Save the sorted list to the database
     }
 
     // Add methods for getting and setting user preferences
