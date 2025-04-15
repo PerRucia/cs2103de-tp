@@ -90,13 +90,7 @@ public class DashboardController {
 
     @FXML
     private void handleViewLoans() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ViewLoans.fxml"));
-            Parent view = loader.load();
-            contentPane.getChildren().setAll(view);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Implementation for viewing loans
     }
 
     @FXML
@@ -111,25 +105,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleUserPreferences() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserPreferences.fxml"));
-            Parent view = loader.load();
-            contentPane.getChildren().setAll(view);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     private void handleLogout() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-            Parent root = loader.load();
-            
-            contentPane.getScene().setRoot(root);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Implementation for logout
     }
 } 
