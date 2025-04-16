@@ -1,0 +1,31 @@
+@startuml User Interface Flow
+
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam activityBackgroundColor white
+skinparam activityBorderColor black
+skinparam activityFontColor black
+
+start
+:Login Screen;
+if (Authentication?) then (yes)
+  :Dashboard;
+  if (User Type?) then (Regular User)
+    :Book Search;
+    :Book Loan;
+    :Book Return;
+    :User Preferences;
+  else (Administrator)
+    :Book Management;
+    :Loan Management;
+    :User Management;
+    :System Settings;
+  endif
+else (no)
+  :Error Message;
+  stop
+endif
+
+@enduml 

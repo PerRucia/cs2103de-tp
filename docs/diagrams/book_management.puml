@@ -1,0 +1,51 @@
+@startuml Book Management Flow
+
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam sequence {
+    ArrowColor black
+    ActorBorderColor black
+    LifeLineBorderColor black
+    ParticipantBorderColor black
+    ParticipantBackgroundColor white
+}
+
+actor User
+participant "UI Layer" as UI
+participant "Book Service" as BS
+participant "Storage" as ST
+
+== Book Search ==
+User -> UI: Enter search criteria
+UI -> BS: Search request
+BS -> ST: Query books
+ST --> BS: Return results
+BS --> UI: Filtered books
+UI --> User: Display results
+
+== Book Loan ==
+User -> UI: Select book to loan
+UI -> BS: Loan request
+BS -> ST: Check availability
+alt Book Available
+    ST --> BS: Confirm availability
+    BS -> ST: Update status
+    BS --> UI: Loan confirmation
+    UI --> User: Success message
+else Book Unavailable
+    ST --> BS: Unavailable status
+    BS --> UI: Error message
+    UI --> User: Unavailable notification
+end
+
+== Book Return ==
+User -> UI: Select book to return
+UI -> BS: Return request
+BS -> ST: Update status
+ST --> BS: Confirmation
+BS --> UI: Return confirmation
+UI --> User: Success message
+
+@enduml 

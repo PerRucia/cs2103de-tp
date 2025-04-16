@@ -14,6 +14,37 @@
 ## Introduction
 The Library Management System is a Java-based application designed to help manage library operations efficiently. It provides features for book management, loan tracking, and user preferences.
 
+### System Overview
+The following diagrams provide a high-level understanding of the system:
+
+1. **System Architecture Overview**
+   ![System Architecture](diagrams/system_architecture.png)
+   - Shows the main components of the system
+   - Illustrates how different parts work together
+   - Helps understand the system's organization
+
+2. **User Interface Flow**
+   ![User Interface Flow](diagrams/ui_flow.png)
+   - Shows the navigation between different screens
+   - Illustrates the main user paths
+   - Helps understand how to navigate the system
+
+3. **User Roles and Permissions**
+   - Shows the different user types
+   - Illustrates what each user type can do
+   - Helps understand access levels
+
+4. **Book Management Flow**
+   ![Book Management Flow](diagrams/book_management.png)
+   - Shows the book lifecycle
+   - Illustrates loan and return processes
+   - Helps understand book operations
+
+5. **Search and Sorting Flow**
+   - Shows how to find and organize books
+   - Illustrates available search options
+   - Helps understand information retrieval
+
 ## Getting Started
 1. Ensure you have Java 17 or later installed on your system
 2. Launch the application by running the `LibraryManagementSystem` jar file
@@ -139,7 +170,7 @@ If you encounter any issues:
 4. Contact your system administrator for assistance
 
 ## System Requirements
-- Java 17 or later
+- Java 21 or later
 - JavaFX 17.0.7
 - Minimum 2GB RAM
 - 500MB free disk space

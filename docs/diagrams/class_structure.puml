@@ -1,0 +1,88 @@
+@startuml Class Structure
+
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam class {
+    BackgroundColor white
+    ArrowColor black
+    BorderColor black
+}
+
+package "Models" {
+    class Book {
+        -String isbn
+        -String title
+        -String author
+        -boolean available
+        +getIsbn()
+        +getTitle()
+        +getAuthor()
+        +isAvailable()
+    }
+
+    class User {
+        -String username
+        -String password
+        -boolean isAdmin
+        +getUsername()
+        +isAdmin()
+    }
+
+    class Loan {
+        -Book book
+        -User user
+        -Date loanDate
+        -Date returnDate
+        +getBook()
+        +getUser()
+        +getLoanDate()
+        +getReturnDate()
+    }
+}
+
+package "Services" {
+    class BookService {
+        +searchBooks()
+        +loanBook()
+        +returnBook()
+    }
+
+    class UserService {
+        +authenticate()
+        +createUser()
+        +updateUser()
+    }
+
+    class LoanService {
+        +createLoan()
+        +endLoan()
+        +getActiveLoans()
+    }
+}
+
+package "Controllers" {
+    class BookController {
+        -BookService bookService
+        +handleSearch()
+        +handleLoan()
+        +handleReturn()
+    }
+
+    class UserController {
+        -UserService userService
+        +handleLogin()
+        +handleRegistration()
+    }
+}
+
+BookService --> Book
+LoanService --> Loan
+LoanService --> Book
+LoanService --> User
+UserService --> User
+BookController --> BookService
+UserController --> UserService
+
+@enduml 
