@@ -131,21 +131,21 @@ public class MyLoansController {
     
     private void refreshMyLoans() {
         try {
-            // 获取用户偏好设置
+            // Get user preferences
             UserPreferences userPrefs = libraryService.getUserPreferences();
-            
-            // 使用新方法直接获取当前用户的借阅记录，根据偏好决定是否包含已归还的书籍
+
+            // Use the new method to directly obtain the current user's borrowing record and decide whether to include returned books based on preferences
             List<Loan> myLoans = libraryService.getMyLoans(userPrefs.isShowReturnedLoans());
-            
-            // 按照用户偏好进行排序
+
+            // Sort by user preference
             LoanSortCriteria sortCriteria = userPrefs.getDefaultLoanSortCriteria();
             boolean ascending = userPrefs.isDefaultSortAscending();
             sortLoans(myLoans, sortCriteria, ascending);
-            
-            // 更新表格
+
+            // Update the table
             loansTable.setItems(FXCollections.observableArrayList(myLoans));
-            
-            // 更新消息
+
+            // Update message
             messageLabel.setText("Found " + myLoans.size() + " loan(s)");
         } catch (Exception e) {
             messageLabel.setText("Error loading loans: " + e.getMessage());

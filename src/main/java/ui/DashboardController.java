@@ -20,22 +20,22 @@ public class DashboardController {
     @FXML
     public void initialize() {
         libraryService = LibraryApp.getLibraryService();
-        
-        // 根据用户角色隐藏/显示菜单项
+
+        // Hide/show menu items based on user role
         User currentUser = libraryService.getCurrentUser();
         if (currentUser != null) {
-            // 获取所有菜单按钮
+            // Get all menu buttons
             sidebar.getChildren().forEach(node -> {
                 if (node instanceof Button) {
                     Button button = (Button) node;
-                    
-                    // 处理管理员专属菜单项
+
+                    // Process administrator-only menu items
                     if (button.getStyleClass().contains("admin-only") && !currentUser.isAdmin()) {
                         button.setVisible(false);
                         button.setManaged(false);
                     }
-                    
-                    // 处理普通用户专属菜单项
+
+                    // Process menu items exclusive to ordinary users
                     if (button.getStyleClass().contains("user-only") && currentUser.isAdmin()) {
                         button.setVisible(false);
                         button.setManaged(false);
@@ -45,7 +45,7 @@ public class DashboardController {
         }
     }
 
-    // 加载指定的FXML内容到contentPane
+    // Load the specified FXML content into contentPane
     private void loadContent(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

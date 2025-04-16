@@ -17,11 +17,11 @@ public class Loan implements Serializable {
     private boolean isReturned;
 
     /**
-     * 创建一个新的借阅记录
-     * @param borrower 借阅者
-     * @param book 借阅的图书
-     * @param loanDate 借阅日期
-     * @param dueDate 应还日期
+     * Create a new borrowing record
+     * @param borrower borrower
+     * @param book borrowed book
+     * @param loanDate borrowing date
+     * @param dueDate due date
      */
     public Loan(User borrower, Book book, LocalDate loanDate, LocalDate dueDate) {
         this.loanId = generateLoanId(borrower, book, loanDate);
@@ -34,7 +34,7 @@ public class Loan implements Serializable {
     }
 
     /**
-     * 生成借阅ID
+     * Generate a borrowing ID
      */
     private String generateLoanId(User borrower, Book book, LocalDate loanDate) {
         return book.getIsbn() + "-" + loanDate.toString();
@@ -80,7 +80,7 @@ public class Loan implements Serializable {
     }
 
     /**
-     * 归还图书（不需要 BookList 参数）
+     * Return a book (BookList parameter is not required)
      */
     public void returnBook() {
         if (!isReturned) {

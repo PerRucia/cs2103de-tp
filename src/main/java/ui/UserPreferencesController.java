@@ -60,13 +60,13 @@ public class UserPreferencesController {
             preferences.setDefaultLoanSortCriteria(loanSortCriteriaComboBox.getValue());
             preferences.setDefaultSearchCriteria(searchCriteriaComboBox.getValue());
             preferences.setDefaultSortAscending(ascendingRadio.isSelected());
-            
-            // Display Settings部分默认值处理 - 因为UI已隐藏，使用默认选择
-            preferences.setShowBookStatus(true); // 默认显示书籍状态
-            preferences.setShowReturnedLoans(true); // 默认显示已归还的借阅记录
-            
-            // 设置默认每页项目数
-            preferences.setItemsPerPage(10); // 使用10作为默认值
+
+            // Display Settings default value processing - because the UI is hidden, use the default selection
+            preferences.setShowBookStatus(true); // Display book status by default
+            preferences.setShowReturnedLoans(true); // Display returned borrowing records by default
+
+            // Set the default number of items per page
+            preferences.setItemsPerPage(10); // Use 10 as the default value
             
             // Save preferences
             libraryService.saveUserPreferences();
@@ -83,8 +83,8 @@ public class UserPreferencesController {
     @FXML
     private void handleReset() {
         preferences = new UserPreferences(); // Create new preferences with default values
-        
-        // 只加载可见组件的值
+
+        // Only load values of visible components
         bookSortCriteriaComboBox.setValue(preferences.getDefaultBookSortCriteria());
         loanSortCriteriaComboBox.setValue(preferences.getDefaultLoanSortCriteria());
         searchCriteriaComboBox.setValue(preferences.getDefaultSearchCriteria());
@@ -94,8 +94,8 @@ public class UserPreferencesController {
         } else {
             descendingRadio.setSelected(true);
         }
-        
-        // Display Settings已被隐藏，不需要更新其UI值
+
+        // Display Settings has been hidden, no need to update its UI value
         
         showMessage("Preferences reset to default values");
     }

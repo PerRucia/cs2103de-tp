@@ -34,8 +34,8 @@ public class ViewBooksController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        
-        // 设置列头排序功能
+
+        // Set the column header sorting function
         setupColumnSorting();
         
         // Load initial data with user preferences
@@ -43,16 +43,16 @@ public class ViewBooksController {
     }
 
     /**
-     * 设置表格列的排序功能
+     * Set the sorting function of the table column
      */
     private void setupColumnSorting() {
-        // 禁用所有列的排序功能
+        // Disable sorting for all columns
         isbnColumn.setSortable(false);
         titleColumn.setSortable(false);
         authorColumn.setSortable(false);
         statusColumn.setSortable(false);
-        
-        // 清除任何排序标记
+
+        // Clear any sort flags
         booksTable.getSortOrder().clear();
     }
 

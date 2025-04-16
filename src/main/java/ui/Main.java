@@ -154,7 +154,7 @@ public class Main extends Application {
         System.out.println("2. Descending");
         
         int directionChoice = InputUtil.readInt("Choose direction: ");
-        boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
+        boolean ascending = directionChoice != 2; // 1 or other values for ascending order, 2 for descending order
         
         libraryService.viewAllBooksSorted(criteria, ascending);
     }
@@ -177,7 +177,7 @@ public class Main extends Application {
         System.out.println("2. Descending");
         
         int directionChoice = InputUtil.readInt("Choose direction: ");
-        boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
+        boolean ascending = directionChoice != 2; // 1 or other values for ascending order, 2 for descending order
         
         System.out.println("\nView options:");
         System.out.println("1. All loans");
@@ -215,10 +215,10 @@ public class Main extends Application {
         int sortChoice = InputUtil.readInt("Choose sorting criteria: ");
         
         if (sortChoice == 1) {
-            // 按相关性排序
+            // Sort by relevance
             handleSearch(query, searchCriteria);
         } else {
-            // 按其他条件排序
+            // Sort by other conditions
             SortCriteria sortCriteria;
             switch (sortChoice) {
                 case 2:
@@ -242,7 +242,7 @@ public class Main extends Application {
             System.out.println("2. Descending");
             
             int directionChoice = InputUtil.readInt("Choose direction: ");
-            boolean ascending = directionChoice != 2; // 1 或其他值为升序，2为降序
+            boolean ascending = directionChoice != 2; // 1 or other values for ascending order, 2 for descending order
             
             libraryService.searchAndSortBooks(query, searchCriteria, sortCriteria, ascending);
         }

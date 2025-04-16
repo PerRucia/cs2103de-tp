@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 管理借阅记录的类
+ * Class for managing borrowing records
  */
 public class LoanList {
     private List<Loan> loans;
@@ -15,22 +15,22 @@ public class LoanList {
     public LoanList() {
         this.loans = new ArrayList<>();
     }
-    
+
     /**
-     * 添加借阅记录
-     * @param loan 要添加的借阅记录
+     * Add a loan record
+     * @param loan The loan record to be added
      */
     public void addLoan(Loan loan) {
         if (loan != null) {
             loans.add(loan);
         }
     }
-    
+
     /**
-     * 添加新的借阅记录
-     * @param borrower 借阅者
-     * @param book 借阅的图书
-     * @return 创建的借阅记录
+     * Add a new borrowing record
+     * @param borrower borrower
+     * @param book borrowed book
+     * @return created borrowing record
      */
     public Loan createLoan(User borrower, Book book) {
         if (borrower == null || book == null) {
@@ -38,44 +38,44 @@ public class LoanList {
         }
         
         LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanDate.plusDays(21); // 默认借阅期限为21天
+        LocalDate dueDate = loanDate.plusDays(21); // The default borrowing period is 21 days
         
         Loan loan = new Loan(borrower, book, loanDate, dueDate);
         addLoan(loan);
         return loan;
     }
-    
+
     /**
-     * 获取所有借阅记录
-     * @return 借阅记录列表
+     * Get all borrowing records
+     * @return borrowing record list
      */
     public List<Loan> getAllLoans() {
         return new ArrayList<>(loans);
     }
-    
+
     /**
-     * 获取当前借出的图书的借阅记录
-     * @return 当前借出图书的借阅记录列表
+     * Get the borrowing record of the currently borrowed book
+     * @return the borrowing record list of the currently borrowed book
      */
     public List<Loan> getCurrentLoans() {
         return loans.stream()
                 .filter(loan -> loan.getReturnDate() == null)
                 .collect(Collectors.toList());
     }
-    
+
     /**
-     * 获取已归还图书的借阅记录
-     * @return 已归还图书的借阅记录列表
+     * Get the borrowing record of returned books
+     * @return the borrowing record list of returned books
      */
     public List<Loan> getReturnedLoans() {
         return loans.stream()
                 .filter(loan -> loan.getReturnDate() != null)
                 .collect(Collectors.toList());
     }
-    
+
     /**
-     * 获取逾期未还的借阅记录
-     * @return 逾期未还的借阅记录列表
+     * Get overdue borrowing records
+     * @return overdue borrowing record list
      */
     public List<Loan> getOverdueLoans() {
         LocalDate today = LocalDate.now();
@@ -83,12 +83,12 @@ public class LoanList {
                 .filter(loan -> loan.getReturnDate() == null && loan.getDueDate().isBefore(today))
                 .collect(Collectors.toList());
     }
-    
+
     /**
-     * 获取按指定条件排序的借阅记录
-     * @param criteria 排序条件
-     * @param ascending 是否升序排列
-     * @return 排序后的借阅记录列表
+     * Get borrowing records sorted by specified conditions
+     * @param criteria sorting conditions
+     * @param ascending whether to sort in ascending order
+     * @return sorted borrowing record list
      */
     public List<Loan> getSortedLoans(LoanSortCriteria criteria, boolean ascending) {
         List<Loan> loanList = new ArrayList<>(loans);
@@ -103,7 +103,7 @@ public class LoanList {
                 comparator = Comparator.comparing(Loan::getDueDate);
                 break;
             case RETURN_DATE:
-                // 对于 null 的归还日期，我们将其视为"最大"日期
+                // For null return dates, we treat it as the "maximum" date
                 comparator = (loan1, loan2) -> {
                     if (loan1.getReturnDate() == null && loan2.getReturnDate() == null) {
                         return 0;
@@ -152,11 +152,11 @@ public class LoanList {
         loanList.sort(comparator);
         return loanList;
     }
-    
+
     /**
-     * 获取按指定条件升序排序的借阅记录
-     * @param criteria 排序条件
-     * @return 排序后的借阅记录列表
+     * Get borrowing records sorted in ascending order according to the specified conditions
+     * @param criteria sorting conditions
+     * @return sorted borrowing record list
      */
     public List<Loan> getSortedLoans(LoanSortCriteria criteria) {
         return getSortedLoans(criteria, true);
