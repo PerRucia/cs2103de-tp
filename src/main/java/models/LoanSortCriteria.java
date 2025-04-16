@@ -1,7 +1,7 @@
 package models;
 
 /**
- * 定义借阅记录排序的条件
+ * Define the conditions for sorting borrowing records
  */
 public enum LoanSortCriteria {
     LOAN_DATE("Loan Date"),
@@ -21,11 +21,11 @@ public enum LoanSortCriteria {
     public String getDisplayName() {
         return displayName;
     }
-    
+
     /**
-     * 从整数选择获取排序条件
-     * @param choice 用户选择的整数
-     * @return 对应的排序条件，如果选择无效则返回LOAN_DATE
+     * Get sorting conditions from integer selection
+     * @param choice The integer selected by the user
+     * @return The corresponding sorting condition, if the selection is invalid, return LOAN_DATE
      */
     public static LoanSortCriteria fromChoice(int choice) {
         switch (choice) {
@@ -44,7 +44,7 @@ public enum LoanSortCriteria {
             case 7:
                 return STATUS;
             default:
-                return LOAN_DATE; // 默认按借阅日期排序
+                return LOAN_DATE; // Default sorting by borrowing date
         }
     }
 } 

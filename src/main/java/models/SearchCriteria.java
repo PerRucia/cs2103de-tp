@@ -1,7 +1,7 @@
 package models;
 
 /**
- * 定义图书搜索的条件
+ * Define the conditions for book search
  */
 public enum SearchCriteria {
     ALL("All Fields"),
@@ -20,11 +20,11 @@ public enum SearchCriteria {
     public String toString() {
         return displayName;
     }
-    
+
     /**
-     * 从整数选择获取搜索条件
-     * @param choice 用户选择的整数
-     * @return 对应的搜索条件，如果选择无效则返回ALL
+     * Get search conditions from integer selection
+     * @param choice The integer selected by the user
+     * @return The corresponding search condition, if the selection is invalid, returns ALL
      */
     public static SearchCriteria fromChoice(int choice) {
         switch (choice) {
@@ -39,7 +39,7 @@ public enum SearchCriteria {
             case 5:
                 return STATUS;
             default:
-                return ALL; // 默认搜索所有字段
+                return ALL; // Search all fields by default
         }
     }
 } 

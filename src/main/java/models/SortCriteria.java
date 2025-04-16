@@ -1,7 +1,7 @@
 package models;
 
 /**
- * 定义图书排序的条件
+ * Define the conditions for sorting books
  */
 public enum SortCriteria {
     ISBN("ISBN"),
@@ -23,11 +23,11 @@ public enum SortCriteria {
     public String toString() {
         return displayName;
     }
-    
+
     /**
-     * 从整数选择获取排序条件
-     * @param choice 用户选择的整数
-     * @return 对应的排序条件，如果选择无效则返回TITLE
+     * Get sorting conditions from integer selection
+     * @param choice The integer selected by the user
+     * @return The corresponding sorting condition, if the selection is invalid, returns TITLE
      */
     public static SortCriteria fromChoice(int choice) {
         switch (choice) {
@@ -40,7 +40,7 @@ public enum SortCriteria {
             case 4:
                 return STATUS;
             default:
-                return TITLE; // 默认按标题排序
+                return TITLE; // Default sorting is by title
         }
     }
 } 

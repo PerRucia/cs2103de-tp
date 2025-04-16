@@ -144,24 +144,24 @@ public class LibraryService {
     }
 
     /**
-     * 获取当前用户的借阅记录
-     * @return 当前用户的借阅记录列表
+     * Get the borrowing record of the current user
+     * @return The borrowing record list of the current user
      */
     public List<Loan> getMyLoans() {
         if (currentUser == null) {
             throw new IllegalStateException("No user is currently logged in.");
         }
-        
-        // 过滤借阅记录，只返回当前用户的记录
+
+        // Filter borrowing records and return only the records of the current user
         return loanList.getAllLoans().stream()
             .filter(loan -> loan.getBorrower().getId().equals(currentUser.getId()))
             .collect(Collectors.toList());
     }
 
     /**
-     * 获取当前用户的借阅记录（可选择是否包含已归还的书籍）
-     * @param includeReturned 是否包含已归还的书籍
-     * @return 当前用户的借阅记录列表
+     * Get the borrowing record of the current user (you can choose whether to include returned books)
+     * @param includeReturned whether to include returned books
+     * @return The borrowing record list of the current user
      */
     public List<Loan> getMyLoans(boolean includeReturned) {
         List<Loan> myLoans = getMyLoans();
@@ -307,11 +307,11 @@ public class LibraryService {
     }
 
     /**
-     * 对借阅记录进行排序
-     * @param loans 要排序的借阅记录列表
-     * @param criteria 排序条件
-     * @param ascending 是否升序排列
-     * @return 排序后的借阅记录列表
+     * Sort loan records
+     * @param loans List of loan records to be sorted
+     * @param criteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
+     * @return Sorted loan record list
      */
     public List<Loan> sortLoans(List<Loan> loans, LoanSortCriteria criteria, boolean ascending) {
         List<Loan> loansCopy = new ArrayList<>(loans);
@@ -375,13 +375,13 @@ public class LibraryService {
         return loansCopy;
     }
 
-    // 添加获取和设置用户偏好的方法
+    // Add methods for getting and setting user preferences
     public UserPreferences getUserPreferences() {
         return userPreferences;
     }
 
     /**
-     * 保存用户偏好设置
+     * Save user preferences
      */
     public void saveUserPreferences() {
         if (userPreferences != null) {
@@ -390,9 +390,9 @@ public class LibraryService {
     }
 
     /**
-     * 更新图书排序偏好
-     * @param criteria 排序条件
-     * @param ascending 是否升序
+     * Update book sorting preferences
+     * @param criteria sorting criteria
+     * @param ascending whether to ascend
      */
     public void updateBookSortPreferences(SortCriteria criteria, boolean ascending) {
         userPreferences.setDefaultBookSortCriteria(criteria);
@@ -401,9 +401,9 @@ public class LibraryService {
     }
 
     /**
-     * 更新借阅记录排序偏好
-     * @param criteria 排序条件
-     * @param ascending 是否升序
+     * Update borrowing record sorting preference
+     * @param criteria sorting criteria
+     * @param ascending whether to ascend
      */
     public void updateLoanSortPreferences(LoanSortCriteria criteria, boolean ascending) {
         userPreferences.setDefaultLoanSortCriteria(criteria);
@@ -412,8 +412,8 @@ public class LibraryService {
     }
 
     /**
-     * 更新搜索偏好
-     * @param criteria 搜索条件
+     * Update search preferences
+     * @param criteria search criteria
      */
     public void updateSearchPreferences(SearchCriteria criteria) {
         userPreferences.setDefaultSearchCriteria(criteria);
@@ -421,7 +421,7 @@ public class LibraryService {
     }
 
     /**
-     * 使用默认偏好显示所有图书
+     * Display all books using default preferences
      */
     public void viewAllBooksSortedWithPreferences() {
         viewAllBooksSorted(
@@ -431,7 +431,7 @@ public class LibraryService {
     }
 
     /**
-     * 使用默认偏好显示所有借阅记录
+     * Display all borrowing records using default preferences
      */
     public void viewLoansSortedWithPreferences() {
         viewLoansSorted(
