@@ -17,11 +17,11 @@ public class Loan implements Serializable {
     private boolean isReturned;
 
     /**
-     * Create a new borrowing record
-     * @param borrower borrower
-     * @param book borrowed book
-     * @param loanDate borrowing date
-     * @param dueDate due date
+     * Create a new loan record
+     * @param borrower The borrower
+     * @param book The book being borrowed
+     * @param loanDate Loan date
+     * @param dueDate Due date
      */
     public Loan(User borrower, Book book, LocalDate loanDate, LocalDate dueDate) {
         this.loanId = generateLoanId(borrower, book, loanDate);
@@ -34,7 +34,7 @@ public class Loan implements Serializable {
     }
 
     /**
-     * Generate a borrowing ID
+     * Generate loan ID
      */
     private String generateLoanId(User borrower, Book book, LocalDate loanDate) {
         return book.getIsbn() + "-" + loanDate.toString();
@@ -80,7 +80,7 @@ public class Loan implements Serializable {
     }
 
     /**
-     * Return a book (BookList parameter is not required)
+     * Return the book (no BookList parameter needed)
      */
     public void returnBook() {
         if (!isReturned) {

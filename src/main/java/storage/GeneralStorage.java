@@ -67,8 +67,8 @@ public class GeneralStorage {
 
     /**
      * Save user preferences
-     * @param filename file path
-     * @param preferences user preference object
+     * @param filename File path
+     * @param preferences User preferences object
      */
     public static void saveUserPreferences(String filename, UserPreferences preferences) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -80,8 +80,8 @@ public class GeneralStorage {
 
     /**
      * Load user preferences
-     * @param filename file path
-     * @return user preference object, if loading fails, return default preferences
+     * @param filename File path
+     * @return User preferences object, returns default preferences if loading fails
      */
     public static UserPreferences loadUserPreferences(String filename) {
         File file = new File(filename);

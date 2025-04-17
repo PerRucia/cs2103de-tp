@@ -106,10 +106,10 @@ public class BookList {
     }
 
     /**
-     * Get a list of books sorted by specified criteria
+     * Gets a list of books sorted by the specified criteria
      * @param criteria Sorting criteria
      * @param ascending Whether to sort in ascending order
-     * @return The sorted list of books
+     * @return Sorted list of books
      */
     public List<Book> getSortedBooks(SortCriteria criteria, boolean ascending) {
         List<Book> bookList = new ArrayList<>(books.values());
@@ -130,19 +130,19 @@ public class BookList {
     }
 
     /**
-     * Get a list of books sorted in ascending order according to the specified criteria
-     * @param criteria sorting criteria
-     * @return sorted book list
+     * Gets a list of books sorted by the specified criteria in ascending order
+     * @param criteria Sorting criteria
+     * @return Sorted list of books
      */
     public List<Book> getSortedBooks(SortCriteria criteria) {
         return getSortedBooks(criteria, true);
     }
 
     /**
-     * Search books based on search conditions and query string
-     * @param query query string
-     * @param criteria search conditions
-     * @return matching book list
+     * Searches for books based on search criteria and query string
+     * @param query Search query string
+     * @param criteria Search criteria
+     * @return List of matching books
      */
     public List<Book> searchBooks(String query, SearchCriteria criteria) {
         if (query == null || query.trim().isEmpty()) {
@@ -157,11 +157,11 @@ public class BookList {
     }
 
     /**
-     * Check if the book matches the search criteria
-     * @param book The book to be checked
-     * @param query Normalized query string (lowercase and without leading and trailing spaces)
+     * Checks if a book matches the search criteria
+     * @param book Book to check
+     * @param query Normalized query string (lowercase and trimmed)
      * @param criteria Search criteria
-     * @return Returns true if the book matches the search criteria
+     * @return true if the book matches the search criteria
      */
     private boolean matchesSearchCriteria(Book book, String query, SearchCriteria criteria) {
         return switch (criteria) {
@@ -177,12 +177,12 @@ public class BookList {
     }
 
     /**
-     * Search books and sort the results
-     * @param query query string
-     * @param searchCriteria search criteria
-     * @param sortCriteria sort criteria
-     * @param ascending whether to sort in ascending order
-     * @return sorted search results
+     * Searches for books and sorts the results
+     * @param query Search query string
+     * @param searchCriteria Search criteria
+     * @param sortCriteria Sorting criteria
+     * @param ascending Whether to sort in ascending order
+     * @return Sorted search results
      */
     public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, 
                                         SortCriteria sortCriteria, boolean ascending) {
@@ -208,11 +208,11 @@ public class BookList {
     }
 
     /**
-     * Search books and sort the results (default ascending order)
-     * @param query query string
-     * @param searchCriteria search criteria
-     * @param sortCriteria sort criteria
-     * @return sorted search results
+     * Searches for books and sorts the results in ascending order
+     * @param query Search query string
+     * @param searchCriteria Search criteria
+     * @param sortCriteria Sorting criteria
+     * @return Sorted search results
      */
     public List<Book> searchAndSortBooks(String query, SearchCriteria searchCriteria, 
                                         SortCriteria sortCriteria) {
@@ -220,10 +220,10 @@ public class BookList {
     }
 
     /**
-     * Search books (sorted by relevance by default)
-     * @param query query string
-     * @param criteria search criteria
-     * @return search results sorted by relevance
+     * Searches for books (sorted by relevance by default)
+     * @param query Search query string
+     * @param criteria Search criteria
+     * @return Search results sorted by relevance
      */
     public List<Book> searchBooksByRelevance(String query, SearchCriteria criteria) {
         if (query == null || query.trim().isEmpty()) {
@@ -235,7 +235,7 @@ public class BookList {
         // Create a list of books with relevance scores
         List<Map.Entry<Book, Integer>> scoredBooks = books.values().stream()
                 .map(book -> new AbstractMap.SimpleEntry<>(book, calculateRelevanceScore(book, normalizedQuery, criteria)))
-                .filter(entry -> entry.getValue() > 0) // 只保留匹配的图书
+                .filter(entry -> entry.getValue() > 0) // Only keep matching books
                 .collect(Collectors.toList());
         
         // Sort by relevance score in descending order
@@ -248,11 +248,11 @@ public class BookList {
     }
 
     /**
-     * Calculate the relevance score of the book to the query
-     * @param book The book to be calculated
-     * @param query The normalized query string
+     * Calculate relevance score between book and query
+     * @param book Book to calculate score for
+     * @param query Normalized query string
      * @param criteria Search criteria
-     * @return Relevance score (the higher the more relevant)
+     * @return Relevance score (higher means more relevant)
      */
     private int calculateRelevanceScore(Book book, String query, SearchCriteria criteria) {
         int score = 0;
@@ -268,8 +268,8 @@ public class BookList {
                 score += calculateFieldScore(book.getIsbn(), query);
                 break;
             case ALL:
-                score += calculateFieldScore(book.getTitle(), query) * 3; // 标题匹配权重更高
-                score += calculateFieldScore(book.getAuthor(), query) * 2; // 作者匹配权重次之
+                score += calculateFieldScore(book.getTitle(), query) * 3; // Higher weight for title matches
+                score += calculateFieldScore(book.getAuthor(), query) * 2; // Medium weight for author matches
                 score += calculateFieldScore(book.getIsbn(), query);
                 break;
             default:
@@ -280,30 +280,30 @@ public class BookList {
     }
 
     /**
-     * Calculate the match score between the field and the query
-     * @param field field value
-     * @param query query string
-     * @return match score
+     * Calculate match score between field and query
+     * @param field Field value
+     * @param query Query string
+     * @return Match score
      */
     private int calculateFieldScore(String field, String query) {
         String normalizedField = field.toLowerCase();
         
-        // Exact matches get high scores
+        // Exact match gets highest score
         if (normalizedField.equals(query)) {
             return 10;
         }
         
-        // The beginning match gets a medium score
+        // Beginning match gets medium score
         if (normalizedField.startsWith(query)) {
             return 5;
         }
         
-        // Contains matching low score
+        // Contains match gets low score
         if (normalizedField.contains(query)) {
             return 3;
         }
         
-        // No match will result in zero points
+        // No match gets zero score
         return 0;
     }
 

@@ -21,11 +21,11 @@
             </padding>
             <Button text="View All Books" onAction="#handleViewAllBooks" styleClass="menu-button" maxWidth="Infinity"/>
             <Button text="Search Books" onAction="#handleSearchBooks" styleClass="menu-button" maxWidth="Infinity"/>
-            <Button text="My Loans" onAction="#handleMyLoans" styleClass="menu-button, user-only" maxWidth="Infinity"/>
+            <Button text="Loan Book" onAction="#handleLoanBook" styleClass="menu-button" maxWidth="Infinity"/>
+            <Button text="Return Book" onAction="#handleReturnBook" styleClass="menu-button" maxWidth="Infinity"/>
             <Button text="Add Book" onAction="#handleAddBook" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
+            <Button text="Remove Book" onAction="#handleRemoveBook" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
             <Button text="View Loans" onAction="#handleViewLoans" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
-            <Button text="Loan History" onAction="#handleLoanHistory" styleClass="menu-button, admin-only" maxWidth="Infinity"/>
-            <Button text="User Preferences" onAction="#handleUserPreferences" styleClass="menu-button" maxWidth="Infinity"/>
         </VBox>
     </left>
     

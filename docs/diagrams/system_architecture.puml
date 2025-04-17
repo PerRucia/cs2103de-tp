@@ -1,0 +1,54 @@
+@startuml System Architecture Overview
+
+!theme plain
+skinparam componentStyle rectangle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+
+package "Presentation Layer" {
+    [JavaFX UI] as UI
+    [FXML Layouts] as FXML
+    [Scene Builder] as SB
+}
+
+package "Business Logic Layer" {
+    [Book Management Service] as BMS
+    [Loan Management Service] as LMS
+    [User Management Service] as UMS
+    [Search and Sorting Service] as SSS
+}
+
+package "Data Access Layer" {
+    [JSON Storage] as JSON
+    [Data Validation] as DV
+    [File Operations] as FO
+}
+
+package "Domain Layer" {
+    [Book Model] as BM
+    [User Model] as UM
+    [Loan Model] as LM
+}
+
+UI --> FXML
+FXML --> SB
+UI --> BMS
+UI --> LMS
+UI --> UMS
+UI --> SSS
+
+BMS --> BM
+LMS --> LM
+UMS --> UM
+SSS --> BM
+
+BMS --> JSON
+LMS --> JSON
+UMS --> JSON
+SSS --> JSON
+
+JSON --> DV
+JSON --> FO
+
+@enduml 

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import service.LibraryService;
 import models.User;
@@ -24,6 +25,9 @@ public class LibraryApp extends Application {
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+        
+        // Set application icon
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/library_icon.png")));
         
         stage.setTitle("Library Management System");
         stage.setScene(scene);
