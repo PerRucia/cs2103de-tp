@@ -1,0 +1,65 @@
+@startuml component_interaction
+
+title Component Interaction: Loaning a Book
+
+actor User
+participant "LoanBookController (UI)" as UI
+participant "LibraryService (Service)" as Service
+participant "BookList (Model)" as BookList
+participant "LoanList (Model)" as LoanList
+participant "Book (Model)" as Book
+participant "Loan (Model)" as Loan
+participant "GeneralStorage (Storage)" as Storage
+
+User -> UI : Enters ISBN and clicks "Loan Book"
+activate UI
+UI -> Service : loanBook(isbn)
+activate Service
+Service -> BookList : getBook(isbn)
+activate BookList
+BookList -> BookList : Find book by ISBN
+BookList --> Service : return Book object
+deactivate BookList
+
+alt Book Found and AVAILABLE
+    Service -> Book : getStatus()
+    activate Book
+    Book --> Service : return AVAILABLE
+    deactivate Book
+
+    Service -> LoanList : createLoan(currentUser, book)
+    activate LoanList
+    LoanList -> Loan : new Loan(currentUser, book, loanDate, dueDate)
+    activate Loan
+    Loan --> LoanList : return new Loan object
+    deactivate Loan
+    LoanList -> LoanList : Add loan to internal list
+    LoanList --> Service : return created Loan
+    deactivate LoanList
+
+    Service -> BookList : loanBook(book)
+    activate BookList
+    BookList -> Book : setStatus(CHECKED_OUT)
+    activate Book
+    deactivate Book
+    BookList --> Service
+    deactivate BookList
+
+    ' Persist changes (optional, depending on exact save strategy)'
+    ' Service -> Storage : saveBookList(bookList)'
+    ' activate Storage'
+    ' Storage --> Service'
+    ' deactivate Storage'
+
+
+    Service --> UI : Success confirmation
+    UI -> User : Display "Book loaned successfully!"
+else Book Not Found or Not Available
+    Service --> UI : Throw Exception (e.g., IllegalArgumentException / IllegalStateException)
+    UI -> User : Display error message (e.g., "Book not found", "Book not available")
+end
+
+deactivate Service
+deactivate UI
+
+@enduml

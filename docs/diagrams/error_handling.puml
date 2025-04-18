@@ -1,0 +1,35 @@
+@startuml error_handling_flow
+
+title Error Handling Flow: Saving Data Failure
+
+participant "UI Controller\n(e.g., on shutdown or save action)" as UI
+participant "LibraryService (Service)" as Service
+participant "GeneralStorage (Storage)" as Storage
+participant "Operating System/File System" as OS
+
+UI -> Service : saveData()
+activate Service
+Service -> Storage : saveBookList(...)
+activate Storage
+Storage -> OS : Attempt to write to file (e.g., bookDatabase.txt)
+
+alt Write Fails (e.g., Permissions Denied, Disk Full)
+    OS --> Storage : IOException
+    Storage --> Service : Propagate IOException (or handle and throw custom exception)
+    deactivate Storage
+    Service --> UI : Propagate Exception (or return error status)
+    deactivate Service
+    activate UI
+    UI -> UI : Catch Exception
+    UI -> User : Display Error Message (e.g., "Failed to save data: Permission denied")
+    deactivate UI
+else Write Succeeds
+    OS --> Storage : Success
+    Storage --> Service : Return (void or success status)
+    deactivate Storage
+    Service --> UI : Return (void or success status)
+    deactivate Service
+    UI -> User : (Optional) Display Success Message or do nothing
+end
+
+@enduml

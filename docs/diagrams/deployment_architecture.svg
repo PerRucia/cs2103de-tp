@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="479px" preserveAspectRatio="none" style="width:628px;height:479px;background:#FFFFFF;" version="1.1" viewBox="0 0 628 479" width="628px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.2969" id="_title" style="stroke:none;stroke-width:1.0;" width="208" x="203" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="198" x="208" y="22.9951">Deployment Architecture</text><!--MD5=[244c28f1a2b8944bb6317e8d24e64623]
+cluster UserPC--><g id="cluster_UserPC"><polygon fill="none" points="16,53.2969,26,43.2969,611,43.2969,611,452.2969,601,462.2969,16,462.2969,16,53.2969" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="601" x2="611" y1="53.2969" y2="43.2969"/><line style="stroke:#181818;stroke-width:1.0;" x1="16" x2="601" y1="53.2969" y2="53.2969"/><line style="stroke:#181818;stroke-width:1.0;" x1="601" x2="601" y1="53.2969" y2="462.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="107" x="256" y="69.292">User Machine</text></g><!--MD5=[d1470243d47c7df7999b6c1d1bb81b90]
+cluster OS--><g id="cluster_OS"><polygon fill="none" points="40,101.2969,50,91.2969,587,91.2969,587,428.2969,577,438.2969,40,438.2969,40,101.2969" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="577" x2="587" y1="101.2969" y2="91.2969"/><line style="stroke:#181818;stroke-width:1.0;" x1="40" x2="577" y1="101.2969" y2="101.2969"/><line style="stroke:#181818;stroke-width:1.0;" x1="577" x2="577" y1="101.2969" y2="438.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="313" x="153" y="117.292">Operating System (Windows/Mac/Linux)</text></g><!--MD5=[f115c11e5962c034e410d4bd2e574e59]
+cluster JRE--><g id="cluster_JRE"><rect fill="none" height="123" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="483" x="72" y="147.2969"/><polygon fill="none" points="538,152.2969,538,166.2969,550,166.2969,550,158.2969,544,152.2969,538,152.2969" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="544" x2="544" y1="152.2969" y2="158.2969"/><line style="stroke:#181818;stroke-width:1.0;" x1="550" x2="544" y1="158.2969" y2="158.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="281" x="173" y="162.292">Java Runtime Environment (JRE 21+)</text></g><!--MD5=[3123dc679bd3a8d0a1fee4288322f972]
+cluster DataFolder--><g id="cluster_DataFolder"><path d="M158.5,327.2969 L235.5,327.2969 A3.75,3.75 0 0 1 238,329.7969 L245,349.5938 L327.5,349.5938 A2.5,2.5 0 0 1 330,352.0938 L330,411.7969 A2.5,2.5 0 0 1 327.5,414.2969 L158.5,414.2969 A2.5,2.5 0 0 1 156,411.7969 L156,329.7969 A2.5,2.5 0 0 1 158.5,327.2969 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="156" x2="245" y1="349.5938" y2="349.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="76" x="160" y="342.292">Data Files</text></g><!--MD5=[0918f6a85c677856bcee5cc2b312c683]
+entity JFX--><g id="elem_JFX"><rect fill="#F1F1F1" height="32.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="121" x="409.5" y="204.2969"/><rect fill="#F1F1F1" height="32.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="121" x="405.5" y="200.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="413.5" y="221.292">JavaFX Runtime</text></g><!--MD5=[7f0d5ebcf8936f965e3a7879e6552e19]
+entity AppJar--><g id="elem_AppJar"><rect fill="#F1F1F1" height="55.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="142" x="172" y="190.2969"/><polygon fill="#F1F1F1" points="297,195.2969,297,209.2969,309,209.2969,309,201.2969,303,195.2969,297,195.2969" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="303" x2="303" y1="195.2969" y2="201.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="309" x2="303" y1="201.2969" y2="201.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="182" y="216.292">LibraryApp.jar</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="182" y="232.5889">(Executable JAR)</text></g><!--MD5=[c524aa3bffed2a20be7f68b68a5bed9c]
+entity BookDB--><g id="elem_BookDB"><path d="M172,364.7969 L172,396.0938 A2.5,2.5 0 0 0 174.5,398.5938 L311.5,398.5938 A2.5,2.5 0 0 0 314,396.0938 L314,372.2969 L304,362.2969 L174.5,362.2969 A2.5,2.5 0 0 0 172,364.7969 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><path d="M304,362.2969 L304,369.7969 A2.5,2.5 0 0 0 306.5,372.2969 L314,372.2969 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="182" y="385.292">bookDatabase.txt</text></g><!--MD5=[f08a3378a506ee403d5a7c5621b60883]
+link AppJar to JRE--><g id="link_AppJar_JRE"><path d="M171.77,218.2969 C130.43,218.2969 85.51,218.2969 80.47,218.2969 " fill="none" id="AppJar-to-JRE" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="80.47,218.2969,89.47,222.2969,85.47,218.2969,89.47,214.2969,80.47,218.2969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55" x="98.68" y="211.3638">Requires</text></g><!--MD5=[a74cd0f97836bac2fa669c9b3320c441]
+link AppJar to JFX--><g id="link_AppJar_JFX"><path d="M314.19,218.2969 C341.7,218.2969 373.05,218.2969 400.23,218.2969 " fill="none" id="AppJar-to-JFX" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="405.25,218.2969,396.25,214.2969,400.25,218.2969,396.25,222.2969,405.25,218.2969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55" x="332.25" y="211.3638">Requires</text></g><!--MD5=[bd9256f25c6e0974e5a457c2b4315312]
+link AppJar to BookDB--><g id="link_AppJar_BookDB"><path d="M243,246.4369 C243,277.4969 243,327.7869 243,356.7669 " fill="none" id="AppJar-to-BookDB" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="243,361.9169,247,352.9169,243,356.9169,239,352.9169,243,361.9169" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="244" y="307.3638">Reads/Writes</text></g><!--MD5=[b23d569191329a93f8aefbb968c22e27]
+@startuml
+title Deployment Architecture
+
+node "User Machine" as UserPC {
+  node "Operating System (Windows/Mac/Linux)" as OS {
+    artifact "Java Runtime Environment (JRE 21+)" as JRE {
+      collections "JavaFX Runtime" as JFX
+      artifact "LibraryApp.jar\n(Executable JAR)" as AppJar
+    }
+    folder "Data Files" as DataFolder {
+       file "bookDatabase.txt" as BookDB
+    }
+  }
+}
+
+AppJar .> JRE : Requires
+AppJar .> JFX : Requires
+AppJar ..> BookDB : Reads/Writes
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

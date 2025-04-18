@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="684px" preserveAspectRatio="none" style="width:1685px;height:684px;background:#FFFFFF;" version="1.1" viewBox="0 0 1685 684" width="1685px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.2969" id="_title" style="stroke:none;stroke-width:1.0;" width="179" x="754" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="169" x="759" y="27.9951">Security Architecture</text><rect fill="#FFFFFF" height="58.2656" style="stroke:#181818;stroke-width:1.0;" width="10" x="592" y="178.8594"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="592" y="295.3906"/><rect fill="#FFFFFF" height="72.2656" style="stroke:#181818;stroke-width:1.0;" width="10" x="592" y="449.0547"/><rect fill="#FFFFFF" height="327" style="stroke:#181818;stroke-width:1.0;" width="10" x="1010" y="266.2578"/><rect fill="none" height="246.7344" style="stroke:#000000;stroke-width:1.5;" width="1177" x="501" y="339.5234"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="24" x2="24" y1="118.5938" y2="603.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="325.5" x2="325.5" y1="118.5938" y2="603.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="597" x2="597" y1="118.5938" y2="603.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="862" x2="862" y1="118.5938" y2="603.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1015" x2="1015" y1="118.5938" y2="603.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1410" x2="1410" y1="118.5938" y2="603.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1591" x2="1591" y1="118.5938" y2="603.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5" y="115.292">User</text><ellipse cx="24" cy="50.7969" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M24,58.7969 L24,85.7969 M11,66.7969 L37,66.7969 M24,85.7969 L11,100.7969 M24,85.7969 L37,100.7969 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5" y="615.2529">User</text><ellipse cx="24" cy="627.0547" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M24,635.0547 L24,662.0547 M11,643.0547 L37,643.0547 M24,662.0547 L11,677.0547 M24,662.0547 L37,677.0547 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="253.5" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="260.5" y="107.292">LoginController (UI)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="253.5" y="602.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="260.5" y="622.2529">LoginController (UI)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="511" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="518" y="107.292">LibraryService (Service)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="511" y="602.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="518" y="622.2529">LibraryService (Service)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="102" x="811" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="818" y="107.292">User (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="102" x="811" y="602.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="818" y="622.2529">User (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="184" x="923" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="170" x="930" y="107.292">DashboardController (UI)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="184" x="923" y="602.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="170" x="930" y="622.2529">DashboardController (UI)</text><rect fill="#E2E2F0" height="46.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="188" x="1316" y="71"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171" x="1324.5" y="90.9951">Admin Feature Controller</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174" x="1323" y="107.292">(e.g., AddBookController)</text><rect fill="#E2E2F0" height="46.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="188" x="1316" y="602.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171" x="1324.5" y="622.2529">Admin Feature Controller</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174" x="1323" y="638.5498">(e.g., AddBookController)</text><rect fill="#E2E2F0" height="46.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="154" x="1514" y="71"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="1521" y="90.9951">Admin Feature Logic</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="1531" y="107.292">(in LibraryService)</text><rect fill="#E2E2F0" height="46.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="154" x="1514" y="602.2578"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="1521" y="622.2529">Admin Feature Logic</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="1531" y="638.5498">(in LibraryService)</text><rect fill="#FFFFFF" height="58.2656" style="stroke:#181818;stroke-width:1.0;" width="10" x="592" y="178.8594"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="592" y="295.3906"/><rect fill="#FFFFFF" height="72.2656" style="stroke:#181818;stroke-width:1.0;" width="10" x="592" y="449.0547"/><rect fill="#FFFFFF" height="327" style="stroke:#181818;stroke-width:1.0;" width="10" x="1010" y="266.2578"/><polygon fill="#181818" points="314,145.7266,324,149.7266,314,153.7266,318,149.7266" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="24" x2="320" y1="149.7266" y2="149.7266"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="278" x="31" y="144.6606">Enters credentials + Admin Checkbox state</text><polygon fill="#181818" points="580,174.8594,590,178.8594,580,182.8594,584,178.8594" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="326" x2="586" y1="178.8594" y2="178.8594"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="247" x="333" y="173.7935">setCurrentUser(new User(id, isAdmin))</text><polygon fill="#181818" points="850,203.9922,860,207.9922,850,211.9922,854,207.9922" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="602" x2="856" y1="207.9922" y2="207.9922"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="236" x="609" y="202.9263">Store currentUser state (id, isAdmin)</text><polygon fill="#181818" points="337,233.125,327,237.125,337,241.125,333,237.125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="331" x2="596" y1="237.125" y2="237.125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="343" y="232.0591">(Implicit success)</text><polygon fill="#181818" points="998,262.2578,1008,266.2578,998,270.2578,1002,266.2578" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="326" x2="1004" y1="266.2578" y2="266.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="105" x="333" y="261.1919">Load Dashboard</text><polygon fill="#181818" points="613,291.3906,603,295.3906,613,299.3906,609,295.3906" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="607" x2="1009" y1="295.3906" y2="295.3906"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="109" x="619" y="290.3247">getCurrentUser()</text><polygon fill="#181818" points="998,320.5234,1008,324.5234,998,328.5234,1002,324.5234" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="597" x2="1004" y1="324.5234" y2="324.5234"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="604" y="319.4575">return User object</text><path d="M501,339.5234 L565,339.5234 L565,346.6563 L555,356.6563 L501,356.6563 L501,339.5234 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="246.7344" style="stroke:#000000;stroke-width:1.5;" width="1177" x="501" y="339.5234"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="19" x="516" y="352.5903">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="97" x="580" y="351.7339">[User is Admin]</text><line style="stroke:#181818;stroke-width:1.0;" x1="1020" x2="1062" y1="377.7891" y2="377.7891"/><line style="stroke:#181818;stroke-width:1.0;" x1="1062" x2="1062" y1="377.7891" y2="390.7891"/><line style="stroke:#181818;stroke-width:1.0;" x1="1021" x2="1062" y1="390.7891" y2="390.7891"/><polygon fill="#181818" points="1031,386.7891,1021,390.7891,1031,394.7891,1027,390.7891" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="371" x="1027" y="372.7231">Enable Admin Buttons (Add/Remove Book, View All Loans)</text><polygon fill="#181818" points="1398,415.9219,1408,419.9219,1398,423.9219,1402,419.9219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="1020" x2="1404" y1="419.9219" y2="419.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="275" x="1027" y="414.856">Navigate to Admin Screen (e.g., Add Book)</text><polygon fill="#181818" points="613,445.0547,603,449.0547,613,453.0547,609,449.0547" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="607" x2="1409" y1="449.0547" y2="449.0547"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="225" x="619" y="443.9888">Call Admin function (e.g., addBook)</text><polygon fill="#181818" points="1579,474.1875,1589,478.1875,1579,482.1875,1583,478.1875" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="602" x2="1585" y1="478.1875" y2="478.1875"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="159" x="609" y="473.1216">Execute admin-only logic</text><polygon fill="#181818" points="613,488.1875,603,492.1875,613,496.1875,609,492.1875" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="607" x2="1590" y1="492.1875" y2="492.1875"/><polygon fill="#181818" points="1398,517.3203,1408,521.3203,1398,525.3203,1402,521.3203" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="597" x2="1404" y1="521.3203" y2="521.3203"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="604" y="516.2544">Return result</text><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="501" x2="1678" y1="530.3203" y2="530.3203"/><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="107" x="506" y="540.5308">[User is Regular]</text><line style="stroke:#181818;stroke-width:1.0;" x1="1020" x2="1062" y1="565.2578" y2="565.2578"/><line style="stroke:#181818;stroke-width:1.0;" x1="1062" x2="1062" y1="565.2578" y2="578.2578"/><line style="stroke:#181818;stroke-width:1.0;" x1="1021" x2="1062" y1="578.2578" y2="578.2578"/><polygon fill="#181818" points="1031,574.2578,1021,578.2578,1031,582.2578,1027,578.2578" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="179" x="1027" y="560.1919">Disable/Hide Admin Buttons</text><!--MD5=[9f96bb04f24b0fcd835c8890fcc962c6]
+@startuml
+title Security Architecture
+
+actor User
+participant "LoginController (UI)" as LoginUI
+participant "LibraryService (Service)" as Service
+participant "User (Model)" as UserModel
+participant "DashboardController (UI)" as DashboardUI
+participant "Admin Feature Controller\n(e.g., AddBookController)" as AdminUI
+participant "Admin Feature Logic\n(in LibraryService)" as AdminServiceLogic
+
+User -> LoginUI : Enters credentials + Admin Checkbox state
+LoginUI -> Service : setCurrentUser(new User(id, isAdmin))
+activate Service
+Service -> UserModel : Store currentUser state (id, isAdmin)
+Service - -> LoginUI : (Implicit success)
+deactivate Service
+LoginUI -> DashboardUI : Load Dashboard
+
+activate DashboardUI
+DashboardUI -> Service : getCurrentUser()
+activate Service
+Service - -> DashboardUI : return User object
+deactivate Service
+
+alt User is Admin
+  DashboardUI -> DashboardUI : Enable Admin Buttons (Add/Remove Book, View All Loans)
+  DashboardUI -> AdminUI : Navigate to Admin Screen (e.g., Add Book)
+  AdminUI -> Service : Call Admin function (e.g., addBook)
+  activate Service
+  Service -> AdminServiceLogic : Execute admin-only logic
+  AdminServiceLogic - -> Service
+  Service - -> AdminUI : Return result
+  deactivate Service
+else User is Regular
+  DashboardUI -> DashboardUI : Disable/Hide Admin Buttons
+  ' Attempts to access admin features would be blocked by UI state '
+  ' Direct calls to admin service logic might throw exceptions if not guarded '
+end
+deactivate DashboardUI
+@enduml
+
+@startuml
+title Security Architecture
+
+actor User
+participant "LoginController (UI)" as LoginUI
+participant "LibraryService (Service)" as Service
+participant "User (Model)" as UserModel
+participant "DashboardController (UI)" as DashboardUI
+participant "Admin Feature Controller\n(e.g., AddBookController)" as AdminUI
+participant "Admin Feature Logic\n(in LibraryService)" as AdminServiceLogic
+
+User -> LoginUI : Enters credentials + Admin Checkbox state
+LoginUI -> Service : setCurrentUser(new User(id, isAdmin))
+activate Service
+Service -> UserModel : Store currentUser state (id, isAdmin)
+Service - -> LoginUI : (Implicit success)
+deactivate Service
+LoginUI -> DashboardUI : Load Dashboard
+
+activate DashboardUI
+DashboardUI -> Service : getCurrentUser()
+activate Service
+Service - -> DashboardUI : return User object
+deactivate Service
+
+alt User is Admin
+  DashboardUI -> DashboardUI : Enable Admin Buttons (Add/Remove Book, View All Loans)
+  DashboardUI -> AdminUI : Navigate to Admin Screen (e.g., Add Book)
+  AdminUI -> Service : Call Admin function (e.g., addBook)
+  activate Service
+  Service -> AdminServiceLogic : Execute admin-only logic
+  AdminServiceLogic - -> Service
+  Service - -> AdminUI : Return result
+  deactivate Service
+else User is Regular
+  DashboardUI -> DashboardUI : Disable/Hide Admin Buttons
+end
+deactivate DashboardUI
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

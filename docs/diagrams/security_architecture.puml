@@ -1,0 +1,43 @@
+@startuml security_architecture
+
+title Security Architecture
+
+actor User
+participant "LoginController (UI)" as LoginUI
+participant "LibraryService (Service)" as Service
+participant "User (Model)" as UserModel
+participant "DashboardController (UI)" as DashboardUI
+participant "Admin Feature Controller\n(e.g., AddBookController)" as AdminUI
+participant "Admin Feature Logic\n(in LibraryService)" as AdminServiceLogic
+
+User -> LoginUI : Enters credentials + Admin Checkbox state
+LoginUI -> Service : setCurrentUser(new User(id, isAdmin))
+activate Service
+Service -> UserModel : Store currentUser state (id, isAdmin)
+Service --> LoginUI : (Implicit success)
+deactivate Service
+LoginUI -> DashboardUI : Load Dashboard
+
+activate DashboardUI
+DashboardUI -> Service : getCurrentUser()
+activate Service
+Service --> DashboardUI : return User object
+deactivate Service
+
+alt User is Admin
+  DashboardUI -> DashboardUI : Enable Admin Buttons (Add/Remove Book, View All Loans)
+  DashboardUI -> AdminUI : Navigate to Admin Screen (e.g., Add Book)
+  AdminUI -> Service : Call Admin function (e.g., addBook)
+  activate Service
+  Service -> AdminServiceLogic : Execute admin-only logic
+  AdminServiceLogic --> Service
+  Service --> AdminUI : Return result
+  deactivate Service
+else User is Regular
+  DashboardUI -> DashboardUI : Disable/Hide Admin Buttons
+  ' Attempts to access admin features would be blocked by UI state '
+  ' Direct calls to admin service logic might throw exceptions if not guarded '
+end
+deactivate DashboardUI
+
+@enduml

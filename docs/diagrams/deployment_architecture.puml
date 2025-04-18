@@ -1,0 +1,21 @@
+@startuml deployment_architecture
+
+title Deployment Architecture
+
+node "User Machine" as UserPC {
+  node "Operating System (Windows/Mac/Linux)" as OS {
+    artifact "Java Runtime Environment (JRE 21+)" as JRE {
+      collections "JavaFX Runtime" as JFX
+      artifact "LibraryApp.jar\n(Executable JAR)" as AppJar
+    }
+    folder "Data Files" as DataFolder {
+       file "bookDatabase.txt" as BookDB
+    }
+  }
+}
+
+AppJar .> JRE : Requires
+AppJar .> JFX : Requires
+AppJar ..> BookDB : Reads/Writes
+
+@enduml

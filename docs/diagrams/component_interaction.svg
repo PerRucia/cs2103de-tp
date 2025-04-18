@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="859px" preserveAspectRatio="none" style="width:1890px;height:859px;background:#FFFFFF;" version="1.1" viewBox="0 0 1890 859" width="1890px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.2969" id="_title" style="stroke:none;stroke-width:1.0;" width="322" x="783" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="312" x="788" y="27.9951">Component Interaction: Loaning a Book</text><rect fill="#FFFFFF" height="619.1953" style="stroke:#181818;stroke-width:1.0;" width="10" x="495" y="149.7266"/><rect fill="#FFFFFF" height="590.0625" style="stroke:#181818;stroke-width:1.0;" width="10" x="985" y="178.8594"/><rect fill="#FFFFFF" height="71.2656" style="stroke:#181818;stroke-width:1.0;" width="10" x="1145.5" y="207.9922"/><rect fill="#FFFFFF" height="73.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="1145.5" y="549.4531"/><rect fill="#FFFFFF" height="129.5313" style="stroke:#181818;stroke-width:1.0;" width="10" x="1284.5" y="390.7891"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="1455.5" y="332.5234"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="1455.5" y="578.5859"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="1627.5" y="419.9219"/><rect fill="none" height="467.6641" style="stroke:#000000;stroke-width:1.5;" width="1684" x="10" y="294.2578"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="39" x2="39" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="499.5" x2="499.5" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="990" x2="990" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1150" x2="1150" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1289.5" x2="1289.5" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1460.5" x2="1460.5" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1632" x2="1632" y1="118.5938" y2="778.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1789" x2="1789" y1="118.5938" y2="778.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="20" y="115.292">User</text><ellipse cx="39" cy="50.7969" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M39,58.7969 L39,85.7969 M26,66.7969 L52,66.7969 M39,85.7969 L26,100.7969 M39,85.7969 L52,100.7969 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="20" y="790.917">User</text><ellipse cx="39" cy="802.7188" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M39,810.7188 L39,837.7188 M26,818.7188 L52,818.7188 M39,837.7188 L26,852.7188 M39,837.7188 L52,852.7188 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="177" x="411.5" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="163" x="418.5" y="107.292">LoanBookController (UI)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="177" x="411.5" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="163" x="418.5" y="797.917">LoanBookController (UI)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="904" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="911" y="107.292">LibraryService (Service)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="904" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="911" y="797.917">LibraryService (Service)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="129" x="1086" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="1093" y="107.292">BookList (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="129" x="1086" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="1093" y="797.917">BookList (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="126" x="1226.5" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="1233.5" y="107.292">LoanList (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="126" x="1226.5" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="1233.5" y="797.917">LoanList (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="1407.5" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="1414.5" y="107.292">Book (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="1407.5" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="1414.5" y="797.917">Book (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="103" x="1581" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="1588" y="107.292">Loan (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="103" x="1581" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="1588" y="797.917">Loan (Model)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="1694" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="1701" y="107.292">GeneralStorage (Storage)</text><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="1694" y="777.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="1701" y="797.917">GeneralStorage (Storage)</text><rect fill="#FFFFFF" height="619.1953" style="stroke:#181818;stroke-width:1.0;" width="10" x="495" y="149.7266"/><rect fill="#FFFFFF" height="590.0625" style="stroke:#181818;stroke-width:1.0;" width="10" x="985" y="178.8594"/><rect fill="#FFFFFF" height="71.2656" style="stroke:#181818;stroke-width:1.0;" width="10" x="1145.5" y="207.9922"/><rect fill="#FFFFFF" height="73.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="1145.5" y="549.4531"/><rect fill="#FFFFFF" height="129.5313" style="stroke:#181818;stroke-width:1.0;" width="10" x="1284.5" y="390.7891"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="1455.5" y="332.5234"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="1455.5" y="578.5859"/><rect fill="#FFFFFF" height="29.1328" style="stroke:#181818;stroke-width:1.0;" width="10" x="1627.5" y="419.9219"/><polygon fill="#181818" points="483,145.7266,493,149.7266,483,153.7266,487,149.7266" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="39" x2="489" y1="149.7266" y2="149.7266"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="223" x="46" y="144.6606">Enters ISBN and clicks "Loan Book"</text><polygon fill="#181818" points="973,174.8594,983,178.8594,973,182.8594,977,178.8594" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="505" x2="979" y1="178.8594" y2="178.8594"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="95" x="512" y="173.7935">loanBook(isbn)</text><polygon fill="#181818" points="1133.5,203.9922,1143.5,207.9922,1133.5,211.9922,1137.5,207.9922" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="995" x2="1139.5" y1="207.9922" y2="207.9922"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="89" x="1002" y="202.9263">getBook(isbn)</text><line style="stroke:#181818;stroke-width:1.0;" x1="1155.5" x2="1197.5" y1="237.125" y2="237.125"/><line style="stroke:#181818;stroke-width:1.0;" x1="1197.5" x2="1197.5" y1="237.125" y2="250.125"/><line style="stroke:#181818;stroke-width:1.0;" x1="1156.5" x2="1197.5" y1="250.125" y2="250.125"/><polygon fill="#181818" points="1166.5,246.125,1156.5,250.125,1166.5,254.125,1162.5,250.125" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="115" x="1162.5" y="232.0591">Find book by ISBN</text><polygon fill="#181818" points="1006,275.2578,996,279.2578,1006,283.2578,1002,279.2578" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1000" x2="1149.5" y1="279.2578" y2="279.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="1012" y="274.1919">return Book object</text><path d="M10,294.2578 L74,294.2578 L74,301.3906 L64,311.3906 L10,311.3906 L10,294.2578 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="467.6641" style="stroke:#000000;stroke-width:1.5;" width="1684" x="10" y="294.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="19" x="25" y="307.3247">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="185" x="89" y="306.4683">[Book Found and AVAILABLE]</text><polygon fill="#181818" points="1443.5,328.5234,1453.5,332.5234,1443.5,336.5234,1447.5,332.5234" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="995" x2="1449.5" y1="332.5234" y2="332.5234"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="73" x="1002" y="327.4575">getStatus()</text><polygon fill="#181818" points="1006,357.6563,996,361.6563,1006,365.6563,1002,361.6563" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1000" x2="1459.5" y1="361.6563" y2="361.6563"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113" x="1012" y="356.5903">return AVAILABLE</text><polygon fill="#181818" points="1272.5,386.7891,1282.5,390.7891,1272.5,394.7891,1276.5,390.7891" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="995" x2="1278.5" y1="390.7891" y2="390.7891"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="197" x="1002" y="385.7231">createLoan(currentUser, book)</text><polygon fill="#181818" points="1615.5,415.9219,1625.5,419.9219,1615.5,423.9219,1619.5,419.9219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="1294.5" x2="1621.5" y1="419.9219" y2="419.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="314" x="1301.5" y="414.856">new Loan(currentUser, book, loanDate, dueDate)</text><polygon fill="#181818" points="1305.5,445.0547,1295.5,449.0547,1305.5,453.0547,1301.5,449.0547" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1299.5" x2="1631.5" y1="449.0547" y2="449.0547"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="146" x="1311.5" y="443.9888">return new Loan object</text><line style="stroke:#181818;stroke-width:1.0;" x1="1294.5" x2="1336.5" y1="478.1875" y2="478.1875"/><line style="stroke:#181818;stroke-width:1.0;" x1="1336.5" x2="1336.5" y1="478.1875" y2="491.1875"/><line style="stroke:#181818;stroke-width:1.0;" x1="1295.5" x2="1336.5" y1="491.1875" y2="491.1875"/><polygon fill="#181818" points="1305.5,487.1875,1295.5,491.1875,1305.5,495.1875,1301.5,491.1875" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="147" x="1301.5" y="473.1216">Add loan to internal list</text><polygon fill="#181818" points="1006,516.3203,996,520.3203,1006,524.3203,1002,520.3203" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1000" x2="1288.5" y1="520.3203" y2="520.3203"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="127" x="1012" y="515.2544">return created Loan</text><polygon fill="#181818" points="1133.5,545.4531,1143.5,549.4531,1133.5,553.4531,1137.5,549.4531" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="995" x2="1139.5" y1="549.4531" y2="549.4531"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="100" x="1002" y="544.3872">loanBook(book)</text><polygon fill="#181818" points="1443.5,574.5859,1453.5,578.5859,1443.5,582.5859,1447.5,578.5859" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="1155.5" x2="1449.5" y1="578.5859" y2="578.5859"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="1162.5" y="573.52">setStatus(CHECKED_OUT)</text><polygon fill="#181818" points="1006,618.5859,996,622.5859,1006,626.5859,1002,622.5859" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1000" x2="1149.5" y1="622.5859" y2="622.5859"/><polygon fill="#181818" points="516,647.7188,506,651.7188,516,655.7188,512,651.7188" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="510" x2="984" y1="651.7188" y2="651.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="137" x="522" y="646.6528">Success confirmation</text><polygon fill="#181818" points="50,676.8516,40,680.8516,50,684.8516,46,680.8516" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="44" x2="494" y1="680.8516" y2="680.8516"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="224" x="56" y="675.7856">Display "Book loaned successfully!"</text><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="10" x2="1694" y1="689.8516" y2="689.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="218" x="15" y="700.062">[Book Not Found or Not Available]</text><polygon fill="#181818" points="516,720.7891,506,724.7891,516,728.7891,512,724.7891" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="510" x2="984" y1="724.7891" y2="724.7891"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="456" x="522" y="719.7231">Throw Exception (e.g., IllegalArgumentException / IllegalStateException)</text><polygon fill="#181818" points="50,749.9219,40,753.9219,50,757.9219,46,753.9219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="44" x2="494" y1="753.9219" y2="753.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="432" x="56" y="748.856">Display error message (e.g., "Book not found", "Book not available")</text><!--MD5=[429951330fe5c578fd2da8255e66a782]
+@startuml
+title Component Interaction: Loaning a Book
+
+actor User
+participant "LoanBookController (UI)" as UI
+participant "LibraryService (Service)" as Service
+participant "BookList (Model)" as BookList
+participant "LoanList (Model)" as LoanList
+participant "Book (Model)" as Book
+participant "Loan (Model)" as Loan
+participant "GeneralStorage (Storage)" as Storage
+
+User -> UI : Enters ISBN and clicks "Loan Book"
+activate UI
+UI -> Service : loanBook(isbn)
+activate Service
+Service -> BookList : getBook(isbn)
+activate BookList
+BookList -> BookList : Find book by ISBN
+BookList - -> Service : return Book object
+deactivate BookList
+
+alt Book Found and AVAILABLE
+    Service -> Book : getStatus()
+    activate Book
+    Book - -> Service : return AVAILABLE
+    deactivate Book
+
+    Service -> LoanList : createLoan(currentUser, book)
+    activate LoanList
+    LoanList -> Loan : new Loan(currentUser, book, loanDate, dueDate)
+    activate Loan
+    Loan - -> LoanList : return new Loan object
+    deactivate Loan
+    LoanList -> LoanList : Add loan to internal list
+    LoanList - -> Service : return created Loan
+    deactivate LoanList
+
+    Service -> BookList : loanBook(book)
+    activate BookList
+    BookList -> Book : setStatus(CHECKED_OUT)
+    activate Book
+    deactivate Book
+    BookList - -> Service
+    deactivate BookList
+
+    ' Persist changes (optional, depending on exact save strategy)'
+    ' Service -> Storage : saveBookList(bookList)'
+    ' activate Storage'
+    ' Storage - -> Service'
+    ' deactivate Storage'
+
+
+    Service - -> UI : Success confirmation
+    UI -> User : Display "Book loaned successfully!"
+else Book Not Found or Not Available
+    Service - -> UI : Throw Exception (e.g., IllegalArgumentException / IllegalStateException)
+    UI -> User : Display error message (e.g., "Book not found", "Book not available")
+end
+
+deactivate Service
+deactivate UI
+@enduml
+
+@startuml
+title Component Interaction: Loaning a Book
+
+actor User
+participant "LoanBookController (UI)" as UI
+participant "LibraryService (Service)" as Service
+participant "BookList (Model)" as BookList
+participant "LoanList (Model)" as LoanList
+participant "Book (Model)" as Book
+participant "Loan (Model)" as Loan
+participant "GeneralStorage (Storage)" as Storage
+
+User -> UI : Enters ISBN and clicks "Loan Book"
+activate UI
+UI -> Service : loanBook(isbn)
+activate Service
+Service -> BookList : getBook(isbn)
+activate BookList
+BookList -> BookList : Find book by ISBN
+BookList - -> Service : return Book object
+deactivate BookList
+
+alt Book Found and AVAILABLE
+    Service -> Book : getStatus()
+    activate Book
+    Book - -> Service : return AVAILABLE
+    deactivate Book
+
+    Service -> LoanList : createLoan(currentUser, book)
+    activate LoanList
+    LoanList -> Loan : new Loan(currentUser, book, loanDate, dueDate)
+    activate Loan
+    Loan - -> LoanList : return new Loan object
+    deactivate Loan
+    LoanList -> LoanList : Add loan to internal list
+    LoanList - -> Service : return created Loan
+    deactivate LoanList
+
+    Service -> BookList : loanBook(book)
+    activate BookList
+    BookList -> Book : setStatus(CHECKED_OUT)
+    activate Book
+    deactivate Book
+    BookList - -> Service
+    deactivate BookList
+
+
+
+    Service - -> UI : Success confirmation
+    UI -> User : Display "Book loaned successfully!"
+else Book Not Found or Not Available
+    Service - -> UI : Throw Exception (e.g., IllegalArgumentException / IllegalStateException)
+    UI -> User : Display error message (e.g., "Book not found", "Book not available")
+end
+
+deactivate Service
+deactivate UI
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

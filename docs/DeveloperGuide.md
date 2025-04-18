@@ -30,25 +30,28 @@ The Library Management System follows a layered architecture:
 The following diagrams provide visual representations of the system architecture:
 
 1.  **System Architecture Overview**
-    `![System Architecture](diagrams/system_architecture.png)`
+
+    ![System Architecture](diagrams/system_architecture.png)
     * Shows the layered architecture and component interactions.
     * Illustrates data flow between layers.
     * Highlights external dependencies.
 
 2.  **Class Structure**
-    `![Class Structure](diagrams/class_structure.png)`
+
+    ![Class Structure](diagrams/class_structure.png)
     * Displays the main classes and their relationships within key packages (`ui`, `service`, `models`, `storage`).
     * Shows inheritance and composition.
     * Highlights key interfaces (if any).
 
 3.  **Book Management Flow**
-    `![Book Management Flow](diagrams/book_management.png)`
+
+    ![Book Management Flow](diagrams/book_management.png)
     * Shows the sequence of operations for book management (e.g., adding, loaning).
     * Illustrates component interactions (e.g., `AddBookController` -> `LibraryService` -> `BookList` -> `GeneralStorage`).
     * Highlights error handling.
 
 4.  **Component Interaction Diagram**
-    `![Component Interaction](diagrams/component_interaction.png)`
+    ![Component Interaction](diagrams/component_interaction.puml)
     * Details the interaction between components during key operations (e.g., User Login, Loan Book).
     * Shows the flow of data and control.
     * Highlights service dependencies.
