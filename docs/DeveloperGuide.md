@@ -51,31 +51,29 @@ The following diagrams provide visual representations of the system architecture
     * Highlights error handling.
 
 4.  **Component Interaction Diagram**
-    ![Component Interaction](diagrams/component_interaction.puml)
+
+    ![Component Interaction](diagrams/component_interaction.svg)
     * Details the interaction between components during key operations (e.g., User Login, Loan Book).
     * Shows the flow of data and control.
     * Highlights service dependencies.
 
-5.  **Data Flow Diagram**
-    `![Data Flow](diagrams/data_flow.png)`
-    * Illustrates how data moves through the system (e.g., from UI input to storage).
-    * Shows data transformation points.
-    * Highlights validation and processing steps.
+5.  **Deployment Architecture**
 
-6.  **Deployment Architecture**
-    `![Deployment Architecture](diagrams/deployment_architecture.png)`
+    ![Deployment Architecture](diagrams/deployment_architecture.svg)
     * Shows the runtime environment (JRE + Application JAR).
     * Illustrates configuration requirements (e.g., data file locations).
     * Highlights deployment dependencies (Java version, JavaFX).
 
-7.  **Security Architecture**
-    `![Security Architecture](diagrams/security_architecture.png)`
+6.  **Security Architecture**
+
+    ![Security Architecture](diagrams/security_architecture.svg)
     * Shows authentication (Login screen) and authorization (Admin checks) flows.
     * Illustrates security boundaries (Admin-only features in UI and Service layer).
     * Highlights data protection mechanisms (if any beyond basic file storage).
 
-8.  **Error Handling Flow**
-    `![Error Handling Flow](diagrams/error_handling.png)`
+7.  **Error Handling Flow**
+
+    ![Error Handling Flow](diagrams/error_handling.svg)
     * Shows error detection (e.g., validation in `LibraryService`, file I/O exceptions in `GeneralStorage`) and handling (e.g., displaying messages in UI Controllers).
     * Illustrates user feedback paths (e.g., `messageLabel` updates in controllers).
     * Highlights logging and monitoring points (Standard output or dedicated logging framework if added).
