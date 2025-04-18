@@ -21,28 +21,9 @@ Welcome to the Library Management System User Guide. This document provides comp
 
 The Library Management System is a desktop application built using Java and JavaFX. It offers a graphical interface for interacting with the library's catalog and loan records.
 
-Key architectural aspects are illustrated below:
+![User Interface Flow](diagrams/ui_flow.png)
 
-1.  **System Architecture Overview**
-
-   ![System Architecture](diagrams/system_architecture.png)
-   *   This diagram outlines the primary software components and their interactions, providing insight into the system's structure.
-
-2.  **User Interface Flow**
-
-   ![User Interface Flow](diagrams/ui_flow.png)
-   *   This visualizes the typical navigation paths users take through the application's different screens.
-
-3.  **User Roles and Permissions**
-   *   Illustrates the distinction between Regular Users and Administrators and the specific actions each role is permitted to perform.
-
-4.  **Book Management Flow**
-
-   ![Book Management Flow](diagrams/book_management.png)
-   *   Details the processes involved in adding, removing, loaning, and returning books within the system.
-
-5.  **Search and Sorting Flow**
-   *   Explains the mechanisms for finding specific books or loans and organizing the displayed results based on various criteria.
+The diagram above provides a visual representation of the user interface flow, illustrating the typical navigation paths between the application's different screens.
 
 ## Getting Started
 
@@ -62,6 +43,7 @@ The application utilizes a modern JavaFX interface designed for ease of use.
 
 ### Main Components
 
+![Dashboard Overview](screenshots/dashboard_overview.png)
 *   **Login Screen:** Authenticates users (Regular or Administrator).
 *   **Dashboard:** The main hub after login, providing access to different features via a sidebar or main panel buttons.
 *   **Book Management Screens:** Interfaces for viewing, searching, adding (Admin), and removing (Admin) books.
@@ -113,6 +95,8 @@ The system defines two distinct user roles with different capabilities:
 ## Step-by-Step Usage Instructions
 
 ### Logging In
+
+![Login Screen](screenshots/login_page.png)
 
 1.  On the Login Screen, enter your assigned **Username**.
 2.  Enter your **Password**.
