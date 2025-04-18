@@ -1,179 +1,193 @@
-# Library Management System User Guide
+# Library Management System - User Guide
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Getting Started](#getting-started)
-3. [User Interface](#user-interface)
-4. [Features](#features)
-5. [User Roles](#user-roles)
-6. [Book Management](#book-management)
-7. [Loan Management](#loan-management)
-8. [Search and Sorting](#search-and-sorting)
-9. [User Preferences](#user-preferences)
+
+1.  [Introduction](#introduction)
+2.  [Getting Started](#getting-started)
+3.  [User Interface Overview](#user-interface-overview)
+4.  [Core Features](#core-features)
+5.  [Step-by-Step Usage Instructions](#step-by-step-usage-instructions)
+6.  [Troubleshooting](#troubleshooting)
+7.  [System Requirements](#system-requirements)
+8.  [Support](#support)
 
 ## Introduction
-The Library Management System is a Java-based application designed to help manage library operations efficiently. It provides features for book management, loan tracking, and user preferences.
+
+### Purpose
+
+Welcome to the Library Management System User Guide. This document provides comprehensive instructions on how to effectively use the application for managing library resources, tracking book loans, and customizing user settings. This system is designed for both regular library users and administrators.
 
 ### System Overview
-The following diagrams provide a high-level understanding of the system:
 
-1. **System Architecture Overview**
+The Library Management System is a desktop application built using Java and JavaFX. It offers a graphical interface for interacting with the library's catalog and loan records.
+
+Key architectural aspects are illustrated below:
+
+1.  **System Architecture Overview**
+
    ![System Architecture](diagrams/system_architecture.png)
-   - Shows the main components of the system
-   - Illustrates how different parts work together
-   - Helps understand the system's organization
+   *   This diagram outlines the primary software components and their interactions, providing insight into the system's structure.
 
-2. **User Interface Flow**
+2.  **User Interface Flow**
+
    ![User Interface Flow](diagrams/ui_flow.png)
-   - Shows the navigation between different screens
-   - Illustrates the main user paths
-   - Helps understand how to navigate the system
+   *   This visualizes the typical navigation paths users take through the application's different screens.
 
-3. **User Roles and Permissions**
-   - Shows the different user types
-   - Illustrates what each user type can do
-   - Helps understand access levels
+3.  **User Roles and Permissions**
+   *   Illustrates the distinction between Regular Users and Administrators and the specific actions each role is permitted to perform.
 
-4. **Book Management Flow**
+4.  **Book Management Flow**
+
    ![Book Management Flow](diagrams/book_management.png)
-   - Shows the book lifecycle
-   - Illustrates loan and return processes
-   - Helps understand book operations
+   *   Details the processes involved in adding, removing, loaning, and returning books within the system.
 
-5. **Search and Sorting Flow**
-   - Shows how to find and organize books
-   - Illustrates available search options
-   - Helps understand information retrieval
+5.  **Search and Sorting Flow**
+   *   Explains the mechanisms for finding specific books or loans and organizing the displayed results based on various criteria.
 
 ## Getting Started
-1. Ensure you have Java 17 or later installed on your system
-2. Launch the application by running the `LibraryManagementSystem` jar file
-3. The application will start with a login screen
 
-## User Interface
-The application features a modern JavaFX-based graphical user interface with the following main components:
-- Login Screen
-- Dashboard
-- Book Management Interface
-- Loan Management Interface
-- User Preferences Interface
+### Prerequisites
 
-## Features
+*   Ensure **Java 21 or a later version** is installed on your computer. You can verify your Java version by opening a terminal or command prompt and typing `java -version`.
+
+### Launching the Application
+
+1.  Locate the application file: `LibraryManagementSystem.jar`.
+2.  Double-click the `.jar` file to run it. Alternatively, open a terminal or command prompt, navigate to the directory containing the file, and execute the command: `java -jar LibraryManagementSystem.jar`.
+3.  The application will launch and display the Login Screen.
+
+## User Interface Overview
+
+The application utilizes a modern JavaFX interface designed for ease of use.
+
+### Main Components
+
+*   **Login Screen:** Authenticates users (Regular or Administrator).
+*   **Dashboard:** The main hub after login, providing access to different features via a sidebar or main panel buttons.
+*   **Book Management Screens:** Interfaces for viewing, searching, adding (Admin), and removing (Admin) books.
+*   **Loan Management Screens:** Interfaces for loaning, returning, and viewing loan records.
+
+## Core Features
 
 ### User Roles
-The system supports two types of users:
-1. **Regular Users**
-   - Can view books
-   - Can loan and return books
-   - Can search books
-   - Can customize personal preferences
 
-2. **Administrators**
-   - All regular user privileges
-   - Can add and remove books
-   - Can view all loans
-   - Can manage sorted loan views
+The system defines two distinct user roles with different capabilities:
+
+1.  **Regular Users:**
+   *   View the library catalog.
+   *   Search for books using various criteria.
+   *   Loan available books.
+   *   Return books they have loaned.
+   *   View their own current loans.
+
+2.  **Administrators:**
+   *   Possess all privileges of Regular Users.
+   *   Add new books to the library catalog.
+   *   Remove existing books from the catalog.
+   *   View all loans across all users.
+   *   Access advanced sorting options for loan views.
 
 ### Book Management
-1. **Viewing Books**
-   - View all available books in the library
-   - View books sorted by various criteria
-   - Search for specific books
 
-2. **Book Operations**
-   - Loan books (Regular Users)
-   - Return books (Regular Users)
-   - Add books (Administrators only)
-   - Remove books (Administrators only)
+*   **Catalog Viewing:** Browse the complete list of books available in the library.
+*   **Book Search:** Find specific books by Title, Author, or ISBN.
+*   **Loan Operations:** Initiate the process to loan an available book.
+*   **Return Operations:** Initiate the process to return a currently loaned book.
+*   **Adding Books (Admin):** Add new book records (ISBN, Title, Author) to the system.
+*   **Removing Books (Admin):** Remove book records from the system.
 
 ### Loan Management
-1. **Loan Operations**
-   - Loan a book by entering its ISBN
-   - Return a book by entering its ISBN
-   - View all current loans
-   - View sorted loan history (Administrators only)
+
+*   **Loaning:** Check out a book using its unique ISBN. The book's status changes from 'AVAILABLE' to 'ON LOAN'.
+*   **Returning:** Check in a book using its ISBN. The book's status changes back to 'AVAILABLE'.
+*   **Viewing Loans:** Regular users can view their active loans. Administrators can view all active loans in the system.
+*   **Loan History & Sorting (Admin):** Administrators can view and sort historical loan data based on various criteria.
 
 ### Search and Sorting
-1. **Search Features**
-   - Search books by various criteria
-   - View search results in a sorted manner
 
-2. **Sorting Options**
-   - Sort books by:
-     - Title
-     - Author
-     - ISBN
-     - Status
-   - Sort loans by various criteria (Administrators only)
+*   **Flexible Search:** Search the book catalog using fields like Title, Author, or ISBN.
+*   **Configurable Sorting:**
+   *   **Books:** Sort displayed book lists by Title, Author, ISBN, or Status (Available/On Loan).
+   *   **Loans (Admin):** Sort loan records by criteria such as borrower, book title, loan date, or due date.
 
-### User Preferences
-Users can customize their experience through:
-1. **Book Sort Settings**
-   - Choose default sorting criteria
-   - Set default sort direction (ascending/descending)
-
-2. **Loan Sort Settings**
-   - Configure default loan sorting preferences
-
-3. **Search Settings**
-   - Set default search criteria
-   - Configure search result display
-
-4. **Display Settings**
-   - Customize interface appearance
-
-## Usage Instructions
+## Step-by-Step Usage Instructions
 
 ### Logging In
-1. Enter your username
-2. Enter your password
-3. Check the "Login as Administrator" box if you have administrator privileges
-4. Click the "Login" button
 
-### Managing Books
-1. **To View Books**
-   - Select "View all books" from the dashboard
-   - Use the search function to find specific books
+1.  On the Login Screen, enter your assigned **Username**.
+2.  Enter your **Password**.
+3.  If you are an administrator, check the **"Login as Administrator"** checkbox.
+4.  Click the **"Login"** button. Upon successful authentication, you will be directed to the Dashboard.
 
-2. **To Loan a Book**
-   - Select "Loan a book" from the dashboard
-   - Enter the ISBN of the book you wish to loan
-   - Confirm the loan
+### Common User Tasks
 
-3. **To Return a Book**
-   - Select "Return a book" from the dashboard
-   - Enter the ISBN of the book you wish to return
-   - Confirm the return
+*(Accessed primarily from the Dashboard sidebar or main panel)*
 
-### Administrator Functions
-1. **Adding a Book**
-   - Select "Add a book" from the dashboard
-   - Enter the book's ISBN, title, and author
-   - Confirm the addition
+1.  **Viewing Available Books:**
+   *   Click **"View All Books"** to see the entire catalog. Results can be sorted using column headers.
 
-2. **Removing a Book**
-   - Select "Remove a book" from the dashboard
-   - Enter the ISBN of the book to remove
-   - Confirm the removal
+2.  **Searching for Books:**
+   *   Click **"Search Books"**.
+   *   Enter your search term (e.g., title, author, ISBN) into the appropriate field.
+   *   Click the **"Search"** button. Results matching your query will be displayed.
 
-### Managing Preferences
-1. Access the "User Preferences" section from the dashboard
-2. Select the category of preferences you wish to modify
-3. Choose your preferred settings
-4. Save your changes
+3.  **Loaning a Book:**
+   *   *Method 1 (Direct Loan):*
+      *   Click **"Loan a Book"**.
+      *   Enter the exact **ISBN** of the desired book.
+      *   Click **"Loan Book"**. Confirmation or error messages will appear.
+   *   *Method 2 (From Search/View):*
+      *   Find the book via **"View All Books"** or **"Search Books"**.
+      *   If the book's status is 'AVAILABLE', a **"Loan"** button should be active in its row. Click it.
+
+4.  **Returning a Book:**
+   *   *Method 1 (Direct Return):*
+      *   Click **"Return a Book"**.
+      *   Enter the exact **ISBN** of the book you are returning.
+      *   Click **"Return Book"**.
+   *   *Method 2 (From Loan List):*
+      *   Navigate to your loan list (e.g., **"My Loans"**).
+      *   Find the book you wish to return.
+      *   Click the **"Return"** button associated with that loan entry.
+
+5.  **Viewing Your Loans:**
+   *   Click **"My Loans"** (or a similar option) to see a list of books currently checked out under your account.
+
+### Administrator-Specific Tasks
+
+*(Accessed primarily from the Dashboard sidebar or main panel)*
+
+1.  **Adding a New Book:**
+   *   Click **"Add a Book"**.
+   *   Fill in the required fields: **ISBN**, **Title**, **Author**. Ensure the ISBN is unique.
+   *   Click **"Add Book"**.
+
+2.  **Removing an Existing Book:**
+   *   *Method 1 (Direct Remove):*
+      *   Click **"Remove a Book"**.
+      *   Enter the exact **ISBN** of the book to be removed.
+      *   Click **"Remove Book"**. Be cautious, as this action is typically permanent.
+   *   *Method 2 (From Search/View):*
+      *   Find the book via **"View All Books"** or **"Search Books"**.
+      *   Click the **"Remove"** button associated with the book's entry. Confirm the action if prompted.
+
+3.  **Viewing All User Loans:**
+   *   Click **"View All Loans"** or a similar administrative option. This displays all active loans across all users, often with advanced sorting capabilities.
 
 ## Troubleshooting
-If you encounter any issues:
-1. Ensure you have the correct user permissions for the operation
-2. Verify that the book ISBN is correct
-3. Check if the book is available for the operation
-4. Contact your system administrator for assistance
+
+If you encounter problems while using the application:
+
+1.  **Permission Errors:** Ensure you are logged in with the correct role (Regular User vs. Administrator) for the action you are attempting. Administrators have broader permissions.
+2.  **Incorrect ISBN:** Double-check that you have entered the correct and complete ISBN for loaning, returning, or removing books. Typos are common.
+3.  **Book Status Issues:** Verify the book's current status. You cannot loan a book that is already 'ON LOAN', nor can you return a book that is 'AVAILABLE'.
+4.  **Application Not Launching:** Confirm Java 21+ is installed correctly and accessible from your system's PATH environment variable. Try launching from the command line (`java -jar LibraryManagementSystem.jar`) to see potential error messages.
+5.  **Unexpected Behavior:** Restart the application. If the issue persists, note the steps taken to reproduce the problem.
 
 ## System Requirements
-- Java 21 or later
-- JavaFX 17.0.7
-- Minimum 2GB RAM
-- 500MB free disk space
 
-## Support
-For technical support or questions about the Library Management System, please contact your system administrator. 
+*   **Operating System:** Windows, macOS, or Linux (compatible with Java 21)
+*   **Java Runtime Environment:** JRE or JDK Version 21 or later
+*   **JavaFX:** Version 17.0.7 or compatible (often bundled or required separately depending on the Java distribution)
+*   **RAM:** Minimum 2 GB recommended
+*   **Disk Space:** Minimum 500 MB free space for the application and data
