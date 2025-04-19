@@ -17,12 +17,13 @@ public class LibraryService {
     private User currentUser;
 
     public LibraryService() {
-        BookList bookList1;
-        bookList1 = GeneralStorage.loadBookList(DATABASE_FILE);
-        if (bookList1 == null) {
-            bookList1 = new BookList();
+        // First try to load the book list from the database file
+        // If it fails, use an input stream to load the book list from the resources folder
+        BookList loadedBookList = GeneralStorage.loadBookList(DATABASE_FILE);
+        if (loadedBookList == null) {
+            loadedBookList = GeneralStorage.loadBookList(getClass().getResourceAsStream("/bookDatabase.txt"));
         }
-        this.bookList = bookList1;
+        this.bookList = (loadedBookList != null) ? loadedBookList : new BookList();
         this.loanList = new LoanList();
         
         // Load user preferences
