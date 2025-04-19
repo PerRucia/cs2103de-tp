@@ -4,12 +4,17 @@ import models.*;
 import storage.GeneralStorage;
 import java.util.List;
 import java.util.Comparator;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class LibraryService {
-    private static final String DATABASE_FILE = "src/main/resources/bookDatabase.txt";
+    private static final String LOCAL_DATABASE_FILE = "bookDatabase_local.txt";
+    private final Path localDbPath;
     private final BookList bookList;
     private final LoanList loanList;
     private UserPreferences userPreferences;
@@ -17,17 +22,44 @@ public class LibraryService {
     private User currentUser;
 
     public LibraryService() {
-        // First try to load the book list from the database file
-        // If it fails, use an input stream to load the book list from the resources folder
-        BookList loadedBookList = GeneralStorage.loadBookList(DATABASE_FILE);
-        if (loadedBookList == null) {
-            loadedBookList = GeneralStorage.loadBookList(getClass().getResourceAsStream("/bookDatabase.txt"));
-        }
-        this.bookList = (loadedBookList != null) ? loadedBookList : new BookList();
+        this.localDbPath = resolvePath();
+        this.bookList = loadBookList();
         this.loanList = new LoanList();
-        
-        // Load user preferences
         this.userPreferences = GeneralStorage.loadUserPreferences(USER_PREFS_FILE);
+    }
+
+    private Path resolvePath() {
+        Path jarDir;
+        try {
+            jarDir = Paths.get(
+                LibraryService.class
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .toURI()
+            ).getParent();
+        } catch (Exception e) {
+            jarDir = Paths.get(".").toAbsolutePath();
+        }
+        return jarDir.resolve(LOCAL_DATABASE_FILE);
+    }
+
+    private BookList loadBookList() {
+        // attempt to load the external DB
+        BookList bookList = GeneralStorage.loadBookList(localDbPath.toString());
+        if (bookList == null) {
+            // first run: bootstrap from the embedded resource
+            try (InputStream is = LibraryService.class.getResourceAsStream("/bookDatabase.txt")) {
+                bookList = GeneralStorage.loadBookList(is);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            // persist a local copy for next time
+            if (bookList != null) {
+                GeneralStorage.saveBookList(localDbPath.toString(), bookList);
+            }
+        }
+        return (bookList != null ? bookList : new BookList());
     }
 
     public void setCurrentUser(User user) {
@@ -39,7 +71,7 @@ public class LibraryService {
     }
 
     public void saveData() {
-        GeneralStorage.saveBookList(DATABASE_FILE, bookList);
+        GeneralStorage.saveBookList(localDbPath.toString(), bookList);
     }
 
     public void viewAllBooks() {
