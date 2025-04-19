@@ -52,7 +52,3 @@ When updating documentation:
 2. Make your documentation changes
 3. Generate/update diagrams if needed
 4. Submit a Pull Request
-
-## License
-
-This documentation is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
