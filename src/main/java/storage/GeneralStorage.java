@@ -8,6 +8,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
 import models.UserPreferences;
 import java.io.ObjectOutputStream;
@@ -22,13 +24,13 @@ public class GeneralStorage {
      * This method reads the book data from a file and populates the BookList object.
      */
     public static BookList loadBookList(String filename) {
-        BookList bookList = new BookList();
         File file = new File(filename);
         
         if (!file.exists()) {
-            return bookList;
+            return null;
         }
         
+        BookList bookList = new BookList();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -42,6 +44,36 @@ public class GeneralStorage {
         } catch (IOException e) {
             System.out.println("Error loading book list: " + e.getMessage());
         }
+        return bookList;
+    }
+
+    /**
+     * Loads the book list from an InputStream.
+     * This method reads the book data from the InputStream and populates the BookList object.
+     * @param inputStream The InputStream to read the book data from.
+     * @return A BookList object containing the loaded books, or null if the InputStream is null.
+     */
+    public static BookList loadBookList(InputStream inputStream) {
+        if (inputStream == null) {
+            System.out.println("InputStream is null. Cannot load book list.");
+            return null;
+        }
+
+        BookList bookList = new BookList();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 4) {
+                    Book book = new Book(parts[0], parts[1], parts[2]);
+                    book.setStatus(BookStatus.valueOf(parts[3]));
+                    bookList.addBook(book);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading book list from InputStream: " + e.getMessage());
+        }
+
         return bookList;
     }
 
