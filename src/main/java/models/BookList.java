@@ -32,7 +32,9 @@ public class BookList {
     public void addBook(Book book) throws IllegalArgumentException {
         if (book != null && book.getIsbn() != null && !book.getIsbn().isEmpty()) {
             books.put(book.getIsbn(), book);
-            book.setStatus(BookStatus.AVAILABLE);
+            if (book.getStatus() == null) {
+                book.setStatus(BookStatus.AVAILABLE);
+            }
         } else {
             throw new IllegalArgumentException("Book or ISBN cannot be null or empty.");
         }
