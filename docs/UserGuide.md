@@ -13,6 +13,9 @@
 
 ## Introduction
 
+[![Watch the video](https://img.youtube.com/vi/wrpz77hy3dc/0.jpg)](https://youtu.be/wrpz77hy3dc)
+
+
 ### Purpose
 
 Welcome to the Library Management System User Guide. This document provides comprehensive instructions on how to effectively use the application for managing library resources, tracking book loans, and customizing user settings. This system is designed for both regular library users and administrators.
