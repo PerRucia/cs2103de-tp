@@ -28,6 +28,12 @@ public class LibraryApp extends Application {
         
         // Set application icon
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/library_icon.png")));
+
+        // Set fixed size for login window
+        stage.setWidth(450);  // Set your preferred width for login
+        stage.setHeight(500); // Set your preferred height for login
+        stage.centerOnScreen();
+        stage.setResizable(false);
         
         stage.setTitle("Library Management System");
         stage.setScene(scene);
