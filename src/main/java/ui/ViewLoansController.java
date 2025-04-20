@@ -147,15 +147,9 @@ public class ViewLoansController {
     }
     
     private void loadLoans() {
-        // Get user preferences
-        UserPreferences userPrefs = libraryService.getUserPreferences();
-        
         // Load all current loans
         allLoans = new ArrayList<>(libraryService.viewLoans());
         filteredLoans = new ArrayList<>(allLoans);
-        
-        // Apply default sort (by loan date)
-        sortLoans(userPrefs.getDefaultLoanSortCriteria(), userPrefs.isDefaultSortAscending());
         
         // Update the table
         updateTable();

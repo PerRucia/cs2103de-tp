@@ -58,9 +58,11 @@ public class LoanList {
      * @return the borrowing record list of the currently borrowed book
      */
     public List<Loan> getCurrentLoans() {
-        return loans.stream()
+        List<Loan> currLoans = loans.stream()
                 .filter(loan -> loan.getReturnDate() == null)
                 .collect(Collectors.toList());
+        System.out.println("Current loans: " + currLoans.size());
+        return currLoans;
     }
 
     /**
