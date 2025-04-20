@@ -1,16 +1,37 @@
 9780134757599,Refactoring: Improving the Design of Existing Code,Martin Fowler,AVAILABLE
-abc,x,y,AVAILABLE
 9780321125217,Domain-Driven Design,Eric Evans,AVAILABLE
 9780134494166,Clean Architecture,Robert C. Martin,AVAILABLE
 9780201633610,Design Patterns,Erich Gamma,AVAILABLE
-978-0132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
+9780132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
 9781492056362,Fluent Python,Luciano Ramalho,AVAILABLE
 9780596007126,Head First Design Patterns,Eric Freeman,AVAILABLE
 9780262035613,Deep Learning,Ian Goodfellow,AVAILABLE
 9780321486813,Patterns of Enterprise Application Architecture,Martin Fowler,AVAILABLE
 9780132350884,Clean Code: A Handbook of Agile Software Craftsmanship,Robert C. Martin,AVAILABLE
-978-0134685991,Effective Java,Joshua Bloch,AVAILABLE
+9780134685991,Effective Java,Joshua Bloch,AVAILABLE
 9780201835953,The Mythical Man-Month,Frederick P. Brooks Jr.,AVAILABLE
 9780135957059,The Pragmatic Programmer,Andrew Hunt,AVAILABLE
 9781449373320,Designing Data-Intensive Applications,Martin Kleppmann,AVAILABLE
-978-1617294945,Java: The Complete Reference,Herbert Schildt,AVAILABLE
+9781617294945,Java: The Complete Reference,Herbert Schildt,AVAILABLE
+9781449331818,Learning JavaScript Design Patterns,Addy Osmani,AVAILABLE
+9781491954386,Programming Rust,Jim Blandy,AVAILABLE
+9781491978917,Learning React,Alex Banks,AVAILABLE
+9781617293726,Grokking Algorithms,Aditya Bhargava,AVAILABLE
+9781491962299,Programming TypeScript,Boris Cherny,AVAILABLE
+9781492032632,Cloud Native Patterns,Cornelia Davis,AVAILABLE
+9781617294136,Spring in Action,Craig Walls,AVAILABLE
+9780262033848,Introduction to Algorithms,Thomas H. Cormen,AVAILABLE
+9781617293863,Kubernetes in Action,Marko Lukša,AVAILABLE
+9781492053811,Architecture Patterns with Python,Harry Percival,AVAILABLE
+9781492036746,Test-Driven Development with Python,Harry Percival,AVAILABLE
+9781789617313,Python Machine Learning,Sebastian Raschka,AVAILABLE
+9780321563842,The C++ Programming Language,Bjarne Stroustrup,AVAILABLE
+9781593275846,Automate the Boring Stuff with Python,Al Sweigart,AVAILABLE
+9781617294433,Go in Action,William Kennedy,AVAILABLE
+9781492043560,Web Development with Node and Express,Ethan Brown,AVAILABLE
+9781449373321,You Don't Know JS,Kyle Simpson,AVAILABLE
+9781787125698,Machine Learning for Hackers,Drew Conway,AVAILABLE
+9780596517748,JavaScript: The Good Parts,Douglas Crockford,AVAILABLE
+9781617292392,SQL Performance Explained,Markus Winand,AVAILABLE
+abc,Book1,You,AVAILABLE
+def,Book2,Me,AVAILABLE
